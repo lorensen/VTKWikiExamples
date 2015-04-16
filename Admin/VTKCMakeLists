@@ -1,0 +1,34 @@
+==CMakeLists.txt==
+{{#tag:syntaxhighlight
+|
+cmake_minimum_required(VERSION 2.8)
+
+PROJECT({{{1}}})
+
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+
+add_executable({{{1}}} MACOSX_BUNDLE {{{1}}})
+
+if(VTK_LIBRARIES)
+  target_link_libraries({{{1}}} ${VTK_LIBRARIES})
+else()
+  target_link_libraries({{{1}}} vtkHybrid vtkWidgets)
+endif()
+|lang=cmake}}
+
+==Download and Build {{{1}}}==
+Click [http://gitorious.org/vtkwikiexamplestarballs/vtkwikiexamplestarballs/raw/master:{{{1}}}.tar here to download {{{1}}}]. and its ''CMakeLists.txt'' file.
+
+Once the tarball ''{{{1}}}.tar'' has been downloaded and extracted,
+ cd {{{1}}}/build 
+* If VTK is installed:
+ cmake ..
+* If VTK is not installed but compiled on your system, you will need to specify the path to your VTK build:
+ cmake -DVTK_DIR:PATH=/home/me/vtk_build ..
+Build the project:
+ make
+and run it:
+ ./{{{1}}}
+
+'''WINDOWS USERS PLEASE NOTE:''' Be sure to add the VTK bin directory to your path. This will resolve the VTK dll's at run time.
