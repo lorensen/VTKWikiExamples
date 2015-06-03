@@ -23,7 +23,6 @@ int main (int, char *[])
 #else
   mapper->SetInputData(dodecahedron->GetPolyData());
 #endif
-  dodecahedron->GetPolyData()->Print(std::cout);
   vtkSmartPointer<vtkActor> actor = 
     vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
