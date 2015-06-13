@@ -1,4 +1,6 @@
 #include "vtkSmartPointer.h"
+#include "vtkVersion.h"
+
 #include "vtkPolyhedron.h"
 #include "vtkPolyData.h"
 

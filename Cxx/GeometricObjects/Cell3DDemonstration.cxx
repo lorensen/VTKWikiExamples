@@ -1,4 +1,6 @@
 #include <vtkSmartPointer.h>
+#include <vtkVersion.h>
+
 #include <vtkPoints.h>
 #include <vtkCellArray.h>
 #include <vtkUnstructuredGrid.h>
@@ -313,12 +315,12 @@ vtkSmartPointer<vtkUnstructuredGrid> MakePolyhedron()
   points->InsertNextPoint(-0.375185, -1.1547,   -1.58931);
   points->InsertNextPoint( 0.982247, -0.713644, -1.58931);
 
-  vtkIdType dodechedronPointsIds[numberOfVertices] =
+  vtkIdType dodechedronPointsIds[20] =
       {0,   1,  2,  3,  4,  5,  6,  7,  8,  9,
        10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 
 
-  vtkIdType dodechedronFace[numberOfFaces][numberOfFaceVertices] = {
+  vtkIdType dodechedronFace[12][5] = {
       {0, 1, 2, 3, 4},
       {0, 5, 10, 6, 1},
       {1, 6, 11, 7, 2},
