@@ -18,6 +18,7 @@
 #include <vtkVersion.h>
 
 #include <algorithm>
+#include <cmath>
 
 static vtkIdType FindCell(vtkImageData* grid, double point[3]);
 static std::vector<vtkIdType> IntersectImage(vtkImageData* image, double p0[3], double p1[3]);
@@ -207,7 +208,8 @@ std::vector<vtkIdType> IntersectImage(vtkImageData* image, double p0[3], double 
   d[1] = exitPoint[1] - entrancePoint[1];
   d[2] = exitPoint[2] - entrancePoint[2];
 
-  double N = std::max(std::max(abs(d[0]), abs(d[1])),abs(d[2]));
+   double N = std::max(std::max(
+              std::abs(d[0]), std::abs(d[1])),std::abs(d[2]));
 
   double s[3];
   s[0] = d[0]/N;
