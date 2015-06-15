@@ -37,19 +37,19 @@ int main(int argc, char *argv[])
 
   vtkSmartPointer<vtkImageExtractComponents> extractHueFilter =
     vtkSmartPointer<vtkImageExtractComponents>::New();
-  extractHueFilter->SetInputConnection(reader->GetOutputPort());
+  extractHueFilter->SetInputConnection(hsvFilter->GetOutputPort());
   extractHueFilter->SetComponents(0);
   extractHueFilter->Update();
 
   vtkSmartPointer<vtkImageExtractComponents> extractSaturationFilter =
     vtkSmartPointer<vtkImageExtractComponents>::New();
-  extractSaturationFilter->SetInputConnection(reader->GetOutputPort());
+  extractSaturationFilter->SetInputConnection(hsvFilter->GetOutputPort());
   extractSaturationFilter->SetComponents(1);
   extractSaturationFilter->Update();
 
   vtkSmartPointer<vtkImageExtractComponents> extractValueFilter =
     vtkSmartPointer<vtkImageExtractComponents>::New();
-  extractValueFilter->SetInputConnection(reader->GetOutputPort());
+  extractValueFilter->SetInputConnection(hsvFilter->GetOutputPort());
   extractValueFilter->SetComponents(2);
   extractValueFilter->Update();
 
