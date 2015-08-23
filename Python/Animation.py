@@ -1,3 +1,4 @@
+from __future__ import print_function
 import vtk
 
 class vtkTimerCallback():
@@ -5,7 +6,7 @@ class vtkTimerCallback():
        self.timer_count = 0
 
    def execute(self,obj,event):
-       print self.timer_count
+       print(self.timer_count)
        self.actor.SetPosition(self.timer_count, self.timer_count,0);
        iren = obj
        iren.GetRenderWindow().Render()

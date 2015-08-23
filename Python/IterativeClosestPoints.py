@@ -1,8 +1,9 @@
+from __future__ import print_function
 import vtk
 from vtk import *
 
 # ============ create source points ==============
-print "Creating source points..."
+print("Creating source points...")
 sourcePoints = vtk.vtkPoints()
 sourceVertices = vtk.vtkCellArray()
 
@@ -24,16 +25,16 @@ source.SetVerts(sourceVertices)
 if vtk.VTK_MAJOR_VERSION <= 5:
     source.Update()
 
-print "Displaying source points..."
+print("Displaying source points...")
 # ============ display source points ==============
 pointCount = 3
 for index in range(pointCount):
     point = [0,0,0]
     sourcePoints.GetPoint(index, point)
-    print "source point[%s]=%s" % (index,point)
+    print("source point[%s]=%s" % (index,point))
 
 #============ create target points ==============
-print "Creating target points..."
+print("Creating target points...")
 targetPoints = vtk.vtkPoints()
 targetVertices = vtk.vtkCellArray()
 
@@ -57,14 +58,14 @@ if vtk.VTK_MAJOR_VERSION <= 5:
 
 
 # ============ display target points ==============
-print "Displaying target points..."
+print("Displaying target points...")
 pointCount = 3
 for index in range(pointCount):
     point = [0,0,0]
     targetPoints.GetPoint(index, point)
-    print "target point[%s]=%s" % (index,point)
+    print("target point[%s]=%s" % (index,point))
 
-print "Running ICP ----------------"
+print("Running ICP ----------------")
 # ============ run ICP ==============
 icp = vtk.vtkIterativeClosestPointTransform()
 icp.SetSource(source)
@@ -92,4 +93,4 @@ pointCount = 3
 for index in range(pointCount):
     point = [0,0,0]
     transformedSource.GetPoint(index, point)
-    print "transformed source point[%s]=%s" % (index,point)
+    print("transformed source point[%s]=%s" % (index,point))

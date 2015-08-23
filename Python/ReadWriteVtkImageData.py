@@ -13,9 +13,9 @@ else:
 dims = imageData.GetDimensions()
 
 # Fill every entry of the image data with "2.0"
-for z in xrange(dims[2]):
-    for y in xrange(dims[1]):
-        for x in xrange(dims[0]):
+for z in range(dims[2]):
+    for y in range(dims[1]):
+        for x in range(dims[0]):
             imageData.SetScalarComponentFromDouble(x, y, z, 0, 2.0)
 
 
