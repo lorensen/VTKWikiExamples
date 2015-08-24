@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 #------------------------------------------------------------------------------#
 #                                   Imports                                    #
 #------------------------------------------------------------------------------#
@@ -56,7 +56,7 @@ def as_polyline(points, level):
 #------------------------------------------------------------------------------#
 def as_triangles(indices, cellarray, level, data):
   if len(indices) >= 3:
-    stride = len(indices)/4
+    stride = len(indices)//4
     indices.append(indices[-1] + 1)
 
     triangle = vtk.vtkTriangle()
@@ -92,11 +92,11 @@ if __name__ == "__main__":
   # end. For this next trick, I will need a list of the indices in the
   # vtkPoints. They're consecutive, so thats pretty straightforward.
 
-  indices = range(outline_pd.GetPoints().GetNumberOfPoints() + 1)
+  indices = [i for i in range(outline_pd.GetPoints().GetNumberOfPoints() + 1)]
   triangles   = vtk.vtkCellArray()
 
   # Set this up for each of the initial sides, then call the recursive function.
-  stride = (len(indices) - 1)/3
+  stride = (len(indices) - 1)//3
 
   # The cell data will allow us to color the triangles based on the level of
   # the iteration of the Koch snowflake.

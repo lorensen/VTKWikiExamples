@@ -1,4 +1,12 @@
+from __future__ import print_function
 import vtk
+import sys
+
+# Unicode string for demonstration (etre with circumflex)
+if sys.hexversion >= 0x03000000:
+    unicodeEtre = '\xeatre' # unicode in Python 3
+else:
+    unicodeEtre = unicode('\xeatre', 'latin1')
 
 #
 # Basic vtkVariant usage
@@ -19,7 +27,7 @@ v = vtk.vtkVariant(1.0)
 print("Float variant: %r, '%s'" % (v, v.GetTypeAsString()))
 v = vtk.vtkVariant("hello")
 print("String variant: %r, '%s'" % (v, v.GetTypeAsString()))
-v = vtk.vtkVariant(u"there")
+v = vtk.vtkVariant(unicodeEtre)
 print("Unicode variant: %r, '%s'" % (v, v.GetTypeAsString()))
 v = vtk.vtkVariant(vtk.vtkStringArray())
 print("Object variant: %r, '%s'" % (v, v.GetTypeAsString()))
@@ -47,7 +55,7 @@ a.InsertNextValue(vtk.vtkVariant())
 a.InsertNextValue(1)
 a.InsertNextValue(2.0)
 a.InsertNextValue("hello")
-a.InsertNextValue(u"there")
+a.InsertNextValue(unicodeEtre)
 a.InsertNextValue(vtk.vtkVariantArray())
 print("Variant array:")
 for i in range(a.GetNumberOfValues()):
@@ -56,13 +64,13 @@ for i in range(a.GetNumberOfValues()):
 
 # Comparison
 if v2 == vtk.vtkVariant(2):
-   print "v2 is equal to 2"
+   print("v2 is equal to 2")
 if v2 > vtk.vtkVariant(1):
-   print "v2 is greater than 1"
+   print("v2 is greater than 1")
 if v2 < vtk.vtkVariant(3):
-   print "v2 is less than 3"
+   print("v2 is less than 3")
 if v2 == vtk.vtkVariant("2"):
-   print "v2 is equal to '2'"
+   print("v2 is equal to '2'")
 
 # Use as a dict key (hashed as a string)
 d = {}
@@ -104,20 +112,26 @@ print("Invalid cast result: %r" % i)
 #
 
 # Special function vtk.vtkVariantStrictWeakOrder:
-# Compare variants by type first, and then by value.  The return values
-# are -1, 0, 1 like the python cmp() method, for compatibility with the
-# python list sort() method.  This is in contrast with the C++ version,
-# which returns true or false.
+# Compare variants by type first, and then by value.  For Python 2, the
+# return values are -1, 0, 1 like the Python 2 "cmp()" method.  This is
+# in contrast with the Python 3 and C++ versions of this function, which
+# check if (v1 < v2) and return True or False.
 v1 = vtk.vtkVariant(10)
 v2 = vtk.vtkVariant("10")
-i = vtk.vtkVariantStrictWeakOrder(v1, v2)
-print("Strict weak order (10, '10') -> %i" % i)
+r = vtk.vtkVariantStrictWeakOrder(v1, v2)
+print("Strict weak order (10, '10') ->", r)
+
+# Sorting by strict weak order, using a key function:
+unsorted = [1, 2.5, vtk.vtkVariant(), "0", unicodeEtre]
+l = [vtk.vtkVariant(x) for x in unsorted]
+l.sort(key=vtk.vtkVariantStrictWeakOrderKey)
+print("Sort by weak order ->", l)
 
 # Check two variants for strict equality of type and value.
 b = vtk.vtkVariantStrictEquality(v1, v2)
 print("Strict equality (10, '10') -> %s" % b)
 
-# Two special-purpose methods, not generally useful in python
+# Two special-purpose methods.
 # First is identical to (v1 < v2)
 b = vtk.vtkVariantLessThan(v1, v2)
 # Second is identical to (v1 == v2)

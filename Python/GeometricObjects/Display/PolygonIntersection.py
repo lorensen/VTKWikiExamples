@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import vtk
 
@@ -27,6 +28,6 @@ x = [0.0, 0.0, 0.0]
 pcoords = [0.0, 0.0, 0.0]
 subId = vtk.mutable(0)
 iD = polygon.IntersectWithLine(p1, p2, tolerance, t, x, pcoords, subId);
- 
-print "intersected? ", iD
-print "intersection: ", x
+
+print("intersected? ", iD)
+print("intersection: ", x)

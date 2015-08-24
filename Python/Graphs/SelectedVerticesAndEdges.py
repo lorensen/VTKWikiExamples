@@ -1,19 +1,20 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import vtk
- 
+
 source = vtk.vtkRandomGraphSource()
 source.Update()
- 
+
 view = vtk.vtkGraphLayoutView()
 view.AddRepresentationFromInputConnection(source.GetOutputPort())
- 
+
 def selectionCallback(caller, event):
-    
+
     # In C++ there is some extra data passed to the callback, but in Python
     # the callback data is lost...
 
-    # There should be two selection nodes, but which one is vertices and which 
+    # There should be two selection nodes, but which one is vertices and which
     # is edges does not seem to be guaranteed...
     sel = caller.GetCurrentSelection()
     node0 = sel.GetNode(0)
@@ -26,33 +27,33 @@ def selectionCallback(caller, event):
     if (sel_list0.GetNumberOfTuples() > 0):
         printFieldType(node0_field_type)
         for ii in range(sel_list0.GetNumberOfTuples()):
-            print "\t", sel_list0.GetValue(ii)
+            print("\t", sel_list0.GetValue(ii))
 
     if (sel_list1.GetNumberOfTuples() > 0):
         printFieldType(node1_field_type)
         for ii in range(sel_list1.GetNumberOfTuples()):
-            print "\t", sel_list1.GetValue(ii)
- 
-        print "- - -"
- 
- 
+            print("\t", sel_list1.GetValue(ii))
+
+        print("- - -")
+
+
 def printFieldType(field_type):
-    
+
     if field_type == 3:
-           print "Vertices Selected:"
+           print("Vertices Selected:")
     elif field_type == 4:
-           print "Edges Selected:"
+           print("Edges Selected:")
     else:
-           print "Unknown type:"
- 
+           print("Unknown type:")
+
 rep = view.GetRepresentation(0)
- 
+
 # The vtkRenderedGraphRepresentation should already have a vtkAnnotationLink,
-# so we just want to grab it and add an observer with our callback function 
+# so we just want to grab it and add an observer with our callback function
 # attached
 link = rep.GetAnnotationLink()
 link.AddObserver("AnnotationChangedEvent", selectionCallback)
- 
+
 view.GetRenderWindow().SetSize(600, 600)
 view.ResetCamera()
 view.Render()

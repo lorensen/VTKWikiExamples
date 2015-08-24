@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import vtk
 
@@ -30,4 +31,4 @@ planesIntersection.SetBounds(bounds)
 
 intersects = planesIntersection.IntersectsRegion(box)
 
-print "Intersects? " , intersects == 1
+print("Intersects? " , intersects == 1)

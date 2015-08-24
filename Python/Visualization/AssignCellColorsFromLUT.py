@@ -19,6 +19,7 @@ The top row of the display uses the color transfer function to create a
 The bottom row of the display uses a lookup table of predefined colors.
 '''
 
+from __future__ import print_function
 import vtk
 
 def MakeLUT(tableSize):
@@ -81,10 +82,10 @@ def MakeCellData(tableSize, lut, colors):
     for i in range(1,tableSize):
         rgb = [0.0, 0.0, 0.0]
         lut.GetColor(float(i) / (tableSize - 1),rgb)
-        ucrgb = map(int, map(lambda x: x * 255,rgb))
+        ucrgb = list(map(int, [x * 255 for x in rgb]))
         colors.InsertNextTuple3(ucrgb[0], ucrgb[1], ucrgb[2])
-        s = '['+ ', '.join(map(lambda x: '{:0.6f}'.format(x),rgb)) + ']'
-        print s, ucrgb
+        s = '['+ ', '.join(['{:0.6f}'.format(x) for x in rgb]) + ']'
+        print(s, ucrgb)
 
 
 def main():
@@ -118,7 +119,7 @@ def main():
     colorData1 = vtk.vtkUnsignedCharArray()
     colorData1.SetName('colors') # Any name will work here.
     colorData1.SetNumberOfComponents(3)
-    print 'Using a lookup table from a set of named colors.'
+    print('Using a lookup table from a set of named colors.')
     MakeCellData(tableSize, lut1, colorData1)
     # Then use SetScalars() to add it to the vtkPolyData structure,
     # this will then be interpreted as a color table.
@@ -127,7 +128,7 @@ def main():
     colorData2 = vtk.vtkUnsignedCharArray()
     colorData2.SetName('colors') # Any name will work here.
     colorData2.SetNumberOfComponents(3)
-    print 'Using a lookup table created from a color transfer function.'
+    print('Using a lookup table created from a color transfer function.')
     MakeCellData(tableSize, lut2, colorData2)
     plane12.GetOutput().GetCellData().SetScalars(colorData2)
 
@@ -237,8 +238,8 @@ if __name__ == '__main__':
     try:
         CheckVTKVersion(6)
     except:
-        print "You need VTK Version 6 or greater."
-        print "The class vtkNamedColors is in VTK version 6 or greater."
+        print("You need VTK Version 6 or greater.")
+        print("The class vtkNamedColors is in VTK version 6 or greater.")
         exit(0)
     iren = main()
     iren.Start()

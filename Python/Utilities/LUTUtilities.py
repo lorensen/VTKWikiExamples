@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import sys
 import vtk
 
@@ -43,8 +44,8 @@ class LUTUtilities(object):
             str = "Ordinal Lookup Table\n" +\
             " Number of table values: {:d}".format(tv) +\
             "\nTable Range: {:8.6f} to {:8.6f}\n".format(dR[0],dR[1])
-            indices = map(lambda x: (dR[1] - dR[0]) *
-                           float(x)/tv + dR[0], range(0,tv))
+            indices = [(dR[1] - dR[0]) *
+                           float(x)/tv + dR[0] for x in range(0,tv)]
             for i, v in enumerate(indices):
                 rgb = [0.0, 0.0, 0.0]
                 lut.GetColor(v,rgb)
@@ -61,11 +62,11 @@ class LUTUtilities(object):
         :param: The rgba string.
         :return: A string in the above format.
         '''
-        s = '['+ ', '.join(map(lambda x: '{:0.6f}'.format(x),rgba)) + ']'
-        ucrgb = map(lambda x: int(x * 255),rgba)
-        t = '['+ ', '.join(map(lambda x: '{:3d}'.format(x),ucrgb)) + ']'
+        s = '['+ ', '.join(['{:0.6f}'.format(x) for x in rgba]) + ']'
+        ucrgb = [int(x * 255) for x in rgba]
+        t = '['+ ', '.join(['{:3d}'.format(x) for x in ucrgb]) + ']'
         #u = '0x'+''.join(map(lambda x: '{:02X}'.format(x),ucrgb[:3]))
-        u = '0x'+''.join(map(lambda x: '{:02x}'.format(x),ucrgb))
+        u = '0x'+''.join(['{:02x}'.format(x) for x in ucrgb])
         res = '{:s} {:s} {:s}\n'.format(s,t,u)
         return res
 
@@ -125,8 +126,8 @@ class LUTUtilities(object):
                         return res
         else:
             tv = lut1.GetNumberOfTableValues()
-            indices = map(lambda x: (dR1[1] - dR1[0]) *
-                           float(x)/tv + dR1[0], range(0,tv))
+            indices = [(dR1[1] - dR1[0]) *
+                           float(x)/tv + dR1[0] for x in range(0,tv)]
             for i, v in enumerate(indices):
                 rgb1 = [0.0, 0.0, 0.0]
                 lut1.GetColor(v,rgb1)
@@ -180,7 +181,7 @@ def AvailableColorSchemes(colorSchemes):
     :return:  a string if the indexes and names.
     '''
     str = ''
-    for k, v in colorSchemes.iteritems():
+    for k, v in colorSchemes.items():
         str += '{:3d}\t{:s}\n'.format(k,v)
     return str
 
@@ -190,7 +191,7 @@ def DisplayAvailableColorSchemes():
     '''
     line = "-----------------------------------------------------------------------------\n"
     colorSchemes = GetAllColorSchemes()
-    print line + AvailableColorSchemes(colorSchemes) + line
+    print(line + AvailableColorSchemes(colorSchemes) + line)
 
 def DisplayResults(reason, lut1, lut2):
     '''
@@ -201,10 +202,10 @@ def DisplayResults(reason, lut1, lut2):
     '''
     lutUtilities = LUTUtilities()
     line = "-----------------------------------------------------------------------------\n"
-    print line + reason + "\n"
-    print lutUtilities.DisplayLUTAsString(lut1)
-    print lutUtilities.DisplayLUTAsString(lut2)
-    print line
+    print(line + reason + "\n")
+    print(lutUtilities.DisplayLUTAsString(lut1))
+    print(lutUtilities.DisplayLUTAsString(lut2))
+    print(line)
 
 def TestTables(lut1, lut2, expected = True):
     '''
@@ -330,6 +331,7 @@ def main():
 if __name__ == '__main__':
     res = main()
     if res:
-        sys.exit()
+        sys.exit(0)
     else:
+        print('Ordinal or Categorical LookupTable tests failed.')
         sys.exit(1)

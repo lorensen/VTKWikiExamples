@@ -4,6 +4,7 @@
 '''
     This example demonstrates the usage of the vtNamedColor class.
 '''
+from __future__ import print_function
 import vtk
 import string
 
@@ -75,7 +76,7 @@ def DisplayCone(nc):
     lut.SetTableValue(0,rgba)
     # Does "My Red" match anything?
     match = FindSynonyms(nc,"My Red")
-    print "Matching colors to My Red:", match
+    print("Matching colors to My Red:", match)
 
     rgba = nc.GetColor4d("DarkGreen")
     rgba[3] = 0.3
@@ -146,14 +147,14 @@ def CheckVTKVersion(requiredMajorVersion):
 def main():
     nc = vtk.vtkNamedColors()
     colorNames = nc.GetColorNames().split('\n')
-    print "There are", len(colorNames), "colors:"
-    print colorNames
+    print("There are", len(colorNames), "colors:")
+    print(colorNames)
     syn = nc.GetSynonyms().split('\n\n')
     synonyms = []
     for ele in syn:
         synonyms.append(ele.split('\n'))
-    print "There are", len(synonyms), "synonyms:"
-    print synonyms
+    print("There are", len(synonyms), "synonyms:")
+    print(synonyms)
     iren = DisplayCone(nc)
     iren.Start()
 
@@ -161,7 +162,7 @@ if __name__ == "__main__":
     try:
         CheckVTKVersion(6)
     except:
-        print "You need VTK Version 6 or greater."
-        print "The class vtkNamedColors is in VTK version 6 or greater."
+        print("You need VTK Version 6 or greater.")
+        print("The class vtkNamedColors is in VTK version 6 or greater.")
         exit(0)
     main()

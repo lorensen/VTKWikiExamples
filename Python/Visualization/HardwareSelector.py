@@ -1,3 +1,4 @@
+from __future__ import print_function
 import vtk
 import vtk.util.numpy_support as VN
 
@@ -15,10 +16,10 @@ def selectionCallback(caller,eventId):
 
        numNodes = res.GetNumberOfNodes()
        if (numNodes < 1):
-               print "No visible cells"
+               print("No visible cells")
        else:
                sel_node = res.GetNode(0)
-               print 'Visible cell IDs: ', VN.vtk_to_numpy(sel_node.GetSelectionList()).tolist()
+               print('Visible cell IDs: ', VN.vtk_to_numpy(sel_node.GetSelectionList()).tolist())
 
 
 sphere = vtk.vtkSphereSource()

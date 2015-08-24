@@ -35,7 +35,7 @@ numPoints = 40
 
 inc = 7.5/(numPoints-1)
 table.SetNumberOfRows(numPoints)
-for i in xrange(numPoints):
+for i in range(numPoints):
     table.SetValue(i, 0, i*inc)
     table.SetValue(i, 1, math.cos(i*inc))
     table.SetValue(i, 2, math.sin(i*inc))

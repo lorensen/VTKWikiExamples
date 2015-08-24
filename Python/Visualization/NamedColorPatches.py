@@ -26,6 +26,7 @@ In this case Digital CCIR601 is used which gives less weight to the
 
 '''
 
+from __future__ import print_function
 import vtk
 
 def RGBToHTMLColor(rgb):
@@ -34,7 +35,7 @@ def RGBToHTMLColor(rgb):
     :param: rgb - The elements of the array rgb are unsigned chars (0..255).
     :return: The html color.
     '''
-    hexcolor = "#"+ ''.join(map(lambda x: '{:02x}'.format(x),rgb))
+    hexcolor = "#"+ ''.join(['{:02x}'.format(x) for x in rgb])
     return hexcolor
 
 def HTMLColorToRGB(colorString):
@@ -47,7 +48,7 @@ def HTMLColorToRGB(colorString):
     colorString = colorString.strip()
     if colorString[0] == '#': colorString = colorString[1:]
     if len(colorString) != 6:
-        raise ValueError, "Input #%s is not in #RRGGBB format" % colorString
+        raise ValueError("Input #%s is not in #RRGGBB format" % colorString)
     r, g, b = colorString[:2], colorString[2:4], colorString[4:]
     r, g, b = [int(n, 16) for n in (r, g, b)]
     return [r, g, b]
@@ -68,7 +69,7 @@ def FormatRGBForHTML(rgb):
     :param: rgb - The elements of the array rgb are unsigned chars (0..255).
     :return: A formatted string for the html table.
     '''
-    s = ','.join(map(lambda x: '{:3d}'.format(x),rgb))
+    s = ','.join(['{:3d}'.format(x) for x in rgb])
     s = s.replace(' ','&#160;')
     s = s.replace(',','&#160;&#160;')
     return s
@@ -269,11 +270,11 @@ class HTMLTableMaker(object):
     def FindLongestColorName(self):
         ''' Find the longest color name. '''
         maxLength = -1;
-        for key, value in self.cn.iteritems():
+        for key, value in self.cn.items():
             for val in value:
                 if len(val) > maxLength:
                     maxLength = len(val)
-        for key, value in self.vtkcn.iteritems():
+        for key, value in self.vtkcn.items():
             for val in value:
                 if len(val) > maxLength:
                     maxLength = len(val)
@@ -340,7 +341,7 @@ class HTMLTableMaker(object):
         for ele in syn:
             synonyms.append(ele.split('\n'))
         cn = list()
-        for key, value in self.cn.iteritems():
+        for key, value in self.cn.items():
            cn = cn + value
         # Create a dictionary where the key is the lowercase name.
         d = dict()
@@ -457,11 +458,11 @@ if __name__ == "__main__":
     try:
         CheckVTKVersion(6)
     except:
-        print "You need VTK Version 6 or greater."
-        print "The class vtkNamedColors is in VTK version 6 or greater."
+        print("You need VTK Version 6 or greater.")
+        print("The class vtkNamedColors is in VTK version 6 or greater.")
         exit(0)
     ncp = HTMLTableMaker()
     res = ncp.MakeCombinedColorPage()
-    f = open("VTKNamedColorPatches.html", "wb")
+    f = open("VTKNamedColorPatches.html", "wt")
     f.write(res)
     f.close()

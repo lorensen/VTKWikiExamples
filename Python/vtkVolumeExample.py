@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-import os,sys,string
+from __future__ import print_function
 from vtk import *
 
 tse = vtkTimeSourceExample()
@@ -8,7 +7,7 @@ ex = tse.GetExecutive()
 tse.UpdateInformation()
 
 #inspect available time range and time steps
-print ex.GetOutputInformation()
+print(ex.GetOutputInformation())
 
 #make it grow because bounds are easy to inspect
 # tse.SetGrowing(1)
@@ -23,10 +22,10 @@ tse.Update()
 print(tse.GetOutput().GetBounds())
 
 grid = tse.GetOutput()
-print grid
+print(grid)
 
 tri = vtkDataSetTriangleFilter()
-tri.SetInput(grid)
+tri.SetInputData(grid)
 tri.SetTetrahedraOnly(1)
 tri.Update()
 output = tri.GetOutput()
@@ -60,7 +59,7 @@ volumeMapper = vtkUnstructuredGridVolumeRayCastMapper()
 # volumeMapper = vtkUnstructuredGridVolumeZSweepMapper()
 # volumeMapper = vtkProjectedTetrahedraMapper()
 # volumeMapper.SetBlendModeToMaximumIntensity()
-volumeMapper.SetInput(output)
+volumeMapper.SetInputData(output)
 
 volume = vtkVolume()
 volume.SetMapper(volumeMapper)
@@ -112,13 +111,13 @@ renderer.ResetCamera()
 counter = 1
 time = 0
 while time<=1:
-	print "time = ", time
+	print("time = ", time)
 	textActor.SetInput("time = %g" % time)
 
 	window.Render()
 
 	# TODO FIXME if this block is not here than the volume renders wrongly
-	renderer.RemoveVolume(volume)
+	#renderer.RemoveVolume(volume)
 	# del volume
 	volume = vtkVolume()
 	volume.SetMapper(volumeMapper)
@@ -129,8 +128,11 @@ while time<=1:
 	time = time + 1./10
 	ex.SetUpdateTimeStep(0,time)
 	tse.Modified()
-	print grid.GetPointData().GetScalars().GetRange()
-	# print grid.GetPointData().GetScalars()
+	if output.GetPointData().GetScalars():
+		print(output.GetPointData().GetScalars().GetRange())
+	# if grid.GetPointData().GetScalars():
+	# 	print(grid.GetPointData().GetScalars().GetRange())
+	# print(grid.GetPointData().GetScalars())
 
 # while True:
 	# window.Render()
