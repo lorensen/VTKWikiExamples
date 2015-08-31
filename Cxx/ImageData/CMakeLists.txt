@@ -23,6 +23,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT ImageData)
 SET(NEEDS_ARGS
@@ -36,3 +37,4 @@ ADD_TEST(${KIT}-ExtractVOI ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ImageNormalize ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageNormalize -E 35)
+endif()

@@ -18,6 +18,8 @@ endif()
 FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
+Requires_Module(GenericClip vtkTestingRendering)
 
 set(VERSION_MIN "6.0")
 Requires_Version(GenericClip ${VERSION_MIN} ALL_FILES)
@@ -30,6 +32,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Filtering)
 SET(NEEDS_ARGS
@@ -46,3 +49,4 @@ ADD_TEST(${KIT}-SurfaceFromUnorganizedPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}Cxx
 
 ADD_TEST(${KIT}-ContoursFromPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestContoursFromPolyData ${DATA}/Bunny.vtp  -E 30)
+endif()

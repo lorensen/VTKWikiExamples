@@ -23,6 +23,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Interaction)
 SET(NEEDS_ARGS
@@ -38,3 +39,4 @@ ADD_TEST(${KIT}-ImageClip ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ImageRegion ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageRegion ${DATA}/Gourds2.jpg)
+endif()

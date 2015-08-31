@@ -32,6 +32,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(NEEDS_ARGS
 #  HistogramBarChart
@@ -163,5 +164,4 @@ ADD_TEST(${KIT}-RTAnalyticSource ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ResizeImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestResizeImage ${DATA}/Gourds2.jpg 640 480 1)
-
-
+endif()

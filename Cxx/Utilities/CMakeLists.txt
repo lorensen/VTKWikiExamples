@@ -17,8 +17,10 @@ endif()
 # Build all .cxx files in the directory
 FILE(GLOB ALL_FILES *.cxx)
 
-include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
+Requires_Module(GetDataRoot vtkTestingRendering)
 
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 Requires_Version(LUTUtilities "6.0.0" ALL_FILES)
 
 foreach(SOURCE_FILE ${ALL_FILES})
@@ -28,6 +30,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Utilities)
 SET(NEEDS_ARGS
@@ -40,3 +43,4 @@ SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 ADD_TEST(${KIT}-ZBuffer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestZBuffer ${DATA}/Bunny.vtp ${TEMP}/ZBuffer.bmp)
+endif()

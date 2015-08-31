@@ -29,6 +29,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Meshes)
 SET(NEEDS_ARGS
@@ -47,4 +48,4 @@ ADD_TEST(${KIT}-OBBDicer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-MatrixMathFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestMatrixMathFilter ${DATA}/tensors.vtk)
-
+endif()

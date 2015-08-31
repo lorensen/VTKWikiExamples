@@ -4,7 +4,6 @@
 #include <vtkRendererCollection.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkTesting.h>
 
 class vtkTimerCallback : public vtkCommand
 {

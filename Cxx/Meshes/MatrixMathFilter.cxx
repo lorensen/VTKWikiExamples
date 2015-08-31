@@ -7,7 +7,6 @@
 #include <vtkRenderWindow.h>
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkTesting.h>
 #include <vtkUnstructuredGridReader.h>
 #include <vtkDataSetSurfaceFilter.h>
 #include <vtkXMLUnstructuredGridWriter.h>

@@ -23,6 +23,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Widgets)
 
@@ -46,3 +47,4 @@ ADD_TEST(${KIT}-CheckerboardWidget ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-Slider2D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestSlider2D -E 25)
+endif()

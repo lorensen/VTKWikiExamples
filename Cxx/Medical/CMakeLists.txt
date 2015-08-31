@@ -23,6 +23,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Medical)
 SET(NEEDS_ARGS
@@ -34,5 +35,4 @@ SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 ADD_TEST(${KIT}-GenerateCubesFromLabels ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestGenerateCubesFromLabels ${DATA}/frogtissue.mhd 1 29)
-
-
+endif()

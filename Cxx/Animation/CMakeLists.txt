@@ -26,4 +26,6 @@ foreach(SOURCE_FILE ${ALL_FILES})
 endforeach(SOURCE_FILE)
 
 # Testing
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+if (BUILD_TESTING)
+include(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+endif ()

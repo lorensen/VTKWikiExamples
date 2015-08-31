@@ -24,6 +24,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT DataStructures)
 SET(NEEDS_ARGS
@@ -62,3 +63,4 @@ ADD_TEST(${KIT}-OctreeVisualize ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestOctreeVisualize -E 40)
 
 ADD_SUBDIRECTORY(ModifiedBSPTree)
+endif()

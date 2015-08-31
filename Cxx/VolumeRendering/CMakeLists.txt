@@ -31,6 +31,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT VolumeRendering)
 if (VTK_RENDERING_BACKEND STREQUAL "OpenGL2")
@@ -60,3 +61,4 @@ ADD_TEST(${KIT}-MinIntensityRendering ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestMinIntensityRendering ${DATA}/ironProt.vtk)
 endif()
 
+endif()

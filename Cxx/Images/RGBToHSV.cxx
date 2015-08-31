@@ -9,7 +9,6 @@
 #include <vtkJPEGReader.h>
 #include <vtkImageActor.h>
 #include <vtkImageExtractComponents.h>
-#include <vtkTesting.h>
 
 int main(int argc, char *argv[])
 {

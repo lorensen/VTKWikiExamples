@@ -17,11 +17,13 @@ message(STATUS "VTKWikiExamples: VTK VERSION: ${VTK_VERSION}")
 
 set(CMAKE_MODULE_PATH ${WikiExamples_SOURCE_DIR}/CMake ${CMAKE_MODULE_PATH})
 
-ENABLE_TESTING()
-INCLUDE(CTest)
-CONFIGURE_FILE(
-  ${WikiExamples_SOURCE_DIR}/CMake/SampleBuildTest.cmake.in
-  ${WikiExamples_BINARY_DIR}/SampleBuildTest.cmake @ONLY)
+if (BUILD_TESTING)
+  ENABLE_TESTING()
+  INCLUDE(CTest)
+  CONFIGURE_FILE(
+    ${WikiExamples_SOURCE_DIR}/CMake/SampleBuildTest.cmake.in
+    ${WikiExamples_BINARY_DIR}/SampleBuildTest.cmake @ONLY)
+endif ()
 
 include(PlatformSpecificChecks)
 

@@ -84,4 +84,3 @@ foreach(EXAMPLE_FILE ${ALL_FILES})
     TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
   endif()
 endforeach(EXAMPLE_FILE)
-

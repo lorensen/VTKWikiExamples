@@ -17,6 +17,9 @@ endif()
 # Build all .cxx files in the directory
 FILE(GLOB ALL_FILES *.cxx)
 
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
+Requires_Module(TreeMapView vtkTestingRendering)
+
 if(NOT VTK_USE_PARALLEL)
   set(SKIP PKMeansClustering)
   message(STATUS "VTKWikiExamples: ${SKIP} requires VTK_PARALLEL and will not be built")
@@ -31,6 +34,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT InfoVis)
 
@@ -56,3 +60,4 @@ ADD_TEST(${KIT}-TreeMapView ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-XGMLReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestXGMLReader ${DATA}/fsm.gml)
+endif()

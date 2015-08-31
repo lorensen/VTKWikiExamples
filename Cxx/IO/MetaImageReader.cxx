@@ -7,7 +7,6 @@
 #include <vtkImageMapper3D.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkTesting.h>
 
 int main(int argc, char *argv[])
 {

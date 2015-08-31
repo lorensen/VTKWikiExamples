@@ -20,10 +20,6 @@
 #include <vtkStdString.h>
 #include <vtkTextActor.h>
 #include <vtkTextProperty.h>
-#include <vtkTesting.h>
-
-// The environment variable VTK_DATA_ROOT will be used.
-// Make sure it is set accordingly!
 
 int main(int argc, char*argv[])
 {

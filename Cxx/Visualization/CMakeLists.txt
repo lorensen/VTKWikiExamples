@@ -36,6 +36,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Visualization)
 SET(NEEDS_ARGS
@@ -100,3 +101,4 @@ ADD_TEST(${KIT}-VisualizeVTP ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-Visualize2DPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestVisualize2DPoints ${DATA}/Ring.vtp)
+endif()

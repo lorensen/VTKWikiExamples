@@ -13,12 +13,9 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkRenderer.h>
 #include <vtkStreamLine.h>
-#include <vtkTestUtilities.h>
 #include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkStructuredGridOutlineFilter.h>
 #include <vtkProperty.h>
-
-#include <vtkTesting.h>
 
 int main(int argc, char *argv[])
 {

@@ -26,6 +26,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   TARGET_LINK_LIBRARIES(${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
 
+if (BUILD_TESTING)
 # Testing
 SET(KIT Texture)
 SET(NEEDS_ARGS
@@ -38,3 +39,4 @@ SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 ADD_TEST(${KIT}-TexturedSphere ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestTexturedSphere ${DATA}/earth.ppm)
+endif()
