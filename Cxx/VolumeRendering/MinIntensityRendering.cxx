@@ -12,7 +12,7 @@
 #include <vtkVolumeProperty.h>
 #include <vtkFixedPointVolumeRayCastMapper.h>
 #include <vtkColorTransferFunction.h>
- 
+
 int main(int argc, char *argv[])
 {
   if(argc < 2)

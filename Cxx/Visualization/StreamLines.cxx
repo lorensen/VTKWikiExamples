@@ -17,6 +17,8 @@
 #include <vtkStructuredGridOutlineFilter.h>
 #include <vtkProperty.h>
 
+#include <vtkTesting.h>
+
 int main(int argc, char *argv[])
 {
   if(argc < 3)
