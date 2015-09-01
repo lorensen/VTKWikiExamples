@@ -20,6 +20,10 @@ FILE(GLOB ALL_FILES *.cxx)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
 Requires_Module(TreeMapView vtkTestingRendering)
 
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
+set(VERSION_MIN "6.0")
+Requires_Version(TreeMapView ${VERSION_MIN} ALL_FILES)
+
 if(NOT VTK_USE_PARALLEL)
   set(SKIP PKMeansClustering)
   message(STATUS "VTKWikiExamples: ${SKIP} requires VTK_PARALLEL and will not be built")
@@ -39,11 +43,16 @@ if (BUILD_TESTING)
 SET(KIT InfoVis)
 
 SET(NEEDS_ARGS
-DelimitedTextReader
-DelimitedTextWriter
-TreeMapView
-XGMLReader
+  DelimitedTextReader
+  DelimitedTextWriter
+  XGMLReader
 )
+if ("${ALL_FILES}" MATCHES ".*TreeMapView.*")
+  SET(NEEDS_ARGS "${NEEDS_ARGS};TreeMapView")
+  ADD_TEST(${KIT}-TreeMapView ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+    TestTreeMapView ${DATA}/Infovis-XML-vtkclasses.xml ${DATA}/Infovis-XML-vtklibrary.xml)
+endif()
+
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
@@ -54,9 +63,6 @@ ADD_TEST(${KIT}-DelimitedTextReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-DelimitedTextWriter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestDelimitedTextWriter ${TEMP}/foo.txt)
-
-ADD_TEST(${KIT}-TreeMapView ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
-  TestTreeMapView ${DATA}/Infovis-XML-vtkclasses.xml ${DATA}/Infovis-XML-vtklibrary.xml)
 
 ADD_TEST(${KIT}-XGMLReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestXGMLReader ${DATA}/fsm.gml)
