@@ -7,5 +7,22 @@
 #include "vtkDataObject.h"
 #include "vtkSmartPointer.h"
 
-vtkCxxRevisionMacro(vtkTestClass, "$Revision: 1.70 $");
 vtkStandardNewMacro(vtkTestClass);
+
+vtkTestClass::vtkTestClass()
+{
+  this->SetNumberOfInputPorts(0);
+}
+
+int vtkTestClass::RequestData(
+  vtkInformation *vtkNotUsed(request),
+  vtkInformationVector **vtkNotUsed(inputVector),
+  vtkInformationVector *vtkNotUsed(outputVector))
+{
+  std::cout << "some output" << std::endl;
+
+  int value = 3;
+  vtkDebugMacro(<<"Value is: " << value);
+
+  return 1;
+}
