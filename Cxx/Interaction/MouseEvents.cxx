@@ -11,11 +11,11 @@
 #include <vtkObjectFactory.h>
 
 // Define interaction style
-class MouseInteractorStyle4 : public vtkInteractorStyleTrackballCamera
+class customMouseInteractorStyle : public vtkInteractorStyleTrackballCamera
 {
   public:
-    static MouseInteractorStyle4* New();
-    vtkTypeMacro(MouseInteractorStyle4, vtkInteractorStyleTrackballCamera);
+    static customMouseInteractorStyle* New();
+    vtkTypeMacro(customMouseInteractorStyle, vtkInteractorStyleTrackballCamera);
 
     virtual void OnLeftButtonDown() 
     {
@@ -40,7 +40,7 @@ class MouseInteractorStyle4 : public vtkInteractorStyleTrackballCamera
 
 };
 
-vtkStandardNewMacro(MouseInteractorStyle4);
+vtkStandardNewMacro(customMouseInteractorStyle);
 
 int main(int, char *[])
 {
@@ -72,8 +72,8 @@ int main(int, char *[])
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
   renderWindowInteractor->SetRenderWindow ( renderWindow );
   
-  vtkSmartPointer<MouseInteractorStyle4> style =
-    vtkSmartPointer<MouseInteractorStyle4>::New();
+  vtkSmartPointer<customMouseInteractorStyle> style =
+    vtkSmartPointer<customMouseInteractorStyle>::New();
   renderWindowInteractor->SetInteractorStyle( style );
   
   renderWindowInteractor->Initialize();

@@ -1,35 +1,32 @@
+#include <vtkJPEGReader.h>
+#include <vtkImageMapper3D.h>
+#include <vtkImageActor.h> // Note: this is a 3D actor (c.f. vtkImageMapper which is 2D)
+#include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkInteractorStyleImage.h>
-#include <vtkRenderer.h>
-#include <vtkJPEGReader.h>
-#include <vtkImageMapper3D.h>
-#include <vtkImageActor.h>
-#include <vtkCommand.h>
-#include <vtkCallbackCommand.h>
 #include <vtkSmartPointer.h>
 
 int main(int argc, char* argv[])
 {
   // Parse input arguments
   if ( argc != 2 )
-    {
+  {
     std::cout << "Required parameters: Filename" << std::endl;
     return EXIT_FAILURE;
-    }
-
-  std::string InputFilename = argv[1];
+  }
+  std::string inputFilename = argv[1];
 
   // Read the image
-  vtkSmartPointer<vtkJPEGReader> jPEGReader = 
+  vtkSmartPointer<vtkJPEGReader> reader = 
       vtkSmartPointer<vtkJPEGReader>::New();
-  jPEGReader->SetFileName(InputFilename.c_str());
-  jPEGReader->Update();
+  reader->SetFileName(inputFilename.c_str());
+  reader->Update();
 
   // Create an actor
   vtkSmartPointer<vtkImageActor> actor = 
     vtkSmartPointer<vtkImageActor>::New();
-  actor->GetMapper()->SetInputConnection(jPEGReader->GetOutputPort());
+  actor->GetMapper()->SetInputConnection(reader->GetOutputPort());
 
   // Setup renderer
   vtkSmartPointer<vtkRenderer> renderer = 
@@ -38,23 +35,22 @@ int main(int argc, char* argv[])
   renderer->ResetCamera();
 
   // Setup render window
-  vtkSmartPointer<vtkRenderWindow> renderWindow = 
+  vtkSmartPointer<vtkRenderWindow> window = 
     vtkSmartPointer<vtkRenderWindow>::New();
-  renderWindow->AddRenderer(renderer);
+  window->AddRenderer(renderer);
 
   // Setup render window interactor
-  vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = 
+  vtkSmartPointer<vtkRenderWindowInteractor> interactor = 
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
+  interactor->SetRenderWindow(window);
+
+  // Setup interactor style (this is what implements the zooming, panning and brightness adjustment functionality)
   vtkSmartPointer<vtkInteractorStyleImage> style = 
     vtkSmartPointer<vtkInteractorStyleImage>::New();
- 
-  renderWindowInteractor->SetInteractorStyle(style);
+  interactor->SetInteractorStyle(style);
   
   // Render and start interaction
-  renderWindowInteractor->SetRenderWindow(renderWindow);
-  renderWindowInteractor->Initialize();
-
-  renderWindowInteractor->Start();
+  interactor->Start();
 
   return EXIT_SUCCESS;
 }
