@@ -1,3 +1,4 @@
+#include <vtkVersion.h>
 #include <vtkSmartPointer.h>
 #include <vtkCellArray.h>
 #include <vtkCellData.h>
@@ -81,6 +82,12 @@ int main(int, char *[])
   vtkSmartPointer<vtkPolyDataMapper> mapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
   mapper->SetInputData(linesPolyData);
+
+#if VTK_MAJOR_VERSION <= 5
+  mapper->SetInput(linesPolyData);
+#else
+   mapper->SetInputData(linesPolyData);
+#endif
   
   vtkSmartPointer<vtkActor> actor =
     vtkSmartPointer<vtkActor>::New();
