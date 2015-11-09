@@ -81,7 +81,6 @@ int main(int, char *[])
   // Setup the visualization pipeline
   vtkSmartPointer<vtkPolyDataMapper> mapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
-  mapper->SetInputData(linesPolyData);
 
 #if VTK_MAJOR_VERSION <= 5
   mapper->SetInput(linesPolyData);

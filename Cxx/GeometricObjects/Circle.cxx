@@ -20,12 +20,11 @@ int main(int, char *[])
   polygonSource->SetNumberOfSides(50);
   polygonSource->SetRadius(5);
   polygonSource->SetCenter(0, 0, 0);
-  polygonSource->Update();
   
   // Visualize
   vtkSmartPointer<vtkPolyDataMapper> mapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
-  mapper->SetInputData( polygonSource->GetOutput() );
+  mapper->SetInputConnection(polygonSource->GetOutputPort());;
   
   vtkSmartPointer<vtkActor> actor =
     vtkSmartPointer<vtkActor>::New();
