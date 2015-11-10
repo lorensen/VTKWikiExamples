@@ -33,6 +33,7 @@ int main(int, char *[])
   vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
   renderer->AddActor(actor);
+  renderer->SetBackground(.3,.3,.5); // Background color purple
   
   vtkSmartPointer<vtkRenderWindow> renderWindow =
     vtkSmartPointer<vtkRenderWindow>::New();
