@@ -29,7 +29,7 @@ file(GLOB CXX_FILES *.cxx)
 
 if(${VTK_VERSION} VERSION_GREATER "6" AND VTK_QT_VERSION VERSION_GREATER "4")
   qt5_wrap_ui(UISrcs ${UI_FILES} )
-  # CMAKE_AUTOMOC in ON so the MocHdrs will be automatically wrapped.
+  # CMAKE_AUTOMOC in ON so the MOC headers will be automatically wrapped.
   add_executable({{{1}}} MACOSX_BUNDLE
     ${CXX_FILES} ${UISrcs} ${QT_WRAP})
   qt5_use_modules({{{1}}} Core Gui)
