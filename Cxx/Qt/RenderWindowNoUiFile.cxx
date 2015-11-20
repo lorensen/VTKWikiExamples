@@ -4,11 +4,8 @@
 #include <vtkSphereSource.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
-#include <vtkImageViewer.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkInteractorStyleImage.h>
+#include <vtkRenderWindow.h>
 #include <vtkRenderer.h>
-#include <vtkJPEGReader.h>
 
 #include <QVTKWidget.h>
 
@@ -17,35 +14,27 @@ int main(int argc, char** argv)
   QApplication app(argc, argv);
 
   QVTKWidget widget;
-  widget.resize(256,256);
+  widget.resize( 256, 256 );
 
-  // Setup sphere
-  vtkSmartPointer<vtkSphereSource> sphereSource = 
+  vtkSmartPointer<vtkSphereSource> sphereSource =
       vtkSmartPointer<vtkSphereSource>::New();
-  sphereSource->Update();
-  vtkSmartPointer<vtkPolyDataMapper> sphereMapper = 
+
+  vtkSmartPointer<vtkPolyDataMapper> sphereMapper =
       vtkSmartPointer<vtkPolyDataMapper>::New();
-  sphereMapper->SetInputConnection(sphereSource->GetOutputPort());
-  vtkSmartPointer<vtkActor> sphereActor = 
+  sphereMapper->SetInputConnection( sphereSource->GetOutputPort() );
+
+  vtkSmartPointer<vtkActor> sphereActor =
       vtkSmartPointer<vtkActor>::New();
-  sphereActor->SetMapper(sphereMapper);
-    
-  // Setup window
-  vtkSmartPointer<vtkRenderWindow> renderWindow = 
-      vtkSmartPointer<vtkRenderWindow>::New();
+  sphereActor->SetMapper( sphereMapper );
 
-  // Setup renderer
-  vtkSmartPointer<vtkRenderer> renderer = 
+  vtkSmartPointer<vtkRenderer> renderer =
       vtkSmartPointer<vtkRenderer>::New();
-  renderWindow->AddRenderer(renderer);
-      
-  renderer->AddActor(sphereActor);
-  renderer->ResetCamera();
-
-  widget.SetRenderWindow(renderWindow);
+  renderer->AddActor( sphereActor );
+ 
+  widget.GetRenderWindow()->AddRenderer( renderer );
   widget.show();
 
   app.exec();
-  
+
   return EXIT_SUCCESS;
 }
