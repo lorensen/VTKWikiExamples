@@ -1,11 +1,11 @@
 #include <vtkSmartPointer.h>
+#include <vtkSimplePointsReader.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
-#include <vtkSimplePointsReader.h>
+#include <vtkProperty.h>
+#include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkRenderer.h>
-#include <vtkProperty.h>
 
 int main(int argc, char* argv[])
 {
@@ -35,17 +35,17 @@ int main(int argc, char* argv[])
 
   vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
+  renderer->AddActor(actor);
+  renderer->SetBackground(.3, .6, .3); // Background color green
+
   vtkSmartPointer<vtkRenderWindow> renderWindow =
     vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
+
   vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
   renderWindowInteractor->SetRenderWindow(renderWindow);
 
-  renderer->AddActor(actor);
-  renderer->SetBackground(.3, .6, .3); // Background color green
-
-  renderWindow->Render();
   renderWindowInteractor->Start();
 
   return EXIT_SUCCESS;

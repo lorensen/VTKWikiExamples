@@ -1,9 +1,8 @@
-#include <vtkPolyData.h>
-#include <vtkSimplePointsWriter.h>
-#include <vtkSphereSource.h>
 #include <vtkSmartPointer.h>
+#include <vtkSphereSource.h>
+#include <vtkSimplePointsWriter.h>
 
-int main(int, char *[])
+int main(int vtkNotUsed(argc), char* vtkNotUsed(argv)[])
 {
   vtkSmartPointer<vtkSphereSource> sphereSource =
     vtkSmartPointer<vtkSphereSource>::New();
