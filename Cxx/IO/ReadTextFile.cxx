@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
   }
   // Get all data from the file
   std::string filename = argv[1];
-  std::ifstream fin(filename.c_str());
+  std::ifstream filestream(filename.c_str());
 
   std::string line;
   vtkSmartPointer<vtkPoints> points =
