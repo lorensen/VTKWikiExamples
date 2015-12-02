@@ -40,5 +40,10 @@ int main(int, char *[])
 
   polydata->GetFieldData()->AddArray(intValue);
  
+  // Get the data back out
+  vtkIntArray* retrievedArray = vtkIntArray::SafeDownCast(polydata->GetFieldData()->GetArray("MyIntValue"));
+
+  std::cout << retrievedArray->GetValue(0) << std::endl;
+
   return EXIT_SUCCESS;
 }
