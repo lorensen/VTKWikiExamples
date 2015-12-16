@@ -1,6 +1,4 @@
 #include <vtkSmartPointer.h>
-#include <vtkJPEGWriter.h>
-#include <vtkImageCast.h>
 #include <vtkImageMapper3D.h>
 #include <vtkMath.h>
 #include <vtkImageData.h>
@@ -10,10 +8,7 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkInteractorStyleImage.h>
 #include <vtkRenderer.h>
-#include <vtkJPEGReader.h>
 #include <vtkImageActor.h>
-#include <vtkImageEllipsoidSource.h>
-#include <vtkImageCast.h>
 
 int main(int, char *[])
 {
@@ -58,28 +53,26 @@ int main(int, char *[])
   originalRenderer->ResetCamera();
   originalRenderer->SetBackground(.4, .5, .6);
 
-  vtkSmartPointer<vtkRenderer> gradientMagnitudeRenderer =
+  vtkSmartPointer<vtkRenderer> mathRenderer =
     vtkSmartPointer<vtkRenderer>::New();
-  gradientMagnitudeRenderer->SetViewport(rightViewport);
-  gradientMagnitudeRenderer->AddActor(mathActor);
-  gradientMagnitudeRenderer->ResetCamera();
-  gradientMagnitudeRenderer->SetBackground(.4, .5, .7);
+  mathRenderer->SetViewport(rightViewport);
+  mathRenderer->AddActor(mathActor);
+  mathRenderer->ResetCamera();
+  mathRenderer->SetBackground(.4, .5, .7);
 
   vtkSmartPointer<vtkRenderWindow> renderWindow =
     vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->SetSize(600, 300);
   renderWindow->AddRenderer(originalRenderer);
-  renderWindow->AddRenderer(gradientMagnitudeRenderer);
+  renderWindow->AddRenderer(mathRenderer);
 
   vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
+  renderWindowInteractor->SetRenderWindow(renderWindow);
+
   vtkSmartPointer<vtkInteractorStyleImage> style =
     vtkSmartPointer<vtkInteractorStyleImage>::New();
-
   renderWindowInteractor->SetInteractorStyle(style);
-
-  renderWindowInteractor->SetRenderWindow(renderWindow);
-  renderWindowInteractor->Initialize();
 
   renderWindowInteractor->Start();
   return EXIT_SUCCESS;
