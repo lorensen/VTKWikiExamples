@@ -1,5 +1,5 @@
 #include <vtkVersion.h>
-#if VTK_MAJOR_VERSION == 6
+#if VTK_MAJOR_VERSION >= 6
 int main(int, char *argv[])
 {
   std::cout << argv[0] << " requires VTK 5.10 or earlier. This VTK version is " << vtkVersion::GetVTKVersion() << std::endl;
