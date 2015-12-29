@@ -50,6 +50,7 @@ int main(int, char* [])
   // White image is displayed
   //renderer->AddActor(redImageActor);
   //renderer->AddActor(whiteImageActor);
+
   renderer->ResetCamera();
 
   vtkSmartPointer<vtkRenderWindow> renderWindow =
