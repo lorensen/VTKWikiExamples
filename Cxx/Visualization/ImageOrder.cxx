@@ -6,7 +6,6 @@
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkSmartPointer.h>
-#include <vtkTransform.h>
 
 static void CreateWhiteImage(vtkSmartPointer<vtkImageData> image);
 static void CreateRedImage(vtkSmartPointer<vtkImageData> image);
