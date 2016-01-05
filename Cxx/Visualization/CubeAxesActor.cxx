@@ -47,8 +47,12 @@ int main(int, char *[])
   cubeAxesActor->DrawXGridlinesOn();
   cubeAxesActor->DrawYGridlinesOn();
   cubeAxesActor->DrawZGridlinesOn();
-#if VTK_MAJOR_VERSION > 5
+#if VTK_MAJOR_VERSION == 6
   cubeAxesActor->SetGridLineLocation(VTK_GRID_LINES_FURTHEST);
+#endif
+#if VTK_MAJOR_VERSION > 6
+  cubeAxesActor->SetGridLineLocation(
+    cubeAxesActor->VTK_GRID_LINES_FURTHEST);
 #endif
   
   cubeAxesActor->XAxisMinorTickVisibilityOff();
