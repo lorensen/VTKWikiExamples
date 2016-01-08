@@ -12,21 +12,20 @@
 
 int main(int, char *[])
 {
+  // Create a sphere
   vtkSmartPointer<vtkSphereSource> sphereSource = 
     vtkSmartPointer<vtkSphereSource>::New();
   sphereSource->SetCenter ( 0.0, 0.0, 0.0 );
   sphereSource->SetRadius ( 5.0 );
   sphereSource->Update();
 
-  vtkPolyData* polydata = sphereSource->GetOutput();
-
   // Create a mapper
   vtkSmartPointer<vtkPolyDataMapper> mapper = 
     vtkSmartPointer<vtkPolyDataMapper>::New();
 #if VTK_MAJOR_VERSION <= 5
-  mapper->SetInput ( polydata );
+  mapper->SetInput ( sphereSource->GetOutput() );
 #else
-  mapper->SetInputData ( polydata );
+  mapper->SetInputData ( sphereSource->GetOutput() );
 #endif
 
   // Create an actor
@@ -34,30 +33,30 @@ int main(int, char *[])
     vtkSmartPointer<vtkActor>::New();
   actor->SetMapper ( mapper );
 
-  // A renderer and render window
+  // Create a renderer
   vtkSmartPointer<vtkRenderer> renderer = 
     vtkSmartPointer<vtkRenderer>::New();
+  renderer->SetBackground ( 1, 1, 1 ); // Set background color to white
+  renderer->AddActor ( actor );
+
+  // Create a render window
   vtkSmartPointer<vtkRenderWindow> renderWindow = 
     vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer ( renderer );
 
-  // An interactor
+  // Create an interactor
   vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = 
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
   renderWindowInteractor->SetRenderWindow ( renderWindow );
 
-  // Add the actors to the scene
-  renderer->AddActor ( actor );
-  renderer->SetBackground ( 1,1,1 ); // Background color white
-
-  // Setup the text and add it to the window
+  // Setup the text and add it to the renderer
   vtkSmartPointer<vtkTextActor> textActor = 
     vtkSmartPointer<vtkTextActor>::New();
-  textActor->GetTextProperty()->SetFontSize ( 24 );
-  textActor->SetPosition2 ( 10, 40 );
-  renderer->AddActor2D ( textActor );
   textActor->SetInput ( "Hello world" );
-  textActor->GetTextProperty()->SetColor ( 1.0,0.0,0.0 );
+  textActor->SetPosition2 ( 10, 40 );
+  textActor->GetTextProperty()->SetFontSize ( 24 );
+  textActor->GetTextProperty()->SetColor ( 1.0, 0.0, 0.0 );
+  renderer->AddActor2D ( textActor );
   
   // Render and interact
   renderWindow->Render();

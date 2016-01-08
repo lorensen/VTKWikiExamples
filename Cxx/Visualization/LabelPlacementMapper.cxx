@@ -34,7 +34,8 @@ int main(int, char *[])
   pointSource->GetOutput()->GetPointData()->AddArray(labels);
 
   // Add priority array.
-  vtkSmartPointer<vtkIntArray> sizes = vtkSmartPointer<vtkIntArray>::New();
+  vtkSmartPointer<vtkIntArray> sizes =
+    vtkSmartPointer<vtkIntArray>::New();
   sizes->SetNumberOfValues(6);
   sizes->SetName("sizes");
   sizes->SetValue(0, 10);
@@ -46,11 +47,12 @@ int main(int, char *[])
   pointSource->GetOutput()->GetPointData()->AddArray(sizes);
 
   // Create a mapper and actor for the points.
-  vtkSmartPointer<vtkPolyDataMapper> pointMapper = vtkSmartPointer<
-    vtkPolyDataMapper>::New();
+  vtkSmartPointer<vtkPolyDataMapper> pointMapper =
+    vtkSmartPointer<vtkPolyDataMapper>::New();
   pointMapper->SetInputConnection(pointSource->GetOutputPort());
 
-  vtkSmartPointer<vtkActor> pointActor = vtkSmartPointer<vtkActor>::New();
+  vtkSmartPointer<vtkActor> pointActor =
+    vtkSmartPointer<vtkActor>::New();
   pointActor->SetMapper(pointMapper);
 
   // Generate the label hierarchy.
@@ -63,17 +65,19 @@ int main(int, char *[])
   pointSetToLabelHierarchyFilter->Update();
 
   // Create a mapper and actor for the labels.
-  vtkSmartPointer<vtkLabelPlacementMapper> labelMapper = vtkSmartPointer<
-    vtkLabelPlacementMapper>::New();
+  vtkSmartPointer<vtkLabelPlacementMapper> labelMapper =
+    vtkSmartPointer<vtkLabelPlacementMapper>::New();
   labelMapper->SetInputConnection(
     pointSetToLabelHierarchyFilter->GetOutputPort());
-  vtkSmartPointer<vtkActor2D> labelActor = vtkSmartPointer<vtkActor2D>::New();
+  vtkSmartPointer<vtkActor2D> labelActor =
+    vtkSmartPointer<vtkActor2D>::New();
   labelActor->SetMapper(labelMapper);
 
   // Create a renderer, render window, and interactor.
-  vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
-  vtkSmartPointer<vtkRenderWindow> renderWindow = vtkSmartPointer<
-    vtkRenderWindow>::New();
+  vtkSmartPointer<vtkRenderer> renderer =
+    vtkSmartPointer<vtkRenderer>::New();
+  vtkSmartPointer<vtkRenderWindow> renderWindow =
+    vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
   vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
     vtkSmartPointer<vtkRenderWindowInteractor>::New();

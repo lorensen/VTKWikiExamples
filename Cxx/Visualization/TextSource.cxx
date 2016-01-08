@@ -9,7 +9,7 @@
 
 int main(int, char *[])
 {
-  // Create a sphere
+  // Create text
   vtkSmartPointer<vtkTextSource> textSource = 
     vtkSmartPointer<vtkTextSource>::New();
   textSource->SetText("Hello");
@@ -21,7 +21,7 @@ int main(int, char *[])
   vtkSmartPointer<vtkPolyDataMapper> mapper = 
     vtkSmartPointer<vtkPolyDataMapper>::New();
   mapper->SetInputConnection(textSource->GetOutputPort());
-  
+
   vtkSmartPointer<vtkActor> actor = 
     vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);

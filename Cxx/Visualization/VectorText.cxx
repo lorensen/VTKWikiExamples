@@ -20,7 +20,7 @@ int main(int, char *[])
   vtkSmartPointer<vtkPolyDataMapper> mapper = 
     vtkSmartPointer<vtkPolyDataMapper>::New();
   mapper->SetInputConnection(textSource->GetOutputPort());
-  
+
   vtkSmartPointer<vtkActor> actor = 
     vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
