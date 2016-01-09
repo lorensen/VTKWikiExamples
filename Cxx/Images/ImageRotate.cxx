@@ -67,8 +67,7 @@ int main(int argc, char *argv[])
     reader->GetOutput()->GetOrigin()[0],
     reader->GetOutput()->GetOrigin()[1],
     reader->GetOutput()->GetOrigin()[2]);
-  reslice->SetOutputExtent(
-    reader->GetOutput()->GetExtent());
+  reslice->SetOutputExtent(reader->GetOutput()->GetExtent()); // Use a larger extent than the original image's to prevent clipping
 
   // Visualize
   vtkSmartPointer<vtkImageViewer2> imageViewer =
