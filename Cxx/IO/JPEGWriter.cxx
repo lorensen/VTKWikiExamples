@@ -13,9 +13,11 @@ int main(int vtkNotUsed(argc), char* vtkNotUsed(argv)[])
   imageSource->SetExtent( extent );
   imageSource->SetScalarTypeToUnsignedChar(); // vtkJPEGWriter only accepts unsigned char input
   imageSource->SetNumberOfScalarComponents( 3 ); // 3 color channels: Red, Green and Blue
+
   // Fill the whole image with a blue background
   imageSource->SetDrawColor( 0, 127, 255 );
   imageSource->FillBox( extent[0], extent[1], extent[2], extent[3] );
+
   // Paint a 30x30 white square into the image
   imageSource->SetDrawColor( 255, 255, 255 );
   imageSource->FillBox( 40, 70, 20, 50 );
