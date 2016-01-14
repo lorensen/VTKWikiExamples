@@ -8,7 +8,7 @@
 #include <vtkActor.h>
 #include <vtkCornerAnnotation.h>
 
-int main(int, char *[])
+int main( int, char *[] )
 {
   vtkSmartPointer<vtkSphereSource> sphereSource = 
       vtkSmartPointer<vtkSphereSource>::New();
@@ -16,21 +16,21 @@ int main(int, char *[])
   
   vtkSmartPointer<vtkPolyDataMapper> mapper = 
       vtkSmartPointer<vtkPolyDataMapper>::New();
-  mapper->SetInputConnection(sphereSource->GetOutputPort());
+  mapper->SetInputConnection( sphereSource->GetOutputPort() );
  
   vtkSmartPointer<vtkActor> actor = 
       vtkSmartPointer<vtkActor>::New();
-  actor->SetMapper(mapper);
+  actor->SetMapper( mapper );
   
   // Visualize
   vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
   vtkSmartPointer<vtkRenderWindow> renderWindow = vtkSmartPointer<vtkRenderWindow>::New();
-  renderWindow->AddRenderer(renderer);
+  renderWindow->AddRenderer( renderer );
   
   vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = 
       vtkSmartPointer<vtkRenderWindowInteractor>::New();
-  renderWindowInteractor->SetRenderWindow(renderWindow);
-  renderer->AddActor(actor);
+  renderWindowInteractor->SetRenderWindow( renderWindow );
+  renderer->AddActor( actor );
   
    // Annotate the image with window/level and mouse over pixel information
   vtkSmartPointer<vtkCornerAnnotation> cornerAnnotation = 
@@ -42,9 +42,9 @@ int main(int, char *[])
   cornerAnnotation->SetText( 1, "lower right" );
   cornerAnnotation->SetText( 2, "upper left" );
   cornerAnnotation->SetText( 3, "upper right" );
-  cornerAnnotation->GetTextProperty()->SetColor( 1,0,0);
+  cornerAnnotation->GetTextProperty()->SetColor( 1, 0, 0 );
 
-  renderer->AddViewProp(cornerAnnotation);
+  renderer->AddViewProp( cornerAnnotation );
   
   renderWindow->Render();
   renderWindowInteractor->Start();
