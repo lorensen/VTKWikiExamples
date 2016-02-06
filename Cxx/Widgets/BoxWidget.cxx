@@ -1,5 +1,4 @@
 #include <vtkSmartPointer.h>
-
 #include <vtkActor.h>
 #include <vtkBoxWidget.h>
 #include <vtkCamera.h>
@@ -63,13 +62,11 @@ int main(int, char*[])
     vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
   iren->SetInteractorStyle(style);
 
-  //
   // Here we use a vtkBoxWidget to transform the underlying coneActor (by
   // manipulating its transformation matrix).
   
-  // The place factor 
-  // controls the initial size of the widget with respect to the bounding box
-  // of the input to the widget.
+  // The place factor controls the initial size of the widget
+  // with respect to the bounding box of the input to the widget.
   vtkSmartPointer<vtkBoxWidget> boxWidget = 
     vtkSmartPointer<vtkBoxWidget>::New();
   boxWidget->SetInteractor(iren);
