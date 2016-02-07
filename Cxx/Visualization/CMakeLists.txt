@@ -19,6 +19,7 @@ FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresSettingOff.cmake)
 
 set(VERSION_MIN "6.0.0")
 Requires_Version(AssignCellColorsFromLUT ${VERSION_MIN} ALL_FILES)
@@ -28,6 +29,7 @@ Requires_Version(Legend ${VERSION_MIN} ALL_FILES)
 Requires_Version(ElevationBandsWithGlyphs ${VERSION_MIN} ALL_FILES)
 Requires_Version(CurvatureBandsWithGlyphs ${VERSION_MIN} ALL_FILES)
 Requires_Module(Shadows vtkRenderingOpenGL)
+Requires_Setting_Off(StreamLines VTK_LEGACY_REMOVE)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   STRING(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
@@ -87,8 +89,10 @@ ADD_TEST(${KIT}-RenderLargeImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 ADD_TEST(${KIT}-SelectWindowRegion ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestSelectWindowRegion ${DATA}/Ox.jpg)
 
+if (NOT VTK_LEGACY_REMOVE)
 ADD_TEST(${KIT}-StreamLines ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestStreamLines ${DATA}/combxyz.bin ${DATA}/combq.bin)
+endif()
 
 ADD_TEST(${KIT}-TextureMapPlane ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestTextureMapPlane ${DATA}/Yinyang.jpg)
