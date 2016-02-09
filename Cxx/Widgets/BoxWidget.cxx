@@ -1,87 +1,82 @@
 #include <vtkSmartPointer.h>
-#include <vtkActor.h>
-#include <vtkBoxWidget.h>
-#include <vtkCamera.h>
-#include <vtkCommand.h>
+// For the rendering pipeline setup:
 #include <vtkConeSource.h>
-#include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkPolyDataMapper.h>
+#include <vtkActor.h>
+#include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkRenderer.h>
+#include <vtkInteractorStyleTrackballCamera.h>
+// For vtkBoxWidget:
+#include <vtkBoxWidget.h>
+#include <vtkCommand.h>
 #include <vtkTransform.h>
 
 class vtkMyCallback : public vtkCommand
 {
 public:
-  static vtkMyCallback *New() 
-    { return new vtkMyCallback; }
-  virtual void Execute(vtkObject *caller, unsigned long, void*)
-    {
-      vtkSmartPointer<vtkTransform> t = 
-	vtkSmartPointer<vtkTransform>::New();
-      vtkBoxWidget *widget = reinterpret_cast<vtkBoxWidget*>(caller);
-      widget->GetTransform(t);
-      widget->GetProp3D()->SetUserTransform(t);
-    }
+  static vtkMyCallback *New()
+  {
+    return new vtkMyCallback;
+  }
+  virtual void Execute( vtkObject *caller, unsigned long, void* )
+  {
+    // Here we use the vtkBoxWidget to transform the underlying coneActor
+    // (by manipulating its transformation matrix).
+    vtkSmartPointer<vtkTransform> t =
+      vtkSmartPointer<vtkTransform>::New();
+    vtkBoxWidget *widget = reinterpret_cast<vtkBoxWidget*>(caller);
+    widget->GetTransform( t );
+    widget->GetProp3D()->SetUserTransform( t );
+  }
 };
 
-int main(int, char*[])
+int main( int vtkNotUsed( argc ), char* vtkNotUsed( argv )[] )
 {
-  
-  vtkSmartPointer<vtkConeSource> cone = 
+  vtkSmartPointer<vtkConeSource> cone =
     vtkSmartPointer<vtkConeSource>::New();
-  cone->SetHeight( 3.0 );
-  cone->SetRadius( 1.0 );
-  cone->SetResolution( 10 );
-  cone->Update();
-  
-  vtkSmartPointer<vtkPolyDataMapper> coneMapper = 
+
+  vtkSmartPointer<vtkPolyDataMapper> coneMapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
   coneMapper->SetInputConnection( cone->GetOutputPort() );
 
-  vtkSmartPointer<vtkActor> coneActor = 
+  vtkSmartPointer<vtkActor> coneActor =
     vtkSmartPointer<vtkActor>::New();
   coneActor->SetMapper( coneMapper );
 
-  vtkSmartPointer<vtkRenderer> ren1= 
+  vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
-  ren1->AddActor( coneActor );
-  ren1->SetBackground( 0.1, 0.2, 0.4 );
+  renderer->AddActor( coneActor );
+  renderer->SetBackground( 0.1, 0.2, 0.4 );
 
-  vtkSmartPointer<vtkRenderWindow> renWin = 
+  vtkSmartPointer<vtkRenderWindow> window =
     vtkSmartPointer<vtkRenderWindow>::New();
-  renWin->AddRenderer( ren1 );
-  renWin->SetSize( 300, 300 );
+  window->AddRenderer( renderer );
+  window->SetSize( 300, 300 );
 
-  vtkSmartPointer<vtkRenderWindowInteractor> iren = 
+  vtkSmartPointer<vtkRenderWindowInteractor> interactor =
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
-  iren->SetRenderWindow(renWin);
+  interactor->SetRenderWindow( window );
 
-  vtkSmartPointer<vtkInteractorStyleTrackballCamera> style = 
+  vtkSmartPointer<vtkInteractorStyleTrackballCamera> style =
     vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
-  iren->SetInteractorStyle(style);
+  interactor->SetInteractorStyle( style );
 
-  // Here we use a vtkBoxWidget to transform the underlying coneActor (by
-  // manipulating its transformation matrix).
-  
-  // The place factor controls the initial size of the widget
-  // with respect to the bounding box of the input to the widget.
-  vtkSmartPointer<vtkBoxWidget> boxWidget = 
+  vtkSmartPointer<vtkBoxWidget> boxWidget =
     vtkSmartPointer<vtkBoxWidget>::New();
-  boxWidget->SetInteractor(iren);
-  boxWidget->SetPlaceFactor(1.25);
+  boxWidget->SetInteractor( interactor );
 
-  boxWidget->SetProp3D(coneActor);
+  boxWidget->SetProp3D( coneActor );
+  boxWidget->SetPlaceFactor( 1.25 ); // Make the box 1.25x larger than the actor
   boxWidget->PlaceWidget();
+
   vtkSmartPointer<vtkMyCallback> callback =
     vtkSmartPointer<vtkMyCallback>::New();
-  boxWidget->AddObserver(vtkCommand::InteractionEvent, callback);
+  boxWidget->AddObserver( vtkCommand::InteractionEvent, callback );
 
   boxWidget->On();
 
-  iren->Initialize();
-  iren->Start();
-  
+  interactor->Start();
+
   return EXIT_SUCCESS;
 }

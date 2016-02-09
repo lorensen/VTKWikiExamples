@@ -1,95 +1,94 @@
+#include <vtkSmartPointer.h>
+// For the rendering pipeline setup:
+#include <vtkConeSource.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
-#include <vtkRenderWindow.h>
 #include <vtkRenderer.h>
+#include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkPolyData.h>
-#include <vtkSmartPointer.h>
-#include <vtkSphereSource.h>
+#include <vtkInteractorStyleTrackballCamera.h>
+// For vtkBoxWidget2:
 #include <vtkBoxWidget2.h>
 #include <vtkBoxRepresentation.h>
 #include <vtkCommand.h>
+#include <vtkTransform.h>
 
-// This does the actual work.
-// Callback for the interaction
 class vtkBoxCallback : public vtkCommand
 {
-  public:
-    static vtkBoxCallback *New()
-    {
-      return new vtkBoxCallback;
-    }
-    
-    virtual void Execute(vtkObject *caller, unsigned long, void*)
-    {
-      
-      vtkBoxWidget2 *boxWidget = 
-        reinterpret_cast<vtkBoxWidget2*>(caller);
-      
-      // Get the actual box coordinates/planes
-      vtkSmartPointer<vtkPolyData> polydata = 
-        vtkSmartPointer<vtkPolyData>::New();
-      static_cast<vtkBoxRepresentation*>(boxWidget->GetRepresentation())->GetPolyData (polydata);
-      
-      // Display the center of the box
-      double p[3];
-      polydata->GetPoint(14,p); // As per the vtkBoxRepresentation documentation, the 15th point (index 14) is the center of the box
-      std::cout << "Box center: " << p[0] << " " << p[1] << " " << p[2] << std::endl;
-    }
-    vtkBoxCallback(){}
-    
+public:
+  static vtkBoxCallback *New()
+  {
+    return new vtkBoxCallback;
+  }
+
+  vtkSmartPointer<vtkActor> m_actor;
+
+  void vtkBoxCallback::SetActor( vtkSmartPointer<vtkActor> actor )
+  {
+    m_actor = actor;
+  }
+
+  virtual void Execute( vtkObject *caller, unsigned long, void* )
+  {
+    vtkSmartPointer<vtkBoxWidget2> boxWidget =
+      vtkBoxWidget2::SafeDownCast(caller);
+
+    vtkSmartPointer<vtkTransform> t =
+      vtkSmartPointer<vtkTransform>::New();
+
+    vtkBoxRepresentation::SafeDownCast( boxWidget->GetRepresentation() )->GetTransform( t );
+    this->m_actor->SetUserTransform( t );
+  }
+
+  vtkBoxCallback(){}
 };
- 
-int main(int, char *[])
+
+int main( int vtkNotUsed( argc ), char* vtkNotUsed( argv )[] )
 {
-  vtkSmartPointer<vtkSphereSource> sphereSource = 
-    vtkSmartPointer<vtkSphereSource>::New();
-  sphereSource->Update();
+  vtkSmartPointer<vtkConeSource> coneSource =
+    vtkSmartPointer<vtkConeSource>::New();
+  coneSource->SetHeight( 1.5 );
 
-  // Create a mapper and actor
-  vtkSmartPointer<vtkPolyDataMapper> mapper = 
+  vtkSmartPointer<vtkPolyDataMapper> mapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
-  mapper->SetInputConnection(sphereSource->GetOutputPort());
-  vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
-  actor->SetMapper(mapper);
-  
-  // A renderer and render window
-  vtkSmartPointer<vtkRenderer> renderer = 
-    vtkSmartPointer<vtkRenderer>::New();
-  vtkSmartPointer<vtkRenderWindow> renderWindow = 
-    vtkSmartPointer<vtkRenderWindow>::New();
-  renderWindow->AddRenderer(renderer);
-  //renderer->AddActor(actor);
-  
-  // An interactor
-  vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = 
-    vtkSmartPointer<vtkRenderWindowInteractor>::New();
-  renderWindowInteractor->SetRenderWindow(renderWindow);
+  mapper->SetInputConnection( coneSource->GetOutputPort() );
 
-  vtkSmartPointer<vtkBoxWidget2> boxWidget = 
+  vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
+  actor->SetMapper( mapper );
+
+  vtkSmartPointer<vtkRenderer> renderer =
+    vtkSmartPointer<vtkRenderer>::New();
+  renderer->AddActor(actor);
+  renderer->ResetCamera(); // Reposition camera so the whole scene is visible
+
+  vtkSmartPointer<vtkRenderWindow> renderWindow =
+    vtkSmartPointer<vtkRenderWindow>::New();
+  renderWindow->AddRenderer( renderer );
+
+  vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
+    vtkSmartPointer<vtkRenderWindowInteractor>::New();
+  renderWindowInteractor->SetRenderWindow( renderWindow );
+
+  // Use the "trackball camera" interactor style, rather than the default "joystick camera"
+  vtkSmartPointer<vtkInteractorStyleTrackballCamera> style =
+    vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
+  renderWindowInteractor->SetInteractorStyle( style );
+
+  vtkSmartPointer<vtkBoxWidget2> boxWidget =
     vtkSmartPointer<vtkBoxWidget2>::New();
-  boxWidget->SetInteractor(renderWindowInteractor);
-  //boxWidget->CreateDefaultRepresentation();
+  boxWidget->SetInteractor( renderWindowInteractor );
+  boxWidget->GetRepresentation()->SetPlaceFactor( 1 ); // Default is 0.5
+  boxWidget->GetRepresentation()->PlaceWidget(actor->GetBounds());
   
-  vtkSmartPointer<vtkBoxRepresentation> boxRepresentation = 
-    vtkSmartPointer<vtkBoxRepresentation>::New();
-  boxWidget->SetRepresentation(boxRepresentation);
-  
-  vtkSmartPointer<vtkBoxCallback> boxCallback = 
+  // Set up a callback for the interactor to call so we can manipulate the actor
+  vtkSmartPointer<vtkBoxCallback> boxCallback =
     vtkSmartPointer<vtkBoxCallback>::New();
-  //boxCallback->SphereSource = sphereSource;
- 
-  boxWidget->AddObserver(vtkCommand::InteractionEvent,boxCallback);
-  
-  // Render
-  renderWindow->Render();
-  
-  renderWindowInteractor->Initialize();
-  renderWindow->Render();
+  boxCallback->SetActor(actor);
+  boxWidget->AddObserver( vtkCommand::InteractionEvent, boxCallback );
+
   boxWidget->On();
-  
-  // Begin mouse interaction
+
   renderWindowInteractor->Start();
-  
+
   return EXIT_SUCCESS;
 }
