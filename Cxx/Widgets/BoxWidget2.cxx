@@ -23,7 +23,7 @@ public:
 
   vtkSmartPointer<vtkActor> m_actor;
 
-  void vtkBoxCallback::SetActor( vtkSmartPointer<vtkActor> actor )
+  void SetActor( vtkSmartPointer<vtkActor> actor )
   {
     m_actor = actor;
   }
