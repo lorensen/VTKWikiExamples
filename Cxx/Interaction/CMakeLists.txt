@@ -1,4 +1,4 @@
-PROJECT (Interaction)
+PROJECT (${WIKI}Interaction)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

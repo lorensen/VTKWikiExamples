@@ -1,4 +1,4 @@
-PROJECT (Modelling)
+PROJECT (${WIKI}Modelling)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

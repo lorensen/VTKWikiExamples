@@ -1,4 +1,4 @@
-PROJECT (DataStructures)
+PROJECT (${WIKI}DataStructures)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

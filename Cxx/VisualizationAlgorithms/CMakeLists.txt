@@ -1,4 +1,4 @@
-PROJECT (VisualizationAlgorithms)
+PROJECT (${WIKI}VisualizationAlgorithms)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

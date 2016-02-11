@@ -1,4 +1,4 @@
-PROJECT (SimpleOperations)
+PROJECT (${WIKI}SimpleOperations)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

@@ -1,4 +1,4 @@
-PROJECT (VolumeRendering)
+PROJECT (${WIKI}VolumeRendering)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

@@ -13,7 +13,7 @@ foreach(p
 endforeach()
 #-----------------------------------------------------------------------------
 
-PROJECT (QtVTKWikiExamples)
+PROJECT (${WIKI}QtVTKWikiExamples)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

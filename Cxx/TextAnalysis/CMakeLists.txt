@@ -1,4 +1,4 @@
-PROJECT (TextAnalysis)
+PROJECT (${WIKI}TextAnalysis)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

@@ -1,4 +1,4 @@
-PROJECT (Plotting)
+PROJECT (${WIKI}Plotting)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

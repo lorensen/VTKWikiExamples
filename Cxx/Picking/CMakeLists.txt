@@ -1,4 +1,4 @@
-PROJECT (Picking)
+PROJECT (${WIKI}Picking)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

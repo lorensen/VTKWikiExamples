@@ -1,4 +1,4 @@
-PROJECT (Medical)
+PROJECT (${WIKI}Medical)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
