@@ -27,7 +27,7 @@ vtk_module( WikiExamples
   vtkRenderingImage
   vtkRenderingLOD
   vtkRenderingQt
-  vtkRenderingVolumeOpenGL2
+  vtkRenderingVolume${VTK_RENDERING_BACKEND}
   vtkRendering${VTK_RENDERING_BACKEND}
   vtkTestingGenericBridge
   vtkTestingRendering
