@@ -1,16 +1,4 @@
-#-----------------------------------------------------------------------------
-# Set policies as needed.
-foreach(p
-    CMP0020 # CMake 2.8.11
-    CMP0022 # CMake 2.8.12
-    CMP0025 # CMake 3.0
-    CMP0043 # CMake 3.0
-    CMP0053 # CMake 3.1
-    )
-  if(POLICY ${p})
-    cmake_policy(SET ${p} NEW)
-  endif()
-endforeach()
+WikiPolicies()
 #-----------------------------------------------------------------------------
 
 PROJECT (${WIKI}QtVTKWikiExamples)
@@ -59,7 +47,7 @@ foreach(EXAMPLE_FILE ${ALL_UI_FILES})
     qt5_wrap_ui(UISrcs ${EXAMPLE}.ui)
     # CMAKE_AUTOMOC in ON so the MocHdrs will be automatically wrapped.
     add_executable(${WIKI}${EXAMPLE} ${EXECUTABLE_FLAG} ${EXAMPLE}Driver.cxx ${EXAMPLE}.cxx ${UISrcs} ${EXAMPLE}.h)
-    qt5_use_modules(${EXAMPLE} Core Gui Widgets)
+    qt5_use_modules(${WIKI}${EXAMPLE} Core Gui Widgets)
   else()
     QT4_WRAP_UI(UISrcs ${EXAMPLE}.ui)
     QT4_WRAP_CPP(MOCSrcs ${EXAMPLE}.h)
