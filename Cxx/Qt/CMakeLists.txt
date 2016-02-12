@@ -65,7 +65,7 @@ foreach(EXAMPLE_FILE ${ALL_FILES})
 
   if(VTK_QT_VERSION VERSION_GREATER "4")
     ADD_EXECUTABLE(${WIKI}${EXAMPLE} ${EXECUTABLE_FLAG} ${EXAMPLE}.cxx)
-    qt5_use_modules(${EXAMPLE} Core Gui Widgets)
+    qt5_use_modules(${WIKI}${EXAMPLE} Core Gui Widgets)
     TARGET_LINK_LIBRARIES(${WIKI}${EXAMPLE} ${KIT_LIBS})
   else()
     ADD_EXECUTABLE(${WIKI}${EXAMPLE} ${EXECUTABLE_FLAG} ${EXAMPLE}.cxx)
