@@ -45,8 +45,6 @@ else()
   )
 endif()
 
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
-
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
@@ -60,5 +58,7 @@ ADD_TEST(${KIT}-HAVSVolumeMapper ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 ADD_TEST(${KIT}-MinIntensityRendering ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestMinIntensityRendering ${DATA}/ironProt.vtk)
 endif()
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 endif()

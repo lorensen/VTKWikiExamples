@@ -33,7 +33,6 @@ SET(NEEDS_ARGS
   Slicer2D
   RectilinearWipeWidget
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 ADD_TEST(${KIT}-OrientationMarkerWidget ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
@@ -47,4 +46,6 @@ ADD_TEST(${KIT}-CheckerboardWidget ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-Slider2D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestSlider2D -E 25)
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

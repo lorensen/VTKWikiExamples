@@ -30,9 +30,14 @@ SET(NEEDS_ARGS
   GenerateCubesFromLabels
   GenerateModelsFromLabels
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 ADD_TEST(${KIT}-GenerateCubesFromLabels ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestGenerateCubesFromLabels ${DATA}/frogtissue.mhd 1 29)
+
+ADD_TEST(${KIT}-GenerateModelsFromLabels ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestGenerateModelsFromLabels ${DATA}/frogtissue.mhd 1 29)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

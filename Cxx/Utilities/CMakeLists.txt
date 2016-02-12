@@ -36,11 +36,12 @@ SET(KIT Utilities)
 SET(NEEDS_ARGS
   ZBuffer
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
-
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 ADD_TEST(${KIT}-ZBuffer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestZBuffer ${DATA}/Bunny.vtp ${TEMP}/ZBuffer.bmp)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

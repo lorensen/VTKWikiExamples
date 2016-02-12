@@ -55,8 +55,6 @@ if ("${ALL_FILES}" MATCHES ".*TreeMapView.*")
     TestTreeMapView ${DATA}/Infovis-XML-vtkclasses.xml ${DATA}/Infovis-XML-vtklibrary.xml)
 endif()
 
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
-
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
@@ -68,4 +66,7 @@ ADD_TEST(${KIT}-DelimitedTextWriter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-XGMLReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestXGMLReader ${DATA}/fsm.gml)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

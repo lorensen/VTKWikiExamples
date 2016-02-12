@@ -30,8 +30,6 @@ SET(NEEDS_ARGS
   ImageClip
   ImageRegion
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
-
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 ADD_TEST(${KIT}-ImageClip ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
@@ -39,4 +37,7 @@ ADD_TEST(${KIT}-ImageClip ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ImageRegion ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageRegion ${DATA}/Gourds2.jpg)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

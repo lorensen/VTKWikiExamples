@@ -31,7 +31,6 @@ SET(NEEDS_ARGS
   CutWithScalars
   FilledContours
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
@@ -43,4 +42,6 @@ ADD_TEST(${KIT}-CutWithScalars ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-FilledContours ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestFilledContours ${DATA}/filledContours.vtp 10)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

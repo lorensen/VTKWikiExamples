@@ -37,7 +37,6 @@ SET(NEEDS_ARGS
   OctreeTimingDemo
   OctreeVisualize
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 ADD_TEST(${KIT}-DataStructureComparison ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
@@ -62,5 +61,8 @@ ADD_TEST(${KIT}-OctreeTimingDemo ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 ADD_TEST(${KIT}-OctreeVisualize ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestOctreeVisualize -E 40)
 
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 ADD_SUBDIRECTORY(ModifiedBSPTree)
+
 endif()

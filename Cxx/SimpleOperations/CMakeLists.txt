@@ -24,10 +24,8 @@ foreach(SOURCE_FILE ${ALL_FILES})
 endforeach(SOURCE_FILE)
 
 if (BUILD_TESTING)
+
 # Testing
 SET(KIT SimpleOperations)
-SET(NEEDS_ARGS
-  FloatingPointExceptions
-)
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

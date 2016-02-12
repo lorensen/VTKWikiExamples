@@ -42,30 +42,22 @@ SET(NEEDS_ARGS
   DetermineArrayDataTypes
   DijkstraGraphGeodesicPath	
   ExternalContour
-  FieldData
-  GetMiscCellData
-  GetMiscPointData
   GradientFilter
   GreedyTerrainDecimation
   HighlightBadCells
   Hull
   ImplicitModeller
-  MiscPointData
   PointLocatorVisualization
-  PolyDataExtractNormals
   PolyDataIsoLines
   PolyDataPointSample
   RemoveVertices
   ThinPlateSplineTransform
   TriangleColoredPoints
   TriangleSolidColor
-  EmbedPointsIntoVolume
 )
 if(NOT ${VTK_VERSION} VERSION_LESS "6")
   list(APPEND NEEDS_ARGS Curvatures)
 endif()
-
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
@@ -96,6 +88,9 @@ ADD_TEST(${KIT}-GradientFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 ADD_TEST(${KIT}-GreedyTerrainDecimation ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestGreedyTerrainDecimation -E 55)
 
+ADD_TEST(${KIT}-Hull ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestHull ${DATA}/Bunny.vtp)
+
 ADD_TEST(${KIT}-HighlightBadCells ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestHighlightBadCells -E 20)
 
@@ -104,6 +99,9 @@ ADD_TEST(${KIT}-ImplicitModeller ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-PointLocatorVisualization ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestPointLocatorVisualization -E 50)
+
+ADD_TEST(${KIT}-PolyDataIsoLines ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestPolyDataIsoLines ${DATA}/cowHead.vtp)
 
 ADD_TEST(${KIT}-RemoveVertices ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestRemoveVertices ${DATA}/Bunny.vtp)
@@ -116,4 +114,7 @@ ADD_TEST(${KIT}-TriangleColoredPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-TriangleSolidColor ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestTriangleSolidColor -E 25)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

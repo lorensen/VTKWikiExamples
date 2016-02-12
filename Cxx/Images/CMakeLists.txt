@@ -63,7 +63,6 @@ SET(NEEDS_ARGS
   ResizeImage
   StaticImage
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
@@ -129,6 +128,9 @@ ADD_TEST(${KIT}-ImageNonMaximumSuppression ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTe
 ADD_TEST(${KIT}-ImageOpenClose3D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageOpenClose3D ${DATA}/Yinyang.png -E 25)
 
+ADD_TEST(${KIT}-InteractWithImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestImageToPolyDataFilter ${DATA}/Ox.jpg)
+
 ADD_TEST(${KIT}-ImageToPolyDataFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageToPolyDataFilter ${DATA}/Gourds.png)
 
@@ -164,4 +166,6 @@ ADD_TEST(${KIT}-RTAnalyticSource ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ResizeImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestResizeImage ${DATA}/Gourds2.jpg 640 480 1)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

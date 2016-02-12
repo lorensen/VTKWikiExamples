@@ -37,7 +37,6 @@ SET(NEEDS_ARGS
   MatrixMathFilter
   OBBDicer
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 ADD_TEST(${KIT}-FillHoles ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
@@ -48,4 +47,6 @@ ADD_TEST(${KIT}-OBBDicer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-MatrixMathFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestMatrixMathFilter ${DATA}/tensors.vtk)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()
