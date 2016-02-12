@@ -42,6 +42,8 @@ if (BUILD_TESTING)
 # Testing
 SET(KIT InfoVis)
 
+SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
+
 SET(NEEDS_ARGS
   DelimitedTextReader
   DelimitedTextWriter
