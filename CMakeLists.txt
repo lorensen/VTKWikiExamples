@@ -36,7 +36,11 @@ if (BUILD_TESTING)
 endif ()
 
 include(PlatformSpecificChecks)
+
 include(WikiPolicies)
+# Set the CMake Policies
+WikiPolicies()
+
 #
 # Mac specific
 IF(APPLE)
