@@ -30,13 +30,11 @@ vtk_module( WikiExamples
   vtkRenderingVolume${VTK_RENDERING_BACKEND}
   vtkRendering${VTK_RENDERING_BACKEND}
   vtkTestingGenericBridge
+  vtkTestingRendering
   vtkViewsContext2D
   vtkViewsGeovis
   vtkViewsQt
-  TEST_DEPENDS
-    vtkTestingRendering
 
-  EXCLUDE_FROM_DEFAULT
   DESCRIPTION
     "${DOCUMENTATION}"
 )
