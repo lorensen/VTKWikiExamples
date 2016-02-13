@@ -18,11 +18,12 @@ endif()
 FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
-Requires_Module(TreeMapView vtkTestingRendering)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresSettingOn.cmake)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 set(VERSION_MIN "6.0")
 Requires_Version(TreeMapView ${VERSION_MIN} ALL_FILES)
+Requires_Setting_On (TreeMapView BUILD_TESTING)
 
 if(NOT VTK_USE_PARALLEL)
   set(SKIP PKMeansClustering)

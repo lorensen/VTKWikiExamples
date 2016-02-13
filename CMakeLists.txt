@@ -33,6 +33,9 @@ if (BUILD_TESTING)
   CONFIGURE_FILE(
     ${WikiExamples_SOURCE_DIR}/CMake/SampleBuildTest.cmake.in
     ${WikiExamples_BINARY_DIR}/SampleBuildTest.cmake @ONLY)
+  message(STATUS "VTKWikiExamples: Tests will be built with label \"WikiExamples\"")
+else()
+  message(STATUS "VTKWikiExamples: Tests will not be built")
 endif ()
 
 include(PlatformSpecificChecks)
@@ -130,7 +133,7 @@ else()
 endif()
 
 OPTION(RUN_ADMIN_TESTS "Run the admin tests" OFF)
-IF( RUN_ADMIN_TESTS )
+IF( BUILD_TESTING AND RUN_ADMIN_TESTS )
   ADD_TEST(CheckPagesForImages ${WikiExamples_SOURCE_DIR}/Admin/CheckPagesForImages)
   SET_TESTS_PROPERTIES(CheckPagesForImages PROPERTIES TIMEOUT 2000)
-ENDIF( RUN_ADMIN_TESTS )
+ENDIF()

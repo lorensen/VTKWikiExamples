@@ -17,8 +17,8 @@ endif()
 # Build all .cxx files in the directory
 FILE(GLOB ALL_FILES *.cxx)
 
-include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
-Requires_Module(GetDataRoot vtkTestingRendering)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresSettingOn.cmake)
+Requires_Setting_On (GetDataRoot BUILD_TESTING)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 Requires_Version(LUTUtilities "6.0.0" ALL_FILES)

@@ -19,10 +19,11 @@ FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
-Requires_Module(GenericClip vtkTestingRendering)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresSettingOn.cmake)
 
 set(VERSION_MIN "6.0")
 Requires_Version(GenericClip ${VERSION_MIN} ALL_FILES)
+Requires_Setting_On (GenericClip BUILD_TESTING)
 
 
 foreach(SOURCE_FILE ${ALL_FILES})

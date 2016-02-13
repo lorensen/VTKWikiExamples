@@ -1,6 +1,7 @@
 #
 # Create tests for examples
 #
+if (BUILD_TESTING)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 SET(MyTests "")
 foreach(SOURCE_FILE ${ALL_FILES})
@@ -21,3 +22,4 @@ INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/vtkTestingObjectFactory.cmake)
 ADD_EXECUTABLE(${KIT}CxxTests ${KIT}CxxTests.cxx
                ${MyTests})
 TARGET_LINK_LIBRARIES(${KIT}CxxTests ${KIT_LIBS})
+endif()

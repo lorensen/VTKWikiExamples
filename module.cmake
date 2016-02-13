@@ -30,7 +30,6 @@ vtk_module( WikiExamples
   vtkRenderingVolume${VTK_RENDERING_BACKEND}
   vtkRendering${VTK_RENDERING_BACKEND}
   vtkTestingGenericBridge
-  vtkTestingRendering
   vtkViewsContext2D
   vtkViewsGeovis
   vtkViewsQt
