@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
   //float range[2];
   double range[2];
   reader->GetOutput()->GetPointData()->GetScalars()->GetRange(range);
-  std::cout << "Range: " << range[0] << " , " << range[1] << std::endl;
+  //std::cout << "Range: " << range[0] << " , " << range[1] << std::endl;
   
   vtkSmartPointer<vtkBandedPolyDataContourFilter> bf = 
     vtkSmartPointer<vtkBandedPolyDataContourFilter>::New();
