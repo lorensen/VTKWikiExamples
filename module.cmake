@@ -1,5 +1,10 @@
 set(DOCUMENTATION "A collection of examples illustrating how to use VTK")
 
+set(qt_modules "")
+if (Module_vtkGUISupportQtOpenGL)
+  set(qt_modules vtkRenderingQt vtkViewsQt vtkGUISupportQtOpenGL)
+endif()
+
 vtk_module( WikiExamples
   DEPENDS
   vtkFiltersFlowPaths
@@ -26,15 +31,13 @@ vtk_module( WikiExamples
   vtkRenderingContext${VTK_RENDERING_BACKEND}
   vtkRenderingImage
   vtkRenderingLOD
-  vtkRenderingQt
   vtkRenderingVolume${VTK_RENDERING_BACKEND}
   vtkRendering${VTK_RENDERING_BACKEND}
   vtkTestingGenericBridge
   vtkTestingRendering
   vtkViewsContext2D
   vtkViewsGeovis
-  vtkViewsQt
-
+  ${qt_modules}
   DESCRIPTION
     "${DOCUMENTATION}"
 )
