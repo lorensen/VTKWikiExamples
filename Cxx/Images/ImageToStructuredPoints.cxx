@@ -15,8 +15,11 @@ int main(int, char *[])
   vtkSmartPointer<vtkImageCanvasSource2D> source =
     vtkSmartPointer<vtkImageCanvasSource2D>::New();
   source->SetExtent(0, 20, 0, 20, 0, 0);
+  source->SetScalarTypeToUnsignedChar();
   source->SetNumberOfScalarComponents(3);
-  source->SetDrawColor(127,255,100);
+  source->SetDrawColor(127,127,127);
+  source->FillBox(0,20,0,20);
+  source->SetDrawColor(255,127,127);
   source->FillBox(0,15,0,20);
   source->Update();
 

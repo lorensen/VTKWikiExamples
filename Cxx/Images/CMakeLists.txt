@@ -49,12 +49,15 @@ SET(NEEDS_ARGS
   ImageAnisotropicDiffusion2D
   ImageCheckerboard
   ImageCityBlockDistance
+  ImageHybridMedian2D
   ImageMagnify
   ImageNonMaximumSuppression
+  ImageRange3D
   ImageRotate
   ImageSeparableConvolution
   ImageToPolyDataFilter
   ImageToStructuredPoints
+  Transparency
   InteractWithImage
   PickPixel
   PickPixel2
@@ -129,7 +132,7 @@ ADD_TEST(${KIT}-ImageOpenClose3D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageOpenClose3D ${DATA}/Yinyang.png -E 25)
 
 ADD_TEST(${KIT}-InteractWithImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
-  TestImageToPolyDataFilter ${DATA}/Ox.jpg)
+  TestInteractWithImage ${DATA}/Ox.jpg)
 
 ADD_TEST(${KIT}-ImageToPolyDataFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageToPolyDataFilter ${DATA}/Gourds.png)
@@ -142,6 +145,9 @@ ADD_TEST(${KIT}-ImageSeparableConvolution ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTes
   
 ADD_TEST(${KIT}-ImageToStructuredPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageToStructuredPoints -E 25)
+
+ADD_TEST(${KIT}-Transparency ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestTransparency  ${DATA}/Ox.jpg)
 
 ADD_TEST(${KIT}-PickPixel ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestPickPixel  ${DATA}/Gourds2.jpg)

@@ -31,6 +31,7 @@ SET(NEEDS_ARGS
   DEMReader
   DumpXMLFile
   GenericDataObjectReader
+  ImageReader2Factory
   IndividualVRML
   JPEGReader
   JPEGWriter
