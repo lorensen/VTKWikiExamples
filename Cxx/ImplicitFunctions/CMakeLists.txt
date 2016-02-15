@@ -1,4 +1,4 @@
-PROJECT (ImplicitFunctions)
+PROJECT (${WIKI}ImplicitFunctions)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

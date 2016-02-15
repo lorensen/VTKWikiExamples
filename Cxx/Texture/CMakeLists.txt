@@ -1,4 +1,4 @@
-PROJECT (Texture)
+PROJECT (${WIKI}Texture)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -32,11 +32,12 @@ SET(KIT Texture)
 SET(NEEDS_ARGS
   TexturedSphere
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 ADD_TEST(${KIT}-TexturedSphere ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestTexturedSphere ${DATA}/earth.ppm)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

@@ -1,4 +1,4 @@
-PROJECT (GeometricObjects)
+PROJECT (${WIKI}GeometricObjects)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

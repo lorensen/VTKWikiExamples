@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 2.8.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
 
 PROJECT(WikiExamples)
 if (Module_WikiExamples)
-  message(STATUS "VTKWikiExamples: Building VTKWikiExamples as a Remote Module")
+  message(STATUS "VTKWikiExamples: Building VTKWikiExamples as a Remote VTK Module")
   message(STATUS "VTKWikiExamples: All executables will have a \"wiki\" prefix")
   set(WIKI wiki)
   vtk_module_impl()
@@ -21,7 +21,7 @@ else()
   find_package(VTK REQUIRED)
   include(${VTK_USE_FILE})
 endif()
-
+set(WikiExamples_TEST_LABELS "foo")
 message(STATUS "VTKWikiExamples: VTK VERSION: ${VTK_VERSION}(${VTK_RENDERING_BACKEND})")
 
 set(CMAKE_MODULE_PATH ${WikiExamples_SOURCE_DIR}/CMake ${CMAKE_MODULE_PATH})
@@ -33,9 +33,16 @@ if (BUILD_TESTING)
   CONFIGURE_FILE(
     ${WikiExamples_SOURCE_DIR}/CMake/SampleBuildTest.cmake.in
     ${WikiExamples_BINARY_DIR}/SampleBuildTest.cmake @ONLY)
+  message(STATUS "VTKWikiExamples: Tests will be built with label \"WikiExamples\"")
+else()
+  message(STATUS "VTKWikiExamples: Tests will not be built")
 endif ()
 
 include(PlatformSpecificChecks)
+
+include(WikiPolicies)
+# Set the CMake Policies
+WikiPolicies()
 
 #
 # Mac specific
@@ -126,7 +133,7 @@ else()
 endif()
 
 OPTION(RUN_ADMIN_TESTS "Run the admin tests" OFF)
-IF( RUN_ADMIN_TESTS )
+IF( BUILD_TESTING AND RUN_ADMIN_TESTS )
   ADD_TEST(CheckPagesForImages ${WikiExamples_SOURCE_DIR}/Admin/CheckPagesForImages)
   SET_TESTS_PROPERTIES(CheckPagesForImages PROPERTIES TIMEOUT 2000)
-ENDIF( RUN_ADMIN_TESTS )
+ENDIF()

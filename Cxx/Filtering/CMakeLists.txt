@@ -1,4 +1,4 @@
-PROJECT (Filtering)
+PROJECT (${WIKI}Filtering)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -19,10 +19,11 @@ FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
-Requires_Module(GenericClip vtkTestingRendering)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresSettingOn.cmake)
 
 set(VERSION_MIN "6.0")
 Requires_Version(GenericClip ${VERSION_MIN} ALL_FILES)
+Requires_Setting_On (GenericClip BUILD_TESTING)
 
 
 foreach(SOURCE_FILE ${ALL_FILES})
@@ -36,12 +37,10 @@ if (BUILD_TESTING)
 # Testing
 SET(KIT Filtering)
 SET(NEEDS_ARGS
-  CombinePolyData
   ContoursFromPolyData
   ICPRealData
   SurfaceFromUnorganizedPoints
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 ADD_TEST(${KIT}-SurfaceFromUnorganizedPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
@@ -49,4 +48,6 @@ ADD_TEST(${KIT}-SurfaceFromUnorganizedPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}Cxx
 
 ADD_TEST(${KIT}-ContoursFromPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestContoursFromPolyData ${DATA}/Bunny.vtp  -E 30)
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

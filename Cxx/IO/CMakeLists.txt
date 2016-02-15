@@ -1,4 +1,4 @@
-PROJECT (IO)
+PROJECT (${WIKI}IO)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -31,6 +31,7 @@ SET(NEEDS_ARGS
   DEMReader
   DumpXMLFile
   GenericDataObjectReader
+  ImageReader2Factory
   IndividualVRML
   JPEGReader
   JPEGWriter
@@ -68,7 +69,6 @@ SET(NEEDS_ARGS
   WriteVTI
   WriteVTU
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
  
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
@@ -160,7 +160,7 @@ ADD_TEST(${KIT}-ReadTIFF ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 ADD_TEST(${KIT}-ReadTextFile ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestReadTextFile ${DATA}/TeapotPoints.txt)
 
-ADD_TEST(${KIT}-ReadUnstructuredGridVTUFile ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ReadUnstructuredGrid ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestReadUnstructuredGrid ${DATA}/tetra.vtu)
 
 ADD_TEST(${KIT}-SimplePointsReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
@@ -195,4 +195,7 @@ ADD_TEST(${KIT}-WriteVTI ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-WriteVTU ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestWriteVTU ${TEMP}/WriteVTU.vtu)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

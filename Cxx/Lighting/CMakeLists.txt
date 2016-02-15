@@ -1,4 +1,4 @@
-PROJECT (Lighting)
+PROJECT (${WIKI}Lighting)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

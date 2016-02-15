@@ -1,4 +1,4 @@
-PROJECT (ImageData)
+PROJECT (${WIKI}ImageData)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -30,11 +30,13 @@ SET(NEEDS_ARGS
   ExtractVOI
   ImageNormalize
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 ADD_TEST(${KIT}-ExtractVOI ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestExtractVOI -E 50)
 
 ADD_TEST(${KIT}-ImageNormalize ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageNormalize -E 35)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

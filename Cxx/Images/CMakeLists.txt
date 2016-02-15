@@ -1,4 +1,4 @@
-PROJECT (Images)
+PROJECT (${WIKI}Images)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -49,12 +49,15 @@ SET(NEEDS_ARGS
   ImageAnisotropicDiffusion2D
   ImageCheckerboard
   ImageCityBlockDistance
+  ImageHybridMedian2D
   ImageMagnify
   ImageNonMaximumSuppression
+  ImageRange3D
   ImageRotate
   ImageSeparableConvolution
   ImageToPolyDataFilter
   ImageToStructuredPoints
+  Transparency
   InteractWithImage
   PickPixel
   PickPixel2
@@ -63,7 +66,6 @@ SET(NEEDS_ARGS
   ResizeImage
   StaticImage
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
@@ -129,6 +131,9 @@ ADD_TEST(${KIT}-ImageNonMaximumSuppression ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTe
 ADD_TEST(${KIT}-ImageOpenClose3D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageOpenClose3D ${DATA}/Yinyang.png -E 25)
 
+ADD_TEST(${KIT}-InteractWithImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestInteractWithImage ${DATA}/Ox.jpg)
+
 ADD_TEST(${KIT}-ImageToPolyDataFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageToPolyDataFilter ${DATA}/Gourds.png)
 
@@ -140,6 +145,9 @@ ADD_TEST(${KIT}-ImageSeparableConvolution ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTes
   
 ADD_TEST(${KIT}-ImageToStructuredPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageToStructuredPoints -E 25)
+
+ADD_TEST(${KIT}-Transparency ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestTransparency  ${DATA}/Ox.jpg)
 
 ADD_TEST(${KIT}-PickPixel ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestPickPixel  ${DATA}/Gourds2.jpg)
@@ -164,4 +172,6 @@ ADD_TEST(${KIT}-RTAnalyticSource ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ResizeImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestResizeImage ${DATA}/Gourds2.jpg 640 480 1)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

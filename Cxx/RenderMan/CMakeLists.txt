@@ -1,4 +1,4 @@
-PROJECT (RenderMan)
+PROJECT (${WIKI}RenderMan)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

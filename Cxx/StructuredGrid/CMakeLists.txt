@@ -1,4 +1,4 @@
-PROJECT (StructuredGrid)
+PROJECT (${WIKI}StructuredGrid)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)

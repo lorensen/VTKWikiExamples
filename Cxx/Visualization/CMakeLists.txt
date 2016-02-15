@@ -1,4 +1,4 @@
-PROJECT (Visualization)
+PROJECT (${WIKI}Visualization)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -57,7 +57,6 @@ SET(NEEDS_ARGS
   VisualizeVTP
   Visualize2DPoints
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
@@ -105,4 +104,6 @@ ADD_TEST(${KIT}-VisualizeVTP ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-Visualize2DPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestVisualize2DPoints ${DATA}/Ring.vtp)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

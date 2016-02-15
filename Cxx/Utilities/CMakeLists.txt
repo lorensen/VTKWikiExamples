@@ -1,4 +1,4 @@
-PROJECT (Utilities)
+PROJECT (${WIKI}Utilities)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -17,8 +17,8 @@ endif()
 # Build all .cxx files in the directory
 FILE(GLOB ALL_FILES *.cxx)
 
-include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
-Requires_Module(GetDataRoot vtkTestingRendering)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresSettingOn.cmake)
+Requires_Setting_On (GetDataRoot BUILD_TESTING)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 Requires_Version(LUTUtilities "6.0.0" ALL_FILES)
@@ -36,11 +36,12 @@ SET(KIT Utilities)
 SET(NEEDS_ARGS
   ZBuffer
 )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
-
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 ADD_TEST(${KIT}-ZBuffer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestZBuffer ${DATA}/Bunny.vtp ${TEMP}/ZBuffer.bmp)
+
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
+
 endif()

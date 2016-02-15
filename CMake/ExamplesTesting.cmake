@@ -1,6 +1,7 @@
 #
 # Create tests for examples
 #
+if (BUILD_TESTING)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 SET(MyTests "")
 foreach(SOURCE_FILE ${ALL_FILES})
@@ -13,6 +14,7 @@ foreach(SOURCE_FILE ${ALL_FILES})
   if(SKIP_ADD EQUAL -1)
     ADD_TEST(${KIT}-${EXAMPLE} ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests Test${EXAMPLE})
   endif(SKIP_ADD EQUAL -1)
+  set_property(TEST ${KIT}-${EXAMPLE} PROPERTY LABELS WikiExamples)
 endforeach(SOURCE_FILE)
 SET(VTK_BINARY_DIR ${WikiExamples_BINARY_DIR})
 SET(VTK_DATA_ROOT ${WikiExamples_SOURCE_DIR}/Testing)
@@ -20,3 +22,4 @@ INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/vtkTestingObjectFactory.cmake)
 ADD_EXECUTABLE(${KIT}CxxTests ${KIT}CxxTests.cxx
                ${MyTests})
 TARGET_LINK_LIBRARIES(${KIT}CxxTests ${KIT_LIBS})
+endif()
