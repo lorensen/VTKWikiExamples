@@ -28,5 +28,11 @@ endforeach(SOURCE_FILE)
 if (BUILD_TESTING)
 # Testing
 SET(KIT RenderMan)
+SET(NEEDS_ARGS
+  PolyDataRIB
+)
+ADD_TEST(${KIT}-PolyDataRIB ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestPolyDataRIB ${DATA}/Torso.vtp .01)
+
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()
