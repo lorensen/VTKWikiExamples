@@ -49,9 +49,13 @@ SET(NEEDS_ARGS
   ImageAnisotropicDiffusion2D
   ImageCheckerboard
   ImageCityBlockDistance
+  ImageContinuousDilate3D
+  ImageContinuousErode3D
+  ImageDilateErode3D
   ImageHybridMedian2D
   ImageMagnify
   ImageNonMaximumSuppression
+  ImageOpenClose3D
   ImageRange3D
   ImageRotate
   ImageSeparableConvolution
@@ -111,6 +115,12 @@ ADD_TEST(${KIT}-ImageCheckerboard ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ImageCityBlockDistance ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageCityBlockDistance ${DATA}/Yinyang.jpg -E 15)
+
+ADD_TEST(${KIT}-ImageContinuousDilate3D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestImageContinuousDilate3D ${DATA}/Gourds.png)
+
+ADD_TEST(${KIT}-ImageContinuousErode3D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestImageContinuousErode3D ${DATA}/Gourds.png)
 
 ADD_TEST(${KIT}-ImageDilateErode3D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImageDilateErode3D ${DATA}/Yinyang.png -E 25)

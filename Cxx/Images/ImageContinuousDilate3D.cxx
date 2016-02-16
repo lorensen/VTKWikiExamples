@@ -5,7 +5,7 @@
 #include <vtkImageData.h>
 #include <vtkImageContinuousDilate3D.h>
 #include <vtkImageCanvasSource2D.h>
-#include <vtkXMLImageDataReader.h>
+#include <vtkPNGReader.h>
 #include <vtkActor.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
@@ -22,19 +22,23 @@ int main(int argc, char *argv[])
     // Create an image
     vtkSmartPointer<vtkImageCanvasSource2D> source =
       vtkSmartPointer<vtkImageCanvasSource2D>::New();
-    source->SetExtent(0, 20, 0, 20, 0, 20);
+    source->SetScalarTypeToUnsignedChar();
+    source->SetExtent(0, 200, 0, 200, 0, 0);
+    source->SetDrawColor(0,0,0);
+    source->FillBox(0,200,0,200);
+    source->SetDrawColor(255,0,0);
+    source->FillBox(100,150,100,150);
     source->Update();
     image->ShallowCopy(source->GetOutput());
     }
   else
     {
-    vtkSmartPointer<vtkXMLImageDataReader> reader =
-      vtkSmartPointer<vtkXMLImageDataReader>::New();
+    vtkSmartPointer<vtkPNGReader> reader =
+      vtkSmartPointer<vtkPNGReader>::New();
     reader->SetFileName(argv[1]);
     reader->Update();
     image->ShallowCopy(reader->GetOutput());
     }
-
 
   vtkSmartPointer<vtkImageContinuousDilate3D> dilateFilter =
     vtkSmartPointer<vtkImageContinuousDilate3D>::New();
@@ -43,6 +47,7 @@ int main(int argc, char *argv[])
 #else
   dilateFilter->SetInputData(image);
 #endif
+  dilateFilter->SetKernelSize(10,10,1);
   dilateFilter->Update();
 
   vtkSmartPointer<vtkDataSetMapper> originalMapper =
@@ -57,7 +62,6 @@ int main(int argc, char *argv[])
   vtkSmartPointer<vtkActor> originalActor =
     vtkSmartPointer<vtkActor>::New();
   originalActor->SetMapper(originalMapper);
-  originalActor->GetProperty()->SetRepresentationToPoints();
 
   vtkSmartPointer<vtkDataSetMapper> dilatedMapper =
     vtkSmartPointer<vtkDataSetMapper>::New();
@@ -96,7 +100,7 @@ int main(int argc, char *argv[])
   rightRenderer->AddActor(dilatedActor);
 
   leftRenderer->ResetCamera();
-  rightRenderer->ResetCamera();
+  rightRenderer->SetActiveCamera(leftRenderer->GetActiveCamera());
 
   renderWindow->Render();
   interactor->Start();
