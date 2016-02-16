@@ -32,7 +32,6 @@ SET(NEEDS_ARGS
   PolyDataRIB
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
-
 ADD_TEST(${KIT}-PolyDataRIB ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestPolyDataRIB ${DATA}/Torso.vtp .01)
 
