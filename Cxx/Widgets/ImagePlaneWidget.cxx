@@ -49,7 +49,7 @@ int main(int, char *[])
     vtkSmartPointer<vtkImagePlaneWidget>::New();
   planeWidget->SetInteractor(renderWindowInteractor);
   planeWidget->TextureVisibilityOff();
-
+  
   double origin[3] = {0, 1,0};
   planeWidget->SetOrigin(origin);
   planeWidget->UpdatePlacement();

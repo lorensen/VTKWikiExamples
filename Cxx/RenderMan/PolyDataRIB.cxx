@@ -79,13 +79,13 @@ int main ( int argc, char *argv[] )
   aRib->SetFilePrefix(prefix.c_str());
   aRib->Write();
   std::cout << "Exported RIB file is: " << prefix << ".rib" << std::endl;
-  std::string rmantree = getenv("RMANTREE");
-  if (rmantree == "")
+  if (getenv("RMANTREE") == NULL)
     {
     std::cout << "To render the generated rib file, set the environment variable RMANTREE to the base of your RenderMan install" << std::endl;
     }
   else
     {
+    std::string rmantree = getenv("RMANTREE");
     std::cout << "To create a tif file run: " << std::endl;
     std::cout << rmantree << "bin/prman " << prefix << ".rib " << std::endl;
     }
