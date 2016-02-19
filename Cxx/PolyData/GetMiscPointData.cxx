@@ -11,14 +11,17 @@
 int main(int argc, char *argv[])
 {
   // Parse command line arguments
-  if(argc != 2)
+  if(argc != 3)
     {
-    std::cout << "Required arguments: Filename" << std::endl;
+    std::cout << "Required arguments: Filename ArrayName" << std::endl;
     return EXIT_FAILURE;
     }
 
   // Get filename from command line
   std::string filename = argv[1]; //first command line argument
+
+  // Get array name
+  std::string arrayName = argv[2]; //second command line argument
 	
   // Read the file
   vtkSmartPointer<vtkXMLPolyDataReader> reader = 
@@ -35,27 +38,25 @@ int main(int argc, char *argv[])
   vtkIdType idNumPointsInFile = polydata->GetNumberOfPoints();
 
   vtkSmartPointer<vtkDoubleArray> array = 
-    vtkDoubleArray::SafeDownCast(polydata->GetPointData()->GetArray("Distances"));
-	
+    vtkDoubleArray::SafeDownCast(polydata->GetPointData()->GetArray(arrayName.c_str()));
+
   if(array)
     {
+      std::cout << "Got array " << arrayName
+                << " with " << idNumPointsInFile << " values"
+                << std::endl;
     for(int i = 0; i < idNumPointsInFile; i++)
       {
-      std::cout << "Got array." << std::endl;
-      double dist;
-      dist = array->GetValue(i);
-      /*
-      //if the array held arrays instead of scalars, you would use this:		  
-      double location[3];
-      array->GetTupleValue(i, location);
-      std::cout << "Location: " << Location[0] << ","  << Location[1] << "," << Location[2] << std::endl;
-      */
-      std::cout << "Distance: " << dist << std::endl;
+      double value;
+      value = array->GetValue(i);
+      std::cout << i << ": " << value << std::endl;
       }
-    }//end if(array)
+    }
   else
     {
-    std::cout << "no array." << std::endl;
+    std::cout << "The file " << filename
+              << " does not have a PointData array named " << arrayName
+              << std::endl;
     }
 
   return EXIT_SUCCESS;
