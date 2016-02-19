@@ -42,11 +42,14 @@ SET(NEEDS_ARGS
   DetermineArrayDataTypes
   DijkstraGraphGeodesicPath	
   ExternalContour
+  GetMiscCellData
+  GetMiscPointData
   GradientFilter
   GreedyTerrainDecimation
   HighlightBadCells
   Hull
   ImplicitModeller
+  MiscPointData
   PointLocatorVisualization
   PolyDataIsoLines
   PolyDataPointSample
@@ -82,6 +85,12 @@ ADD_TEST(${KIT}-ExternalContour ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 ADD_TEST(${KIT}-DetermineArrayDataTypes ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestDetermineArrayDataTypes ${DATA}/foilledContours.vtp)
 
+ADD_TEST(${KIT}-GetMiscCellData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestGetMiscCellData ${DATA}/SuperQuadric.vtp Nromals)
+
+ADD_TEST(${KIT}-GetMiscPointData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestGetMiscPointData ${DATA}/cowHead.vtp Gauss_Curvature)
+
 ADD_TEST(${KIT}-GradientFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestGradientFilter ${DATA}/uGridEx.vtk)
 
@@ -96,6 +105,9 @@ ADD_TEST(${KIT}-HighlightBadCells ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-ImplicitModeller ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestImplicitModeller ${DATA}/Bunny.vtp)
+
+ADD_TEST(${KIT}-MiscPointData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestMiscPointData ${DATA}/cowHead.vtp)
 
 ADD_TEST(${KIT}-PointLocatorVisualization ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestPointLocatorVisualization -E 50)
