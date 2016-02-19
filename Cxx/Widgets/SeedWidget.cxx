@@ -1,6 +1,7 @@
 #include <vtkSmartPointer.h>
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
+#include <vtkPolyDataMapper.h>
 #include <vtkSphereSource.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkSeedWidget.h>
@@ -10,8 +11,21 @@
 
 int main( int vtkNotUsed( argc ), char* vtkNotUsed( argv )[] )
 {
+  vtkSmartPointer<vtkSphereSource> sphereSource = 
+    vtkSmartPointer<vtkSphereSource>::New();
+  sphereSource->Update();
+
+  // Create a mapper and actor
+  vtkSmartPointer<vtkPolyDataMapper> mapper = 
+    vtkSmartPointer<vtkPolyDataMapper>::New();
+  mapper->SetInputConnection(sphereSource->GetOutputPort());
+  vtkSmartPointer<vtkActor> actor = 
+    vtkSmartPointer<vtkActor>::New();
+  actor->SetMapper(mapper);
+  
   vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
+  renderer->AddActor(actor);
 
   vtkSmartPointer<vtkRenderWindow> window =
     vtkSmartPointer<vtkRenderWindow>::New();
