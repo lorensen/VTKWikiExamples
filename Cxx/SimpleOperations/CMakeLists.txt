@@ -27,9 +27,9 @@ if (BUILD_TESTING)
 
 # Testing
 SET(KIT SimpleOperations)
+INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 set_tests_properties(
-    FloatingPointExceptions
+    SimpleOperations-FloatingPointExceptions
     PROPERTIES WILL_FAIL TRUE
     )
-INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()
