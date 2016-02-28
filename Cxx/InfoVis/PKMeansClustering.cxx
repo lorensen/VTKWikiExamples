@@ -1,3 +1,4 @@
+#include <vtkVersion.h>
 #include <vtkSmartPointer.h>
 #include <vtkProperty.h>
 #include <vtkPointData.h>
