@@ -41,6 +41,7 @@ SET(NEEDS_ARGS
   ColoredPoints
   DetermineArrayDataTypes
   DijkstraGraphGeodesicPath	
+  EmbedPointsIntoVolume
   ExternalContour
   GetMiscCellData
   GetMiscPointData
@@ -78,6 +79,9 @@ endif()
 
 ADD_TEST(${KIT}-DijkstraGraphGeodesicPath ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestDijkstraGraphGeodesicPath	-E 20)
+
+ADD_TEST(${KIT}-EmbedPointsIntoVolume ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestEmbedPointsIntoVolume ${DATA}/Bunny.vtp )
 
 ADD_TEST(${KIT}-ExternalContour ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestExternalContour ${DATA}/Bunny.vtp -E 80 )
