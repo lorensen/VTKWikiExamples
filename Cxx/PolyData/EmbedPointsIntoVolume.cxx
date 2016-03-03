@@ -9,8 +9,10 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkDataSetMapper.h>
+#include <vtkContourFilter.h>
+#include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
+#include <vtkProperty.h>
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +23,7 @@ int main(int argc, char *argv[])
     {
     vtkSmartPointer<vtkSphereSource> sphereSource =
       vtkSmartPointer<vtkSphereSource>::New();
+    sphereSource->SetRadius(.01);
     sphereSource->Update();
     input->ShallowCopy(sphereSource->GetOutput());
     }
@@ -33,7 +36,6 @@ int main(int argc, char *argv[])
 
     input->ShallowCopy(reader->GetOutput());
   
-    return EXIT_FAILURE;
     }
 
   vtkSmartPointer<vtkGaussianSplatter> splatter =
@@ -44,19 +46,28 @@ int main(int argc, char *argv[])
   splatter->SetInputData(input);
 #endif
 
-  unsigned int n = 10;
+  unsigned int n = 200;
   splatter->SetSampleDimensions(n,n,n);
-  //splatter->SetRadius(0.01); //this is supposed to control how big of an area (how many neighboring voxels) a point distributes its contribution to. However, if set to 0.01 or below, no voxels seem to get any contribution. I thought if Radius=0 the point would contribue all of its weight to the voxel that it is inside?
+  splatter->SetRadius(.02);
+  splatter->SetExponentFactor(-10);
+  splatter->SetEccentricity(2);
   splatter->Update();
 
+  vtkSmartPointer<vtkContourFilter> isoSurface =
+    vtkSmartPointer<vtkContourFilter>::New();
+  isoSurface->SetInputConnection(splatter->GetOutputPort());
+  isoSurface->SetValue(0, .95 * splatter->GetRadius());
+
   // Visualize
-  vtkSmartPointer<vtkDataSetMapper> mapper =
-    vtkSmartPointer<vtkDataSetMapper>::New();
-  mapper->SetInputConnection(splatter->GetOutputPort());
+  vtkSmartPointer<vtkPolyDataMapper> mapper =
+    vtkSmartPointer<vtkPolyDataMapper>::New();
+  mapper->SetInputConnection(isoSurface->GetOutputPort());
+  mapper->ScalarVisibilityOff();
 
   vtkSmartPointer<vtkActor> actor =
     vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
+  actor->GetProperty()->SetColor(1.0, 0.3882, 0.2784); 
 
   vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
@@ -68,7 +79,7 @@ int main(int argc, char *argv[])
   renderWindowInteractor->SetRenderWindow(renderWindow);
 
   renderer->AddActor(actor);
-  renderer->SetBackground(1,1,1); // Background color white
+  renderer->SetBackground(.2, .3, .4);
 
   renderWindow->Render();
   renderWindowInteractor->Start();
