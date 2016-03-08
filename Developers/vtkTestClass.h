@@ -1,29 +1,27 @@
 #ifndef __vtkTestClass_h
 #define __vtkTestClass_h
 
-#include "vtkDataObject.h"
+#include "vtkPolyDataAlgorithm.h"
 
-class vtkMatrix3x3;
-
-class vtkTestClass : public vtkDataObject
+class vtkTestClass : public vtkPolyDataAlgorithm
 {
 public:
-  vtkTypeRevisionMacro(vtkTestClass,vtkDataObject);
+  vtkTypeMacro(vtkTestClass,vtkPolyDataAlgorithm);
   static vtkTestClass *New();
-	
-  vtkSetClampMacro(Value, int, 2, 8);
-  vtkGetMacro(Value, int);
-  
+
+  vtkSetVector3Macro(TestVector,double);
+  vtkGetVector3Macro(TestVector,double);
   
 protected:
-  vtkTestClass(){}
+  vtkTestClass();
   ~vtkTestClass(){}
-  
+ int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *);
+
 private:
   vtkTestClass(const vtkTestClass&);  // Not implemented.
   void operator=(const vtkTestClass&);  // Not implemented.
 
-  int Value;
+  double TestVector[3];
 };
 
 #endif
