@@ -4,8 +4,7 @@
 #include "vtkAlgorithm.h"
 
 class vtkDataSet;
-class vtkTestA;
-class vtkTestB;
+class vtkTest;
 
 class vtkTestSource : public vtkAlgorithm
 {
@@ -16,9 +15,8 @@ class vtkTestSource : public vtkAlgorithm
 
   // Description:
   // Get the output data object for a port on this algorithm.
-    vtkTestA* GetOutputA();
-    vtkTestB* GetOutputB();
-    
+    vtkTest* GetOutput();
+    vtkTest* GetOutput(int);
     virtual void SetOutput(vtkDataObject* d);
 
   // Description:
@@ -66,7 +64,6 @@ class vtkTestSource : public vtkAlgorithm
   private:
     vtkTestSource( const vtkTestSource& ); // Not implemented.
     void operator = ( const vtkTestSource& );  // Not implemented.
-    
 };
 
 #endif
