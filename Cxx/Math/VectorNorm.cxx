@@ -24,8 +24,8 @@ int main(int, char *[])
   
   float v1[3] = {1,2,3};
   float v2[3] = {4,5,6};
-  distances->InsertNextTupleValue(v1);
-  distances->InsertNextTupleValue(v2);
+  distances->InsertNextTypedTuple(v1);
+  distances->InsertNextTypedTuple(v2);
   
   polydata->GetPointData()->SetVectors(distances);
   

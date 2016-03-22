@@ -17,7 +17,7 @@ int main (int, char *[])
   vtkSmartPointer<vtkSphereSource> sphereSource = 
     vtkSmartPointer<vtkSphereSource>::New();
   sphereSource->SetCenter(0.0, 0.0, 0.0);
-  sphereSource->SetRadius(5.0);
+  sphereSource->SetRadius(5000.0);
   sphereSource->Update();
 
   vtkPolyData* polydata = sphereSource->GetOutput();

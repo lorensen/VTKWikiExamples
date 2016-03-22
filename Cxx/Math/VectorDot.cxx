@@ -28,9 +28,9 @@ int main(int, char *[])
   float n0[3] = {1,0,0};
   float n1[3] = {1,0,0};
   float n2[3] = {1,0,0};
-  normals->InsertNextTupleValue(n0);
-  normals->InsertNextTupleValue(n1);
-  normals->InsertNextTupleValue(n2);
+  normals->InsertNextTypedTuple(n0);
+  normals->InsertNextTypedTuple(n1);
+  normals->InsertNextTypedTuple(n2);
 
   polydata->GetPointData()->SetNormals(normals);
 
@@ -43,9 +43,9 @@ int main(int, char *[])
   float v0[3] = {1,0,0};
   float v1[3] = {.707,.707,0};
   float v2[3] = {0,1,0};
-  vectors->InsertNextTupleValue(v0);
-  vectors->InsertNextTupleValue(v1);
-  vectors->InsertNextTupleValue(v2);
+  vectors->InsertNextTypedTuple(v0);
+  vectors->InsertNextTypedTuple(v1);
+  vectors->InsertNextTypedTuple(v2);
 
   polydata->GetPointData()->SetVectors(vectors);
 

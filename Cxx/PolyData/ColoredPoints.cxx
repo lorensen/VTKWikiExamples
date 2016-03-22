@@ -48,9 +48,9 @@ int main(int, char *[])
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
   colors->SetName ("Colors");
-  colors->InsertNextTupleValue(red);
-  colors->InsertNextTupleValue(green);
-  colors->InsertNextTupleValue(blue);
+  colors->InsertNextTypedTuple(red);
+  colors->InsertNextTypedTuple(green);
+  colors->InsertNextTypedTuple(blue);
 
   polydata->GetPointData()->SetScalars(colors);
 

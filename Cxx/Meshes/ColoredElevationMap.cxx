@@ -97,7 +97,7 @@ int main(int, char *[])
               << (int)color[1] << " "
               << (int)color[2] << std::endl;
  
-    colors->InsertNextTupleValue(color);
+    colors->InsertNextTypedTuple(color);
     }
  
   outputPolyData->GetPointData()->SetScalars(colors);

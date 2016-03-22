@@ -31,8 +31,8 @@ int main(int, char *[])
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   vertexColors->SetNumberOfComponents(3);
   vertexColors->SetName("Colors");
-  vertexColors->InsertNextTupleValue(black);
-  vertexColors->InsertNextTupleValue(white);
+  vertexColors->InsertNextTypedTuple(black);
+  vertexColors->InsertNextTypedTuple(white);
 
   // Create a scalar array for the pointdata, each value represents the distance
   // of the vertices from the first vertex
