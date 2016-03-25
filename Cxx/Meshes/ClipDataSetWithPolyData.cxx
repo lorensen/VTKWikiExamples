@@ -2,6 +2,7 @@
 #include <vtkConeSource.h>
 #include <vtkImplicitPolyDataDistance.h>
 #include <vtkPointData.h>
+#include <vtkUnstructuredGrid.h>
 #include <vtkFloatArray.h>
 #include <vtkRectilinearGrid.h>
 #include <vtkClipDataSet.h>
@@ -13,6 +14,8 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
+
+#include <map>
 
 int main (int, char *[])
 {
@@ -147,5 +150,28 @@ int main (int, char *[])
   // Start
   renwin->Render();
   interactor->Start();
+
+  // Generate a report
+  vtkIdType numberOfCells = clipper->GetOutput()->GetNumberOfCells();
+  std::cout << "------------------------" << std::endl;
+  std::cout << "The clipped dataset contains a " << std::endl
+            << clipper->GetOutput()->GetClassName() 
+            <<  " that has " << numberOfCells << " cells" << std::endl;
+  typedef std::map<int,int> CellContainer;
+  CellContainer cellMap;
+  for (vtkIdType i = 0; i < numberOfCells; i++)
+    {
+    cellMap[clipper->GetOutput()->GetCellType(i)]++;
+    }
+
+  CellContainer::const_iterator it = cellMap.begin();
+  while (it != cellMap.end())
+    {
+    std::cout << "\tCell type " 
+              << vtkCellTypes::GetClassNameFromTypeId(it->first)
+              << " occurs " << it->second << " times." << std::endl;
+    ++it;
+    }
+
   return EXIT_SUCCESS;
 }
