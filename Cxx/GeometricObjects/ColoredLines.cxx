@@ -65,8 +65,13 @@ int main(int, char *[])
   vtkSmartPointer<vtkUnsignedCharArray> colors =
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
-  colors->InsertNextTypedTuple(red);
-  colors->InsertNextTypedTuple(green);
+#if VTK_MAJOR_VERSION < 7
+    colors->InsertNextTupleValue(red);
+    colors->InsertNextTupleValue(green);
+#else
+    colors->InsertNextTypedTuple(red);
+    colors->InsertNextTypedTuple(green);
+#endif
   
   // Color the lines.
   // SetScalars() automatically associates the values in the data array passed as parameter
