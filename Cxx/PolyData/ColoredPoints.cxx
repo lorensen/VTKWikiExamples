@@ -48,10 +48,15 @@ int main(int, char *[])
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
   colors->SetName ("Colors");
+#if VTK_MAJOR_VERSION < 7
+  colors->InsertNextTupleValue(red);
+  colors->InsertNextTupleValue(green);
+  colors->InsertNextTupleValue(blue);
+#else
   colors->InsertNextTypedTuple(red);
   colors->InsertNextTypedTuple(green);
   colors->InsertNextTypedTuple(blue);
-
+#endif
   polydata->GetPointData()->SetScalars(colors);
 
   // Visualization

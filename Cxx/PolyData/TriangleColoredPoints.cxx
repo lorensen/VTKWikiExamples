@@ -33,10 +33,15 @@ int main(int, char *[])
   colors->SetName("Colors");
 
   // Add the three colors we have created to the array
+#if VTK_MAJOR_VERSION < 7
+  colors->InsertNextTupleValue(red);
+  colors->InsertNextTupleValue(green);
+  colors->InsertNextTupleValue(blue);
+#else
   colors->InsertNextTypedTuple(red);
   colors->InsertNextTypedTuple(green);
   colors->InsertNextTypedTuple(blue);
-
+#endif
   // Create a triangle
   vtkSmartPointer<vtkCellArray> triangles =
     vtkSmartPointer<vtkCellArray>::New();
