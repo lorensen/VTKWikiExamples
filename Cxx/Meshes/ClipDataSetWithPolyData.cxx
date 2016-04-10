@@ -38,7 +38,7 @@ int main (int, char *[])
   implicitPolyDataDistance->SetInput(cone->GetOutput());
  
   // create a grid
-  int dimension = 51;
+  unsigned int dimension = 51;
   vtkSmartPointer<vtkFloatArray> xCoords =
     vtkSmartPointer<vtkFloatArray>::New();
   for (unsigned int i = 0; i < dimension; ++i)

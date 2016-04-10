@@ -46,7 +46,7 @@ int main(int, char *[])
   vectors->SetName("Vectors");
 
   float v0[3] = {1,0,0};
-  float v1[3] = {.707,.707,0};
+  float v1[3] = {.707f,.707f,0};
   float v2[3] = {0,1,0};
 #if VTK_MAJOR_VERSION < 7
   vectors->InsertNextTupleValue(v0);
