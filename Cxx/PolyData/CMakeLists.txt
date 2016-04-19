@@ -58,6 +58,7 @@ SET(NEEDS_ARGS
   ThinPlateSplineTransform
   TriangleColoredPoints
   TriangleSolidColor
+  WarpSurface
 )
 if(NOT ${VTK_VERSION} VERSION_LESS "6")
   list(APPEND NEEDS_ARGS Curvatures)
@@ -130,6 +131,9 @@ ADD_TEST(${KIT}-TriangleColoredPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-TriangleSolidColor ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestTriangleSolidColor -E 25)
+
+ADD_TEST(${KIT}-WarpSurface ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestWarpSurface ${DATA}/cowHead.vtp .1)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
