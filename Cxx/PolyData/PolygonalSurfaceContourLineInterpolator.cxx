@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
   actor->SetMapper(mapper);
   actor->GetProperty()->SetInterpolationToFlat();
   
-  // Create the RenderWindow, Renderer and the DEM + path actors.
+  // Create the render window, renderer and interactor.
  
   vtkSmartPointer<vtkRenderer> renderer = 
     vtkSmartPointer<vtkRenderer>::New();
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
   renderer->AddActor(actor);
   renderer->SetBackground (.3, .4, .5);
 
-  // Here comes the contour widget stuff.....
+  // Here comes the contour widget stuff...
 
   vtkSmartPointer<vtkContourWidget> contourWidget = 
     vtkSmartPointer<vtkContourWidget>::New();

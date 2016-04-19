@@ -145,8 +145,8 @@ int main(int, char *[])
   frame1.Write("frame1.vtp");
   
   float frame2origin[3] = {0,0,0};
-  float frame2XDirection[3] = {.707,.707,0};
-  float frame2YDirection[3] = {-.707,.707,0};
+  float frame2XDirection[3] = {.707f,.707f,0};
+  float frame2YDirection[3] = {-.707f,.707f,0};
   float frame2ZDirection[3] = {0,0,1};
   Frame frame2(frame2origin, frame2XDirection, frame2YDirection, frame2ZDirection);
   frame2.Write("frame2.vtp");

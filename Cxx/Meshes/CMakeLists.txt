@@ -33,11 +33,16 @@ if (BUILD_TESTING)
 # Testing
 SET(KIT Meshes)
 SET(NEEDS_ARGS
+  ClipDataSetWithPolyData
   FillHoles
   MatrixMathFilter
   OBBDicer
+  TableBasedClipDataSetWithPolyData
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
+
+ADD_TEST(${KIT}-ClipDataSetWithPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestClipDataSetWithPolyData -E 25)
 
 ADD_TEST(${KIT}-FillHoles ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestFillHoles ${DATA}/Torso.vtp)
@@ -47,6 +52,9 @@ ADD_TEST(${KIT}-OBBDicer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-MatrixMathFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
   TestMatrixMathFilter ${DATA}/tensors.vtk)
+
+ADD_TEST(${KIT}-TableBasedClipDataSetWithPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  TestTableBasedClipDataSetWithPolyData -E 25)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()

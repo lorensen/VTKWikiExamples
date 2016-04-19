@@ -39,7 +39,7 @@ int main(int, char *[])
   
   for(unsigned int i = 0; i < 4; i++)
     {
-    vertexColors->InsertNextTupleValue(blue);//not connected vertices
+    vertexColors->InsertNextTypedTuple(blue);//not connected vertices
     }
    
  

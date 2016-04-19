@@ -24,9 +24,13 @@ int main(int, char *[])
   
   float v1[3] = {1,2,3};
   float v2[3] = {4,5,6};
+#if VTK_MAJOR_VERSION < 7
   distances->InsertNextTupleValue(v1);
   distances->InsertNextTupleValue(v2);
-  
+#else
+  distances->InsertNextTypedTuple(v1);
+  distances->InsertNextTypedTuple(v2);
+#endif  
   polydata->GetPointData()->SetVectors(distances);
   
   vtkSmartPointer<vtkVectorNorm> vectorNorm = 

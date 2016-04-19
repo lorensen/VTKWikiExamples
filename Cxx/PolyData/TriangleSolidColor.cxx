@@ -31,7 +31,11 @@ int main(int, char *[])
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
   colors->SetName("Colors");
+#if VTK_MAJOR_VERSION < 7
   colors->InsertNextTupleValue(red);
+#else
+  colors->InsertNextTypedTuple(red);
+#endif
  
   vtkSmartPointer<vtkCellArray> triangles =
     vtkSmartPointer<vtkCellArray>::New();
