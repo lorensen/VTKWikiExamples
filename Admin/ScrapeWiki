@@ -38,7 +38,7 @@ def FillQtCMakeLists(S, Name):
     return reg
 
 # Connect to the wiki
-site = mwclient.Site('www.paraview.org', '/Wiki/')
+site = mwclient.Site(('https','itk.org'), '/Wiki/')
 
 # Read the Wiki Templates
 VTKTemplateFile = open("Admin/VTKCMakeLists", 'r')
