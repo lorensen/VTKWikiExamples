@@ -6,6 +6,11 @@
 #include <vtkPointData.h>
 #include <vtkVectorDot.h>
 
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   // Generate data
@@ -28,15 +33,10 @@ int main(int, char *[])
   float n0[3] = {1,0,0};
   float n1[3] = {1,0,0};
   float n2[3] = {1,0,0};
-#if VTK_MAJOR_VERSION < 7
   normals->InsertNextTupleValue(n0);
   normals->InsertNextTupleValue(n1);
   normals->InsertNextTupleValue(n2);
-#else
-  normals->InsertNextTypedTuple(n0);
-  normals->InsertNextTypedTuple(n1);
-  normals->InsertNextTypedTuple(n2);
-#endif
+
   polydata->GetPointData()->SetNormals(normals);
 
   // Add vectors
@@ -48,15 +48,10 @@ int main(int, char *[])
   float v0[3] = {1,0,0};
   float v1[3] = {.707f,.707f,0};
   float v2[3] = {0,1,0};
-#if VTK_MAJOR_VERSION < 7
   vectors->InsertNextTupleValue(v0);
   vectors->InsertNextTupleValue(v1);
   vectors->InsertNextTupleValue(v2);
-#else
-  vectors->InsertNextTypedTuple(v0);
-  vectors->InsertNextTypedTuple(v1);
-  vectors->InsertNextTypedTuple(v2);
-#endif
+
   polydata->GetPointData()->SetVectors(vectors);
 
   // Compute the dot products between normals and vectors

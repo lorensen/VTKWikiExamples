@@ -10,6 +10,11 @@
 #include <vtkDataSetAttributes.h>
 #include <vtkGraphLayoutView.h>
 
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   vtkSmartPointer<vtkMutableUndirectedGraph> g = 
@@ -39,7 +44,7 @@ int main(int, char *[])
   
   for(unsigned int i = 0; i < 4; i++)
     {
-    vertexColors->InsertNextTypedTuple(blue);//not connected vertices
+    vertexColors->InsertNextTupleValue(blue);//not connected vertices
     }
    
  

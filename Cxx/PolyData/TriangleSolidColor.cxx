@@ -13,6 +13,11 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
  
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   // Setup points
@@ -31,11 +36,7 @@ int main(int, char *[])
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
   colors->SetName("Colors");
-#if VTK_MAJOR_VERSION < 7
   colors->InsertNextTupleValue(red);
-#else
-  colors->InsertNextTypedTuple(red);
-#endif
  
   vtkSmartPointer<vtkCellArray> triangles =
     vtkSmartPointer<vtkCellArray>::New();

@@ -12,6 +12,11 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
 
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   // Create the polydata where we will store all the geometric data
@@ -65,13 +70,8 @@ int main(int, char *[])
   vtkSmartPointer<vtkUnsignedCharArray> colors =
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
-#if VTK_MAJOR_VERSION < 7
-    colors->InsertNextTupleValue(red);
-    colors->InsertNextTupleValue(green);
-#else
-    colors->InsertNextTypedTuple(red);
-    colors->InsertNextTypedTuple(green);
-#endif
+  colors->InsertNextTupleValue(red);
+  colors->InsertNextTupleValue(green);
   
   // Color the lines.
   // SetScalars() automatically associates the values in the data array passed as parameter

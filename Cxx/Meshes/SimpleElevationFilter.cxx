@@ -14,6 +14,11 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
 
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   // Created a grid of points (heigh/terrian map)
@@ -86,11 +91,7 @@ int main(int, char *[])
       }
     std::cout << "color: " << (int)color[0] << " " << (int)color[1] << " " << (int)color[2] << std::endl;
     
-#if VTK_MAJOR_VERSION < 7
     colors->InsertNextTupleValue(color);
-#else
-    colors->InsertNextTypedTuple(color);
-#endif
     }
   
   output->GetPointData()->AddArray(colors);

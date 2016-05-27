@@ -13,6 +13,11 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkUnsignedCharArray.h>
 
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   // Create points
@@ -31,15 +36,9 @@ int main(int, char *[])
   unsigned char r[3] = {255,0,0};
   unsigned char g[3] = {0,255,0};
   unsigned char b[3] = {0,0,255};
-#if VTK_MAJOR_VERSION < 7
   colors->InsertNextTupleValue(r);
   colors->InsertNextTupleValue(g);
   colors->InsertNextTupleValue(b);
-#else
-  colors->InsertNextTypedTuple(r);
-  colors->InsertNextTypedTuple(g);
-  colors->InsertNextTypedTuple(b);
-#endif
     
   // Combine into a polydata
   vtkSmartPointer<vtkPolyData> polydata = 

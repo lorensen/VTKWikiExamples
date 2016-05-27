@@ -13,6 +13,11 @@
 #include <vtkVertexGlyphFilter.h>
 #include <vtkProperty.h>
 
+// For compatibility with new VTK generic data arrays
+#ifdef vtkGenericDataArray_h
+#define InsertNextTupleValue InsertNextTypedTuple
+#endif
+
 int main(int, char *[])
 {
   vtkSmartPointer<vtkPoints> points =
@@ -48,15 +53,10 @@ int main(int, char *[])
     vtkSmartPointer<vtkUnsignedCharArray>::New();
   colors->SetNumberOfComponents(3);
   colors->SetName ("Colors");
-#if VTK_MAJOR_VERSION < 7
   colors->InsertNextTupleValue(red);
   colors->InsertNextTupleValue(green);
   colors->InsertNextTupleValue(blue);
-#else
-  colors->InsertNextTypedTuple(red);
-  colors->InsertNextTypedTuple(green);
-  colors->InsertNextTypedTuple(blue);
-#endif
+
   polydata->GetPointData()->SetScalars(colors);
 
   // Visualization
