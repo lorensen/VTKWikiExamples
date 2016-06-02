@@ -51,10 +51,13 @@ int main(int, char *[])
     while (valIt != valEnd)
       {
       // Increment for each component
+      double x = *valIt++;
+      double y = *valIt++;
+      double z = *valIt++;
       std::cout << "("
-                << *valIt++ << ","
-                << *valIt++ << ","
-                << *valIt++ << ") ";
+                << x << ","
+                << y << ","
+                << z << ") ";
       }      
     std::cout << std::endl;
     it.NextSpan();

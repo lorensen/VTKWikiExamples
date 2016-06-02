@@ -94,7 +94,7 @@ int main(int, char*[])
         vtkSmartPointer<vtkDoubleArray>::New();
       pcaStatistics->GetEigenvector(i, eigenvectorSingle);
       }
-    delete evec;
+    delete[] evec;
     std::cout << std::endl;
     }
 
