@@ -104,7 +104,6 @@ int main(int argc, char *argv[])
   rep->SetPlaceFactor(1.25); // This must be set prior to placing the widget
   rep->PlaceWidget(actor->GetBounds());
   rep->SetNormal(plane->GetNormal());
-  rep->SetOrigin(0,0,50); //this doesn't seem to work?
 
   vtkSmartPointer<vtkImplicitPlaneWidget2> planeWidget =
     vtkSmartPointer<vtkImplicitPlaneWidget2>::New();
