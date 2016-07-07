@@ -5,15 +5,18 @@ import vtk.*;
 public class JFrameRenderer extends JFrame
 {
 
-  static
-  {
-    System.loadLibrary("vtkCommonJava");
-    System.loadLibrary("vtkFilteringJava");
-    System.loadLibrary("vtkIOJava");
-    System.loadLibrary("vtkImagingJava");
-    System.loadLibrary("vtkGraphicsJava");
-    System.loadLibrary("vtkRenderingJava");
+   static {
+    if (!vtkNativeLibrary.LoadAllNativeLibraries()) {
+      for (vtkNativeLibrary lib : vtkNativeLibrary.values()) {
+        if (!lib.IsLoaded()) {
+          System.out.println(lib.GetLibraryName() + " not loaded");
+        }
+      }
+    }
+    vtkNativeLibrary.DisableOutputWindow(null);
   }
+
+  private vtkRenderWindowPanel renderWindowPanel;
 
   public JFrameRenderer()
   {
@@ -30,13 +33,17 @@ public class JFrameRenderer extends JFrame
     sphereActor.SetMapper(sphereMapper);
 
     // Create a render window panel to display the sphere
-    vtkRenderWindowPanel renderWindowPanel = new vtkRenderWindowPanel();
+    renderWindowPanel = new vtkRenderWindowPanel();
     renderWindowPanel.setPreferredSize(new Dimension(600, 600));
     renderWindowPanel.setInteractorStyle(new vtkInteractorStyleTrackballCamera());
 
     add(renderWindowPanel, BorderLayout.CENTER);
       
     renderWindowPanel.GetRenderer().AddActor(sphereActor);
+  }
+
+  public void render() {
+     renderWindowPanel.Render();
   }
 
   public static void main(String[] args)
@@ -54,6 +61,7 @@ public class JFrameRenderer extends JFrame
           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
           frame.pack();
           frame.setVisible(true);
+          frame.render();
         }
       });    	
     }
