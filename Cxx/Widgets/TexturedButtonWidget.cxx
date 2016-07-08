@@ -25,48 +25,48 @@ int main(int, char *[])
     vtkSmartPointer<vtkImageData>::New();
   vtkSmartPointer<vtkImageData> image2 =
     vtkSmartPointer<vtkImageData>::New();
-  unsigned char banana[3] ={227, 207, 87};
-  unsigned char tomato[3] ={255, 99, 71};
+  unsigned char banana[3] = { 227, 207, 87 };
+  unsigned char tomato[3] = { 255, 99, 71 };
   CreateImage(image1, banana, tomato);
   CreateImage(image2, tomato, banana);
 
   // Create some geometry
-  vtkSmartPointer<vtkSphereSource> sphereSource = 
+  vtkSmartPointer<vtkSphereSource> sphereSource =
     vtkSmartPointer<vtkSphereSource>::New();
   sphereSource->Update();
-    
-  vtkSmartPointer<vtkPolyDataMapper> mapper = 
+
+  vtkSmartPointer<vtkPolyDataMapper> mapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
   mapper->SetInputConnection(sphereSource->GetOutputPort());
 
-  vtkSmartPointer<vtkActor> actor = 
+  vtkSmartPointer<vtkActor> actor =
     vtkSmartPointer<vtkActor>::New();
   actor->SetMapper(mapper);
-  
+
   // A renderer and render window
-  vtkSmartPointer<vtkRenderer> renderer = 
+  vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
-  vtkSmartPointer<vtkRenderWindow> renderWindow = 
+  vtkSmartPointer<vtkRenderWindow> renderWindow =
     vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
 
   // An interactor
-  vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = 
+  vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
   renderWindowInteractor->SetRenderWindow(renderWindow);
-  
+
   // Create the widget and its representation
-  vtkSmartPointer<vtkTexturedButtonRepresentation2D> buttonRepresentation = 
+  vtkSmartPointer<vtkTexturedButtonRepresentation2D> buttonRepresentation =
     vtkSmartPointer<vtkTexturedButtonRepresentation2D>::New();
   buttonRepresentation->SetNumberOfStates(2);
-  buttonRepresentation->SetButtonTexture(0,image1);
-  buttonRepresentation->SetButtonTexture(1,image2);
+  buttonRepresentation->SetButtonTexture(0, image1);
+  buttonRepresentation->SetButtonTexture(1, image2);
 
-  vtkSmartPointer<vtkButtonWidget> buttonWidget = 
+  vtkSmartPointer<vtkButtonWidget> buttonWidget =
     vtkSmartPointer<vtkButtonWidget>::New();
   buttonWidget->SetInteractor(renderWindowInteractor);
   buttonWidget->SetRepresentation(buttonRepresentation);
-  
+
   // Add the actors to the scene
   renderer->AddActor(actor);
   renderer->SetBackground(.1, .2, .5);
@@ -93,12 +93,12 @@ int main(int, char *[])
   // Scale to 1, default is .5
   buttonRepresentation->SetPlaceFactor(1);
   buttonRepresentation->PlaceWidget(bds);
-  
+
   buttonWidget->On();
-  
+
   // Begin mouse interaction
   renderWindowInteractor->Start();
-  
+
   return EXIT_SUCCESS;
 }
 
@@ -107,34 +107,34 @@ void CreateImage(vtkSmartPointer<vtkImageData> image,
                  unsigned char* color2)
 {
   // Specify the size of the image data
-  image->SetDimensions(10,10,1);
+  image->SetDimensions(10, 10, 1);
 #if VTK_MAJOR_VERSION <= 5
   image->SetNumberOfScalarComponents(3);
   image->SetScalarTypeToUnsignedChar();
 #else
-  image->AllocateScalars(VTK_UNSIGNED_CHAR,3);
+  image->AllocateScalars(VTK_UNSIGNED_CHAR, 3);
 #endif
   int* dims = image->GetDimensions();
 
   // Fill the image with
   for (int y = 0; y < dims[1]; y++)
-    {
+  {
     for (int x = 0; x < dims[0]; x++)
-      {
+    {
       unsigned char* pixel =
-        static_cast<unsigned char*>(image->GetScalarPointer(x,y,0));
-      if(x<5)
-        {
+        static_cast<unsigned char*>(image->GetScalarPointer(x, y, 0));
+      if (x < 5)
+      {
         pixel[0] = color1[0];
         pixel[1] = color1[1];
         pixel[2] = color1[2];
-        }
+      }
       else
-        {
+      {
         pixel[0] = color2[0];
         pixel[1] = color2[1];
         pixel[2] = color2[2];
-        }
       }
     }
+  }
 }
