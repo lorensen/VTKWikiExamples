@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   renWin->Render();
   
   // 3D texture mode. For coverage.
-#if !defined(VTK_LEGACY_REMOVE)
+#if !defined(VTK_LEGACY_REMOVE) && !defined(VTK_OPENGL2)
   volumeMapper->SetRequestedRenderModeToRayCastAndTexture();
 #endif // VTK_LEGACY_REMOVE
   renWin->Render();
