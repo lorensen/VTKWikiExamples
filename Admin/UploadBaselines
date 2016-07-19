@@ -16,7 +16,7 @@ if len(sys.argv) < 3:
   sys.exit()
 
 # Connect to the wiki
-site = mwclient.Site('itk.org', '/Wiki/')
+site = mwclient.Site(('https','itk.org'), '/Wiki/')
 site.login(sys.argv[1], sys.argv[2])
 
 # Walk the baseline directory

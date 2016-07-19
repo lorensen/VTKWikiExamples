@@ -18,7 +18,7 @@ def GetImage(S):
   return [(x.strip('\n')) for x in reg.findall(S)]
 
 # Connect to the wikix2
-site = mwclient.Site('itk.org', '/Wiki/')
+site = mwclient.Site(('https','itk.org'), '/Wiki/')
 
 foundPagesWithoutImages = False
 for page in site.pages:
