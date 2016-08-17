@@ -35,16 +35,16 @@ SET(NEEDS_ARGS
 )
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
-ADD_TEST(${KIT}-OrientationMarkerWidget ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-OrientationMarkerWidget ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestOrientationMarkerWidget ${DATA}/Bunny.vtp)
 
-ADD_TEST(${KIT}-RectilinearWipeWidget ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-RectilinearWipeWidget ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestRectilinearWipeWidget ${DATA}/Gourds2.jpg ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-CheckerboardWidget ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-CheckerboardWidget ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCheckerboardWidget ${DATA}/Gourds2.jpg ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-Slider2D ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-Slider2D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestSlider2D -E 25)
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 

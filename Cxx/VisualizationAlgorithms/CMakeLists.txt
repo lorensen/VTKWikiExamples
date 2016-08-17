@@ -34,13 +34,13 @@ SET(NEEDS_ARGS
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-CutWithCutFunction ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-CutWithCutFunction ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCutWithCutFunction ${DATA}/Torso.vtp 20)
 
-ADD_TEST(${KIT}-CutWithScalars ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-CutWithScalars ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCutWithScalars ${DATA}/Torso.vtp 20)
 
-ADD_TEST(${KIT}-FilledContours ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-FilledContours ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestFilledContours ${DATA}/filledContours.vtp 10)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

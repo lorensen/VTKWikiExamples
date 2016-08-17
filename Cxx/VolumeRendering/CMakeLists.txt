@@ -49,13 +49,13 @@ SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 if (VTK_RENDERING_BACKEND STREQUAL "OpenGL2")
-ADD_TEST(${KIT}-MinIntensityRendering ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-MinIntensityRendering ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMinIntensityRendering ${DATA}/ironProt.vtk)
 else()
-ADD_TEST(${KIT}-HAVSVolumeMapper ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-HAVSVolumeMapper ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestHAVSVolumeMapper ${DATA}/ironProt.vtk ${DATA}/neghip.slc)
 
-ADD_TEST(${KIT}-MinIntensityRendering ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-MinIntensityRendering ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMinIntensityRendering ${DATA}/ironProt.vtk)
 endif()
 

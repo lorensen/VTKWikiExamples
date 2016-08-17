@@ -43,10 +43,10 @@ SET(NEEDS_ARGS
 )
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
-ADD_TEST(${KIT}-SurfaceFromUnorganizedPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-SurfaceFromUnorganizedPoints ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestSurfaceFromUnorganizedPoints ${DATA}/Bunny.vtp -E 30)
 
-ADD_TEST(${KIT}-ContoursFromPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ContoursFromPolyData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestContoursFromPolyData ${DATA}/Bunny.vtp  -E 30)
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 

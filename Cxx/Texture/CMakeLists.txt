@@ -36,7 +36,7 @@ SET(NEEDS_ARGS
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
-ADD_TEST(${KIT}-TexturedSphere ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-TexturedSphere ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTexturedSphere ${DATA}/earth.ppm)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

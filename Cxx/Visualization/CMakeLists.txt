@@ -61,48 +61,48 @@ SET(NEEDS_ARGS
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
-ADD_TEST(${KIT}-BackgroundTexture ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-BackgroundTexture ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestBackgroundTexture -E 30)
 
-ADD_TEST(${KIT}-ClipArt ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ClipArt ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestClipArt ${DATA}/stormy.jpg)
 
-ADD_TEST(${KIT}-CorrectlyRenderTranslucentGeometry ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-CorrectlyRenderTranslucentGeometry ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCorrectlyRenderTranslucentGeometry 100 100 50 0.1 0 0)
 
-ADD_TEST(${KIT}-CurvedReformation ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-CurvedReformation ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCurvedReformation ${DATA}/HeadMRVolume.mhd ${DATA}/polyline.vtk 200)
 
-ADD_TEST(${KIT}-DepthSortPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-DepthSortPolyData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDepthSortPolyData 1 100 100 0)
 
-ADD_TEST(${KIT}-Glyph3DMapper ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-Glyph3DMapper ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGlyph3DMapper -E 40)
 
-ADD_TEST(${KIT}-HedgeHog ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-HedgeHog ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestHedgeHog -E 50)
 
-ADD_TEST(${KIT}-RenderLargeImage ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-RenderLargeImage ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestRenderLargeImage ${DATA}/Bunny.vtp ${TEMP}/Bunny.png 4)
 
-ADD_TEST(${KIT}-SelectWindowRegion ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-SelectWindowRegion ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestSelectWindowRegion ${DATA}/Ox.jpg)
 
 if (NOT VTK_LEGACY_REMOVE)
-ADD_TEST(${KIT}-StreamLines ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-StreamLines ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestStreamLines ${DATA}/combxyz.bin ${DATA}/combq.bin)
 endif()
 
-ADD_TEST(${KIT}-TextureMapPlane ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-TextureMapPlane ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTextureMapPlane ${DATA}/Yinyang.jpg)
 
-ADD_TEST(${KIT}-TextureMapQuad ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-TextureMapQuad ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTextureMapQuad ${DATA}/Yinyang.jpg)
 
-ADD_TEST(${KIT}-VisualizeVTP ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-VisualizeVTP ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestVisualizeVTP ${DATA}/Bunny.vtp)
 
-ADD_TEST(${KIT}-Visualize2DPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-Visualize2DPoints ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestVisualize2DPoints ${DATA}/Ring.vtp)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

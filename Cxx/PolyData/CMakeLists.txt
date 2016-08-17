@@ -67,72 +67,72 @@ endif()
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
-ADD_TEST(${KIT}-CellLocatorVisualization ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-CellLocatorVisualization ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCellLocatorVisualization -E 50)
 
-ADD_TEST(${KIT}-ColoredPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ColoredPoints ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestColoredPoints ${TEMP}/coloredpoints.vtp)
 
 if(NOT ${VTK_VERSION} VERSION_LESS "6")
-  ADD_TEST(${KIT}-Curvatures ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  ADD_TEST(${KIT}-Curvatures ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestCurvatures ${DATA}/cowHead.vtp -20 20)
 endif()
 
-ADD_TEST(${KIT}-DijkstraGraphGeodesicPath ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-DijkstraGraphGeodesicPath ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDijkstraGraphGeodesicPath	-E 20)
 
-ADD_TEST(${KIT}-EmbedPointsIntoVolume ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-EmbedPointsIntoVolume ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestEmbedPointsIntoVolume ${DATA}/Bunny.vtp )
 
-ADD_TEST(${KIT}-ExternalContour ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ExternalContour ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestExternalContour ${DATA}/Bunny.vtp -E 80 )
 
-ADD_TEST(${KIT}-DetermineArrayDataTypes ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-DetermineArrayDataTypes ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDetermineArrayDataTypes ${DATA}/foilledContours.vtp)
 
-ADD_TEST(${KIT}-GetMiscCellData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-GetMiscCellData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGetMiscCellData ${DATA}/SuperQuadric.vtp Nromals)
 
-ADD_TEST(${KIT}-GetMiscPointData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-GetMiscPointData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGetMiscPointData ${DATA}/cowHead.vtp Gauss_Curvature)
 
-ADD_TEST(${KIT}-GradientFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-GradientFilter ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGradientFilter ${DATA}/uGridEx.vtk)
 
-ADD_TEST(${KIT}-GreedyTerrainDecimation ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-GreedyTerrainDecimation ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGreedyTerrainDecimation -E 55)
 
-ADD_TEST(${KIT}-Hull ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-Hull ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestHull ${DATA}/Bunny.vtp)
 
-ADD_TEST(${KIT}-HighlightBadCells ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-HighlightBadCells ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestHighlightBadCells -E 20)
 
-ADD_TEST(${KIT}-ImplicitModeller ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImplicitModeller ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImplicitModeller ${DATA}/Bunny.vtp)
 
-ADD_TEST(${KIT}-MiscPointData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-MiscPointData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMiscPointData ${DATA}/cowHead.vtp)
 
-ADD_TEST(${KIT}-PointLocatorVisualization ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-PointLocatorVisualization ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestPointLocatorVisualization -E 50)
 
-ADD_TEST(${KIT}-PolyDataIsoLines ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-PolyDataIsoLines ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestPolyDataIsoLines ${DATA}/cowHead.vtp)
 
-ADD_TEST(${KIT}-RemoveVertices ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-RemoveVertices ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestRemoveVertices ${DATA}/Bunny.vtp)
 
-ADD_TEST(${KIT}-ThinPlateSplineTransform ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ThinPlateSplineTransform ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestThinPlateSplineTransform ${DATA}/masonry.bmp)
 
-ADD_TEST(${KIT}-TriangleColoredPoints ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-TriangleColoredPoints ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTriangleColoredPoints -E 15)
 
-ADD_TEST(${KIT}-TriangleSolidColor ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-TriangleSolidColor ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTriangleSolidColor -E 25)
 
-ADD_TEST(${KIT}-WarpSurface ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-WarpSurface ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestWarpSurface ${DATA}/cowHead.vtp .1)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

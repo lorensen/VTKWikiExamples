@@ -52,20 +52,20 @@ SET(NEEDS_ARGS
 )
 if ("${ALL_FILES}" MATCHES ".*TreeMapView.*")
   SET(NEEDS_ARGS "${NEEDS_ARGS};TreeMapView")
-  ADD_TEST(${KIT}-TreeMapView ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+  ADD_TEST(${KIT}-TreeMapView ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestTreeMapView ${DATA}/Infovis-XML-vtkclasses.xml ${DATA}/Infovis-XML-vtklibrary.xml)
 endif()
 
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
-ADD_TEST(${KIT}-DelimitedTextReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-DelimitedTextReader ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDelimitedTextReader ${DATA}/DelimitedData.txt)
 
-ADD_TEST(${KIT}-DelimitedTextWriter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-DelimitedTextWriter ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDelimitedTextWriter ${TEMP}/foo.txt)
 
-ADD_TEST(${KIT}-XGMLReader ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-XGMLReader ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestXGMLReader ${DATA}/fsm.gml)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

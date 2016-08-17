@@ -32,10 +32,10 @@ SET(NEEDS_ARGS
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-ImageClip ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageClip ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageClip ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-ImageRegion ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageRegion ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageRegion ${DATA}/Gourds2.jpg)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

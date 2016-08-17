@@ -41,19 +41,19 @@ SET(NEEDS_ARGS
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-ClipDataSetWithPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ClipDataSetWithPolyData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestClipDataSetWithPolyData -E 25)
 
-ADD_TEST(${KIT}-FillHoles ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-FillHoles ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestFillHoles ${DATA}/Torso.vtp)
 
-ADD_TEST(${KIT}-OBBDicer ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-OBBDicer ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestOBBDicer ${DATA}/Bunny.vtp)
 
-ADD_TEST(${KIT}-MatrixMathFilter ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-MatrixMathFilter ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMatrixMathFilter ${DATA}/tensors.vtk)
 
-ADD_TEST(${KIT}-TableBasedClipDataSetWithPolyData ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-TableBasedClipDataSetWithPolyData ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTableBasedClipDataSetWithPolyData -E 25)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

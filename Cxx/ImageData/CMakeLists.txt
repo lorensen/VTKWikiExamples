@@ -31,10 +31,10 @@ SET(NEEDS_ARGS
   ImageNormalize
 )
 
-ADD_TEST(${KIT}-ExtractVOI ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ExtractVOI ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestExtractVOI -E 50)
 
-ADD_TEST(${KIT}-ImageNormalize ${EXECUTABLE_OUTPUT_PATH}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageNormalize ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageNormalize -E 35)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
