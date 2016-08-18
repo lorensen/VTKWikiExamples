@@ -32,10 +32,10 @@ SET(NEEDS_ARGS
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-GenerateCubesFromLabels ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-GenerateCubesFromLabels ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGenerateCubesFromLabels ${DATA}/frogtissue.mhd 1 29)
 
-ADD_TEST(${KIT}-GenerateModelsFromLabels ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-GenerateModelsFromLabels ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGenerateModelsFromLabels ${DATA}/frogtissue.mhd 1 29)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

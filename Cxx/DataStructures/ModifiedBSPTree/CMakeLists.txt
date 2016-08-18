@@ -30,7 +30,7 @@ SET(NEEDS_ARGS
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-VisualizeModifiedBSPTree ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-VisualizeModifiedBSPTree ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestVisualizeModifiedBSPTree -E 40)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

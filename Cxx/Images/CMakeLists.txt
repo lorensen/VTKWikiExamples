@@ -74,113 +74,113 @@ SET(NEEDS_ARGS
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
-ADD_TEST(${KIT}-CannyEdgeDetector ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-CannyEdgeDetector ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCannyEdgeDetector ${DATA}/Gourds.png)
 
-ADD_TEST(${KIT}-Cast ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-Cast ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCast  ${DATA}/Ox.jpg ${TEMP}/Cast.jpg)
 
-ADD_TEST(${KIT}-CenterAnImage ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-CenterAnImage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCenterAnImage  ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-Colored2DImageFusion ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-Colored2DImageFusion ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestColored2DImageFusion  ${DATA}/Ox.jpg ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-CombineImages ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-CombineImages ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCombineImages  ${DATA}/Ox.jpg ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-DrawOnAnImage ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-DrawOnAnImage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDrawOnAnImage  ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-ExtractComponents ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ExtractComponents ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestExtractComponents  ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-Flip ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-Flip ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestFlip  ${DATA}/Gourds2.jpg ${TEMP}/Flip.jpg )
 
-#ADD_TEST(${KIT}-HistogramBarChart ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+#ADD_TEST(${KIT}-HistogramBarChart ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
 #  TestHistogramBarChart ${DATA}/Gourds2.jpg)
 
-#ADD_TEST(${KIT}-HistogramXYPlot ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+#ADD_TEST(${KIT}-HistogramXYPlot ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
 #  TestHistogramXYPlot  ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-ImageAccumulateGreyscale ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageAccumulateGreyscale ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageAccumulateGreyscale  ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-ImageAnisotropicDiffusion2D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageAnisotropicDiffusion2D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageAnisotropicDiffusion2D  ${DATA}/cake_easy.jpg)
 
-ADD_TEST(${KIT}-ImageCheckerboard ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageCheckerboard ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageCheckerboard  ${DATA}/Ox.jpg ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-ImageCityBlockDistance ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageCityBlockDistance ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageCityBlockDistance ${DATA}/Yinyang.jpg -E 15)
 
-ADD_TEST(${KIT}-ImageContinuousDilate3D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageContinuousDilate3D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageContinuousDilate3D ${DATA}/Gourds.png)
 
-ADD_TEST(${KIT}-ImageContinuousErode3D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageContinuousErode3D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageContinuousErode3D ${DATA}/Gourds.png)
 
-ADD_TEST(${KIT}-ImageDilateErode3D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageDilateErode3D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageDilateErode3D ${DATA}/Yinyang.png -E 25)
 
-ADD_TEST(${KIT}-ImageHybridMedian2D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageHybridMedian2D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageHybridMedian2D ${DATA}/Gourds.png)
 
-ADD_TEST(${KIT}-ImageMagnify ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageMagnify ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageMagnify ${DATA}/Gourds.png)
 
 # The ImageNoiseSource is inherently random
-ADD_TEST(${KIT}-ImageNoiseSource ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageNoiseSource ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageNoiseSource -E 999999)
 
-ADD_TEST(${KIT}-ImageNonMaximumSuppression ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageNonMaximumSuppression ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageNonMaximumSuppression -E 20)
 
-ADD_TEST(${KIT}-ImageOpenClose3D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageOpenClose3D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageOpenClose3D ${DATA}/Yinyang.png -E 25)
 
-ADD_TEST(${KIT}-InteractWithImage ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-InteractWithImage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestInteractWithImage ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-ImageToPolyDataFilter ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageToPolyDataFilter ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageToPolyDataFilter ${DATA}/Gourds.png)
 
-ADD_TEST(${KIT}-ImageRotate ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageRotate ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageRotate ${DATA}/Gourds.png 45)
 
-ADD_TEST(${KIT}-ImageSeparableConvolution ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageSeparableConvolution ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageSeparableConvolution ${DATA}/Yinyang.png -E 25)
   
-ADD_TEST(${KIT}-ImageToStructuredPoints ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageToStructuredPoints ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageToStructuredPoints -E 25)
 
-ADD_TEST(${KIT}-Transparency ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-Transparency ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTransparency  ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-PickPixel ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-PickPixel ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestPickPixel  ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-PickPixel2 ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-PickPixel2 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestPickPixel2  ${DATA}/ColorCells.tif)
 
-ADD_TEST(${KIT}-ImageRange3D ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ImageRange3D ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestImageRange3D  ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-RGBToHSV ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-RGBToHSV ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestRGBToHSV ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-StaticImage ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-StaticImage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestStaticImage ${DATA}/Ox.jpg)
 
-ADD_TEST(${KIT}-Transparency ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-Transparency ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestTransparency ${DATA}/Gourds2.jpg)
 
-ADD_TEST(${KIT}-RTAnalyticSource ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-RTAnalyticSource ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestRTAnalyticSource -E 20)
 
-ADD_TEST(${KIT}-ResizeImage ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ResizeImage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestResizeImage ${DATA}/Gourds2.jpg 640 480 1)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)

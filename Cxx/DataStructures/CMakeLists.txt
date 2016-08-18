@@ -39,26 +39,26 @@ SET(NEEDS_ARGS
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-DataStructureComparison ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-DataStructureComparison ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDataStructureComparison ${DATA}/Bunny.vtp -E 20)
 
-ADD_TEST(${KIT}-VisualizeKDTree ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-VisualizeKDTree ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestVisualizeKDTree -E 40)
-ADD_TEST(${KIT}-VisualizeOBBTree ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-VisualizeOBBTree ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestVisualizeOBBTree -E 40)
 
 # These tests will generate different output each time they run.
 # To avoid regression failures, set the error tolerance to a large number. 
-ADD_TEST(${KIT}-KDTreeTimingDemo ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-KDTreeTimingDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestKDTreeTimingDemo -E 999999)
-ADD_TEST(${KIT}-ModifiedBSPTreeTimingDemo ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-ModifiedBSPTreeTimingDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestModifiedBSPTreeTimingDemo -E 999999)
-ADD_TEST(${KIT}-OBBTreeTimingDemo ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-OBBTreeTimingDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestOBBTreeTimingDemo -E 999999)
-ADD_TEST(${KIT}-OctreeTimingDemo ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-OctreeTimingDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestOctreeTimingDemo -E 999999)
 
-ADD_TEST(${KIT}-OctreeVisualize ${RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+ADD_TEST(${KIT}-OctreeVisualize ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestOctreeVisualize -E 40)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
