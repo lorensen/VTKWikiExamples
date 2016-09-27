@@ -1,34 +1,33 @@
 #include <vtkSmartPointer.h>
+
 #include "vtkTestFilter.h"
 
-int main(int, char*[])
+int main(int, char *[])
 {
-  //setup the first input
-  vtkSmartPointer<vtkPoints> points1 =
+  vtkSmartPointer<vtkPoints> points = 
     vtkSmartPointer<vtkPoints>::New();
-  points1->InsertNextPoint(1.0, 2.0, 3.0);
-  vtkSmartPointer<vtkPolyData> inputPolydata1 =
+  points->InsertNextPoint(0.0, 0.0, 0.0);
+  
+  vtkSmartPointer<vtkPolyData> inputPolydata =   
     vtkSmartPointer<vtkPolyData>::New();
-  inputPolydata1->SetPoints(points1);
-
-  //setup the second input
-  vtkSmartPointer<vtkPoints> points2 =
-    vtkSmartPointer<vtkPoints>::New();
-  points2->InsertNextPoint(4.0, 5.0, 6.0);
-  points2->InsertNextPoint(4.0, 5.0, 6.0);
-  vtkSmartPointer<vtkPolyData> inputPolydata2 =
-    vtkSmartPointer<vtkPolyData>::New();
-  inputPolydata2->SetPoints(points2);
-
-  vtkSmartPointer<vtkTestFilter> filter =
+  inputPolydata->SetPoints(points);
+  
+  std::cout << "Input points: " << inputPolydata->GetNumberOfPoints() 
+            << std::endl;
+  
+  vtkSmartPointer<vtkTestFilter> filter = 
     vtkSmartPointer<vtkTestFilter>::New();
-  filter->AddInputConnection(inputPolydata1->GetProducerPort());
-  filter->AddInputConnection(inputPolydata2->GetProducerPort());
+#if VTK_MAJOR_VERSION <= 5
+  filter->SetInput(inputPolydata);
+#else
+  filter->SetInputData(inputPolydata);
+#endif
   filter->Update();
-
+  
   vtkPolyData* outputPolydata = filter->GetOutput();
-
-  std::cout << "Output points: " << outputPolydata->GetNumberOfPoints() << std::endl;
-
+  
+  std::cout << "Output points: " << outputPolydata->GetNumberOfPoints() 
+            << std::endl;
+  
   return EXIT_SUCCESS;
 }

@@ -1,6 +1,5 @@
 #include "vtkTestSource.h"
-#include "vtkTestA.h"
-#include "vtkTestB.h"
+#include "vtkTest.h"
 
 #include "vtkCommand.h"
 #include "vtkInformation.h"
@@ -15,7 +14,7 @@ vtkStandardNewMacro(vtkTestSource);
 vtkTestSource::vtkTestSource()
 {
   this->SetNumberOfInputPorts( 0 );
-  this->SetNumberOfOutputPorts( 2 );
+  this->SetNumberOfOutputPorts( 1 );
 }
 
 //----------------------------------------------------------------------------
@@ -30,17 +29,16 @@ void vtkTestSource::PrintSelf(ostream& os, vtkIndent indent)
 }
 
 //----------------------------------------------------------------------------
-vtkTestA* vtkTestSource::GetOutputA()
+vtkTest* vtkTestSource::GetOutput()
 {
-  return vtkTestA::SafeDownCast(this->GetOutputDataObject(0));
+  return this->GetOutput(0);
 }
 
 //----------------------------------------------------------------------------
-vtkTestB* vtkTestSource::GetOutputB()
+vtkTest* vtkTestSource::GetOutput(int port)
 {
-  return vtkTestB::SafeDownCast(this->GetOutputDataObject(1));
+  return vtkTest::SafeDownCast(this->GetOutputDataObject(port));
 }
-
 
 //----------------------------------------------------------------------------
 void vtkTestSource::SetOutput(vtkDataObject* d)
@@ -80,18 +78,11 @@ int vtkTestSource::ProcessRequest(vtkInformation* request,
 }
 
 //----------------------------------------------------------------------------
-int vtkTestSource::FillOutputPortInformation(int port, vtkInformation* info)
+int vtkTestSource::FillOutputPortInformation(
+    int vtkNotUsed(port), vtkInformation* info)
 {
   // now add our info
-  if(port == 0)
-    {
-    info->Set(vtkDataObject::DATA_TYPE_NAME(), "vtkTestA");
-    }
-  else if(port == 1)
-    {
-    info->Set(vtkDataObject::DATA_TYPE_NAME(), "vtkTestB");
-    }
-  
+  info->Set(vtkDataObject::DATA_TYPE_NAME(), "vtkTest");
   return 1;
 }
 
@@ -102,34 +93,21 @@ int vtkTestSource::RequestDataObject(
     vtkInformationVector** vtkNotUsed(inputVector),
                                       vtkInformationVector* outputVector )
 {
-  //output 0 - TestA
-  vtkInformation* outInfoA = outputVector->GetInformationObject(0);
-  vtkTestA* outputA = vtkTestA::SafeDownCast(
-                                          outInfoA->Get( vtkDataObject::DATA_OBJECT() ) );
-  if ( ! outputA )
+  for ( int i = 0; i < this->GetNumberOfOutputPorts(); ++i )
   {
-    outputA = vtkTestA::New();
-    outInfoA->Set( vtkDataObject::DATA_OBJECT(), outputA );
-    outputA->FastDelete();
-    outputA->SetPipelineInformation( outInfoA );
-    this->GetOutputPortInformation(0)->Set(
-                                    vtkDataObject::DATA_EXTENT_TYPE(), outputA->GetExtentType() );
+    vtkInformation* outInfo = outputVector->GetInformationObject( i );
+    vtkTest* output = vtkTest::SafeDownCast(
+                                            outInfo->Get( vtkDataObject::DATA_OBJECT() ) );
+    if ( ! output )
+    {
+      output = vtkTest::New();
+      outInfo->Set( vtkDataObject::DATA_OBJECT(), output );
+      output->FastDelete();
+      output->SetPipelineInformation( outInfo );
+      this->GetOutputPortInformation( i )->Set(
+                                      vtkDataObject::DATA_EXTENT_TYPE(), output->GetExtentType() );
+    }
   }
-  
-  //output 1 - TestB
-  vtkInformation* outInfoB = outputVector->GetInformationObject(1);
-  vtkTestB* outputB = vtkTestB::SafeDownCast(
-                                              outInfoB->Get( vtkDataObject::DATA_OBJECT() ) );
-  if ( ! outputB )
-  {
-    outputB = vtkTestB::New();
-    outInfoB->Set( vtkDataObject::DATA_OBJECT(), outputB );
-    outputB->FastDelete();
-    outputB->SetPipelineInformation( outInfoB );
-    this->GetOutputPortInformation(1)->Set(
-                                    vtkDataObject::DATA_EXTENT_TYPE(), outputB->GetExtentType() );
-  }
-    
   return 1;
 }
 
@@ -168,20 +146,8 @@ int vtkTestSource::RequestUpdateExtent(
 int vtkTestSource::RequestData(
                                   vtkInformation* vtkNotUsed(request),
     vtkInformationVector** vtkNotUsed( inputVector ),
-                                       vtkInformationVector* outputVector )
+                                       vtkInformationVector* vtkNotUsed(outputVector) )
 {
-  //actually setup the output here
-  vtkInformation* outInfoA = outputVector->GetInformationObject(0);
-  vtkTestA* outputA = vtkTestA::SafeDownCast(
-                                          outInfoA->Get( vtkDataObject::DATA_OBJECT() ) );
-  
-  outputA->SetValue(111);
-  
-  vtkInformation* outInfoB = outputVector->GetInformationObject(1);
-  vtkTestB* outputB = vtkTestB::SafeDownCast(
-                                             outInfoB->Get( vtkDataObject::DATA_OBJECT() ) );
-  
-  outputB->SetValue(222);
-  
+  // do nothing let subclasses handle it
   return 1;
 }
