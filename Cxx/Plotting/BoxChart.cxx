@@ -10,6 +10,8 @@
 #include "vtkRenderWindowInteractor.h"
 #include "vtkStringArray.h"
 #include "vtkTable.h"
+#include "vtkAxis.h"
+#include "vtkTextProperty.h"
 
 //----------------------------------------------------------------------------
 int main(int , char* [])
@@ -74,8 +76,9 @@ int main(int , char* [])
 
   chart->GetPlot(0)->SetInputData(inputBoxPlotTable.GetPointer());
   chart->SetColumnVisibilityAll(true);
-  chart->SetShowLegend(true);
   chart->SetTitle("Michelson-Morley experiment");
+  chart->GetTitleProperties()->SetFontSize(16);
+  chart->GetYAxis()->SetTitle("Speed of Light (km/s - 299000)");
 
   // Set the labels
   vtkNew<vtkStringArray> labels;
@@ -89,6 +92,7 @@ int main(int , char* [])
 
   // Render the scene
   view->GetRenderWindow()->SetMultiSamples(0);
+  view->GetRenderer()->SetBackground(.8, .8, .8);
   view->GetInteractor()->Initialize();
   view->Render();
   view->GetInteractor()->Start();
