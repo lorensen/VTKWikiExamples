@@ -1,9 +1,12 @@
+#include "vtkSmartPointer.h"
+
 #include "vtkChartBox.h"
+#include "vtkStatisticsAlgorithm.h"
+#include "vtkComputeQuartiles.h"
 #include "vtkContextScene.h"
 #include "vtkContextView.h"
 #include "vtkIntArray.h"
 #include "vtkLookupTable.h"
-#include "vtkNew.h"
 #include "vtkPlotBox.h"
 #include "vtkRenderer.h"
 #include "vtkRenderWindow.h"
@@ -17,24 +20,28 @@
 int main(int , char* [])
 {
   // Set up a 2D scene, add an XY chart to it
-  vtkNew<vtkContextView> view;
+  vtkSmartPointer<vtkContextView> view =
+    vtkSmartPointer<vtkContextView>::New();
   view->GetRenderWindow()->SetSize(400, 400);
   view->GetRenderWindow()->SetMultiSamples(0);
 
-  vtkNew<vtkChartBox> chart;
-  view->GetScene()->AddItem(chart.GetPointer());
+  vtkSmartPointer<vtkChartBox> chart =
+    vtkSmartPointer<vtkChartBox>::New();
+  view->GetScene()->AddItem(chart);
 
   // Creates a vtkPlotBox input table
   int numParam = 5;
-  vtkNew<vtkTable> inputBoxPlotTable;
+  vtkSmartPointer<vtkTable> inputBoxPlotTable =
+    vtkSmartPointer<vtkTable>::New();
 
   for (int i = 0; i < numParam; i++)
     {
     char num[10];
     sprintf(num, "Run %d", i + 1);
-    vtkNew<vtkIntArray> arrIndex;
+    vtkSmartPointer<vtkIntArray> arrIndex =
+      vtkSmartPointer<vtkIntArray>::New();
     arrIndex->SetName(num);
-    inputBoxPlotTable->AddColumn(arrIndex.GetPointer());
+    inputBoxPlotTable->AddColumn(arrIndex);
     }
 
   inputBoxPlotTable->SetNumberOfRows(20);
@@ -68,27 +75,35 @@ int main(int , char* [])
       inputBoxPlotTable->SetValue(j, i, values[j][i]);
       }
     }
+  vtkSmartPointer<vtkComputeQuartiles> quartiles =
+    vtkSmartPointer<vtkComputeQuartiles>::New();
+  quartiles->SetInputData(vtkStatisticsAlgorithm::INPUT_DATA, inputBoxPlotTable);
+  quartiles->Update();
 
-  vtkNew<vtkLookupTable> lookup;
+  vtkTable *outTable = quartiles->GetOutput();
+  vtkSmartPointer<vtkLookupTable> lookup =
+    vtkSmartPointer<vtkLookupTable>::New();
   lookup->SetNumberOfColors(5);
   lookup->SetRange(0, 4);
   lookup->Build();
 
-  chart->GetPlot(0)->SetInputData(inputBoxPlotTable.GetPointer());
+  chart->GetPlot(0)->SetInputData(outTable);
+  chart->GetPlot(0)->LegendVisibilityOn();
   chart->SetColumnVisibilityAll(true);
   chart->SetTitle("Michelson-Morley experiment");
   chart->GetTitleProperties()->SetFontSize(16);
   chart->GetYAxis()->SetTitle("Speed of Light (km/s - 299000)");
 
   // Set the labels
-  vtkNew<vtkStringArray> labels;
+  vtkSmartPointer<vtkStringArray> labels =
+    vtkSmartPointer<vtkStringArray>::New();
   labels->SetNumberOfValues(5);
   labels->SetValue(0, "Run 1");
   labels->SetValue(1, "Run 2");
   labels->SetValue(2, "Run 3");
   labels->SetValue(3, "Run 4");
   labels->SetValue(4, "Run 5");
-  chart->GetPlot(0)->SetLabels(labels.GetPointer());
+  chart->GetPlot(0)->SetLabels(labels);
 
   // Render the scene
   view->GetRenderWindow()->SetMultiSamples(0);
