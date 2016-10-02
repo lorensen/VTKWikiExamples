@@ -88,7 +88,7 @@ int main(int , char* [])
   lookup->Build();
 
   chart->GetPlot(0)->SetInputData(outTable);
-  chart->GetPlot(0)->LegendVisibilityOn();
+  chart->SetShowLegend(true);
   chart->SetColumnVisibilityAll(true);
   chart->SetTitle("Michelson-Morley experiment");
   chart->GetTitleProperties()->SetFontSize(16);
