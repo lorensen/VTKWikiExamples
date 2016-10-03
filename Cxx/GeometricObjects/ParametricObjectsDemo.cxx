@@ -128,6 +128,10 @@ int main(int, char *[])
   textProperty->SetFontSize(10);
   textProperty->SetJustificationToCentered();
 
+  vtkSmartPointer<vtkProperty> backProperty =
+    vtkSmartPointer<vtkProperty>::New();
+  backProperty->SetColor(1.0, 0.0, 0.0);
+
   // Create a parametric function source, renderer, mapper, and actor
   // for each object
   for(unsigned int i = 0; i < parametricObjects.size(); i++)
@@ -135,6 +139,9 @@ int main(int, char *[])
     parametricFunctionSources.push_back(
       vtkSmartPointer<vtkParametricFunctionSource>::New());
     parametricFunctionSources[i]->SetParametricFunction(parametricObjects[i]);
+    parametricFunctionSources[i]->SetUResolution(51);
+    parametricFunctionSources[i]->SetVResolution(51);
+    parametricFunctionSources[i]->SetWResolution(51);
     parametricFunctionSources[i]->Update();
 
     mappers.push_back(vtkSmartPointer<vtkPolyDataMapper>::New());
@@ -143,6 +150,7 @@ int main(int, char *[])
 
     actors.push_back(vtkSmartPointer<vtkActor>::New());
     actors[i]->SetMapper(mappers[i]);
+    actors[i]->SetBackfaceProperty(backProperty);
 
     textmappers.push_back(vtkSmartPointer<vtkTextMapper>::New());
     textmappers[i]->SetInput(parametricObjects[i]->GetClassName());
