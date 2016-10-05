@@ -60,7 +60,7 @@ static void Lorenz(void *arg)
   output->DeepCopy(vertexFilter->GetOutput());
 }
 
-main (int, char *[])
+int main (int, char *[])
 {
   vtkSmartPointer<vtkProgrammableSource> source =
     vtkSmartPointer<vtkProgrammableSource>::New();
