@@ -69,7 +69,11 @@ int main (int, char *[])
 
   vtkSmartPointer<vtkPolyDataMapper> mapper = 
     vtkSmartPointer<vtkPolyDataMapper>::New();
+#if VTK_MAJOR_VERSION <= 5
+  mapper->SetInput(source->GetPolyDataOutput());
+#else
   mapper->SetInputData(source->GetPolyDataOutput());
+#endif
   
   vtkSmartPointer<vtkActor> actor = 
     vtkSmartPointer<vtkActor>::New();
