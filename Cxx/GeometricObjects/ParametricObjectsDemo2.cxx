@@ -128,10 +128,6 @@ int main(int, char *[])
          static_cast<double>(gridYDimensions - (row+1)) * rendererSize / (gridYDimensions * rendererSize),
          static_cast<double>(col+1)*rendererSize / (gridXDimensions * rendererSize),
          static_cast<double>(gridYDimensions - row) * rendererSize / (gridYDimensions * rendererSize)};
-      std::cout << viewport[0] << ", "
-                << viewport[1] << ", "
-                << viewport[2] << ", "
-                << viewport[3] << std::endl;
       renderWindow->AddRenderer(renderers[index]);
       renderers[index]->SetViewport(viewport);
       if(index > static_cast<int>(parametricObjects.size() - 1))
