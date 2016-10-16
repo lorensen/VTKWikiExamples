@@ -19,6 +19,7 @@ FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 set(VERSION_MIN "7.0")
+Requires_Version(ParametricKuenDemo ${VERSION_MIN} ALL_FILES)
 Requires_Version(ParametricObjectsDemo2 ${VERSION_MIN} ALL_FILES)
 
 foreach(SOURCE_FILE ${ALL_FILES})
