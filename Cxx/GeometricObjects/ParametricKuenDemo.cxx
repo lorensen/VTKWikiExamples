@@ -226,8 +226,8 @@ int main(int, char *[])
   vtkSmartPointer<vtkSliderRepresentation2D> sliderRepMinimumV =
     vtkSmartPointer<vtkSliderRepresentation2D>::New();
   
-  sliderRepMinimumV->SetMinimumValue(0.0);
-  sliderRepMinimumV->SetMaximumValue(.9999 * vtkMath::Pi());
+  sliderRepMinimumV->SetMinimumValue(0.05);
+  sliderRepMinimumV->SetMaximumValue(vtkMath::Pi());
   sliderRepMinimumV->SetValue(0.0);
   sliderRepMinimumV->SetTitleText("V min");
 
@@ -257,9 +257,9 @@ int main(int, char *[])
   vtkSmartPointer<vtkSliderRepresentation2D> sliderRepMaximumV =
     vtkSmartPointer<vtkSliderRepresentation2D>::New();
   
-  sliderRepMaximumV->SetMinimumValue(0.0);
-  sliderRepMaximumV->SetMaximumValue(.9999* vtkMath::Pi());
-  sliderRepMaximumV->SetValue(.9999 * vtkMath::Pi());
+  sliderRepMaximumV->SetMinimumValue(0.05);
+  sliderRepMaximumV->SetMaximumValue(vtkMath::Pi() - .05);
+  sliderRepMaximumV->SetValue(vtkMath::Pi());
   sliderRepMaximumV->SetTitleText("V max");
 
   sliderRepMaximumV->GetPoint1Coordinate()->SetCoordinateSystemToNormalizedDisplay();
@@ -286,8 +286,8 @@ int main(int, char *[])
 
   surface->SetMinimumU(-4.5);
   surface->SetMaximumU(4.5);
-  surface->SetMinimumV(0.0);
-  surface->SetMaximumV(.9999*vtkMath::Pi());
+  surface->SetMinimumV(0.05);
+  surface->SetMaximumV(vtkMath::Pi() - .05);
 
   renderer->ResetCamera();
   renderer->GetActiveCamera()->Azimuth(30);
