@@ -11,7 +11,7 @@ ping -c 1 $HOST &> /dev/null
 if test "${?}" = 1
   then
   echo "$HOST is not accessible. Try again later"
-  exit
+  exit 1
 fi
 
 echo "1) Pull updates from master repository"
@@ -24,6 +24,16 @@ find . -name mwclient -prune -type f -o "(" -name \*.cxx -o -name \*.h -o -name 
 
 echo "3) Scrape the wiki"
 ./Admin/ScrapeWiki
+
+echo "3.1) Check for a successful scrape"
+count=`find . -name \*.cxx | wc -l`
+expected=850
+if test $count -lt $expected; then
+   echo Admin/ScrapeWiki failed
+   echo Expected at least $expected cxx files but only found $count cxx files
+   git checkout .
+   exit 1
+fi
 
 echo "4) Update Wiki Templates"
 git add Admin/VTKCMakeLists
