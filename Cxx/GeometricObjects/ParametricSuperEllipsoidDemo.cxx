@@ -13,6 +13,7 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkMath.h>
 
+#include <vtkCommand.h>
 #include <vtkSliderWidget.h>
 #include <vtkSliderRepresentation2D.h>
 
