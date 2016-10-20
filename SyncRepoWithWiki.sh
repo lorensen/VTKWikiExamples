@@ -10,7 +10,7 @@ echo "0) Can we access the wiki?"
 ping -c 1 $HOST &> /dev/null
 if test "${?}" != 0
   then
-  echo "$HOST is not accessible. Try again later" | mail -s "SyncRepoWithWiki failed" bill.lorensen@gmail.com
+  echo "VTKWikiExamples: $HOST is not accessible. Try again later" | mail -s "SyncRepoWithWiki failed" bill.lorensen@gmail.com
   exit 1
 fi
 
@@ -29,8 +29,8 @@ echo "3.1) Check for a successful scrape"
 count=`find . -name \*.cxx | wc -l`
 expected=850
 if test $count -lt $expected; then
-   echo Admin/ScrapeWiki failed
-   echo Expected at least $expected cxx files but only found $count cxx files | mail -s "SyncRepoWithWiki failed" bill.lorensen@gmail.com
+   echo VTKWikiExamples/Admin/ScrapeWiki failed
+   echo VTKWikiExamples: Expected at least $expected cxx files but only found $count cxx files | mail -s "SyncRepoWithWiki failed" bill.lorensen@gmail.com
    git checkout .
    exit 1
 fi
