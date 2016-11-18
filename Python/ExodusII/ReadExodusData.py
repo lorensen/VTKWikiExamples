@@ -26,6 +26,7 @@ mapper = vtk.vtkPolyDataMapper()
 mapper.SetInputConnection(geometry.GetOutputPort())
 mapper.SelectColorArray(nodal_var)
 mapper.SetScalarModeToUsePointFieldData()
+mapper.InterpolateScalarsBeforeMappingOn()
 
 # Actor
 actor = vtk.vtkActor()
