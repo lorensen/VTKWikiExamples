@@ -2,6 +2,7 @@
 #include <vtkSmartPointer.h>
 
 #include <QImage>
+#include <QColor>
 #include <QApplication>
 
 // Create a green 50x50 imageData for demonstration purposes
