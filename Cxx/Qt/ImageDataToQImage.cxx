@@ -1,3 +1,5 @@
+#include <vtkVersion.h>
+
 #include <vtkImageData.h>
 #include <vtkSmartPointer.h>
 
