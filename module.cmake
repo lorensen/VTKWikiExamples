@@ -11,6 +11,7 @@ vtk_module( WikiExamples
   vtkFiltersGeneric
   vtkFiltersGeometry
   vtkFiltersParallelStatistics
+  vtkFiltersPoints
   vtkFiltersProgrammable
   vtkFiltersSelection
   vtkFiltersTexture
