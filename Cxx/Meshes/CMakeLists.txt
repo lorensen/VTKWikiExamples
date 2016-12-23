@@ -19,8 +19,11 @@ endif()
 FILE(GLOB ALL_FILES *.cxx)
 
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
+include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
+
 set(VERSION_MIN "6.0")
 Requires_Version(DeformPointSet ${VERSION_MIN} ALL_FILES)
+Requires_Module(ExtractSurface vtkFiltersPoints)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   STRING(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
@@ -34,6 +37,7 @@ if (BUILD_TESTING)
 SET(KIT Meshes)
 SET(NEEDS_ARGS
   ClipDataSetWithPolyData
+  ExtractSurface
   FillHoles
   MatrixMathFilter
   OBBDicer
@@ -43,6 +47,11 @@ SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 ADD_TEST(${KIT}-ClipDataSetWithPolyData ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestClipDataSetWithPolyData -E 25)
+
+if (vtkFiltersPoints_LOADED)
+   ADD_TEST(${KIT}-ExtractSurface ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestExtractSurface ${DATA}/Armadillo.ply)
+endif()
 
 ADD_TEST(${KIT}-FillHoles ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestFillHoles ${DATA}/Torso.vtp)
