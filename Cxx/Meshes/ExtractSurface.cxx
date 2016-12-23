@@ -48,7 +48,7 @@ int main (int argc, char *argv[])
             << range[0] << ", "
             << range[1] << ", "
             << range[2] << std::endl;
-  double radius = range[0] * .01;
+  double radius = range[0] * .02;
   std::cout << "Radius: " << radius << std::endl;
   vtkSmartPointer<vtkSignedDistance> distance =
     vtkSmartPointer<vtkSignedDistance>::New();
