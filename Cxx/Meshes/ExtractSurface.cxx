@@ -31,7 +31,6 @@ int main (int argc, char *argv[])
     range[i] = bounds[2*i + 1] - bounds[2*i];
   }
 
-  
   int sampleSize = reader->GetOutput()->GetNumberOfPoints() * .00005;
   if (sampleSize < 10)
     {
@@ -48,12 +47,15 @@ int main (int argc, char *argv[])
             << range[0] << ", "
             << range[1] << ", "
             << range[2] << std::endl;
+  int dimension = 256;
   double radius = range[0] * .02;
+  radius = range[0] / static_cast<double>(dimension) * 3; // ~3 voxels
   std::cout << "Radius: " << radius << std::endl;
   vtkSmartPointer<vtkSignedDistance> distance =
     vtkSmartPointer<vtkSignedDistance>::New();
   distance->SetInputConnection (normals->GetOutputPort());
   distance->SetRadius(radius);
+  distance->SetDimensions(dimension, dimension, dimension);
   distance->SetBounds(
     bounds[0] - range[0] * .1,
     bounds[1] + range[0] * .1,
@@ -61,7 +63,6 @@ int main (int argc, char *argv[])
     bounds[3] + range[1] * .1,
     bounds[4] - range[2] * .1,
     bounds[5] + range[2] * .1);
-  distance->SetDimensions(200, 200, 200);
 
   vtkSmartPointer<vtkExtractSurface> surface =
     vtkSmartPointer<vtkExtractSurface>::New();
