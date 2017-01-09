@@ -38,6 +38,7 @@ SET(KIT Meshes)
 SET(NEEDS_ARGS
   ClipDataSetWithPolyData
   ExtractSurface
+  ExtractSurfaceDemo
   FillHoles
   MatrixMathFilter
   OBBDicer
@@ -51,6 +52,8 @@ ADD_TEST(${KIT}-ClipDataSetWithPolyData ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}
 if (vtkFiltersPoints_LOADED)
    ADD_TEST(${KIT}-ExtractSurface ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestExtractSurface ${DATA}/Armadillo.ply)
+   ADD_TEST(${KIT}-ExtractSurfaceDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestExtractSurfaceDemo ${DATA}/Armadillo.ply)
 endif()
 
 ADD_TEST(${KIT}-FillHoles ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
