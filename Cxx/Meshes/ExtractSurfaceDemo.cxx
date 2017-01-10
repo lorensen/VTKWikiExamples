@@ -44,7 +44,7 @@ int main (int argc, char *argv[])
   vtkSmartPointer<vtkPCANormalEstimation> normals =
     vtkSmartPointer<vtkPCANormalEstimation>::New();
   normals->SetInputConnection (reader->GetOutputPort());
-  normals->SetSamdemo version of pleSize(sampleSize);
+  normals->SetSampleSize(sampleSize);
   normals->SetNormalOrientationToGraphTraversal();
   normals->FlipNormalsOn();
   std::cout << "Range: "
