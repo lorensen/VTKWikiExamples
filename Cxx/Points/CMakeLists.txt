@@ -1,4 +1,4 @@
-PROJECT (${WIKI}Meshes)
+PROJECT (${WIKI}Points)
 
 IF(NOT WikiExamples_BINARY_DIR)
 FIND_PACKAGE(VTK REQUIRED)
@@ -21,8 +21,13 @@ FILE(GLOB ALL_FILES *.cxx)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
 
-set(VERSION_MIN "6.0")
-Requires_Version(DeformPointSet ${VERSION_MIN} ALL_FILES)
+set(VERSION_MIN "7.0")
+Requires_Version(ExtractClusters ${VERSION_MIN} ALL_FILES)
+Requires_Version(ExtractSurface ${VERSION_MIN} ALL_FILES)
+Requires_Version(ExtractSurfaceDemo ${VERSION_MIN} ALL_FILES)
+Requires_Module(ExtractClusters vtkFiltersPoints)
+Requires_Module(ExtractSurface vtkFiltersPoints)
+Requires_Module(ExtractSurfaceDemo vtkFiltersPoints)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   STRING(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
@@ -33,30 +38,22 @@ endforeach(SOURCE_FILE)
 
 if (BUILD_TESTING)
 # Testing
-SET(KIT Meshes)
+SET(KIT Points)
 SET(NEEDS_ARGS
-  ClipDataSetWithPolyData
-  FillHoles
-  MatrixMathFilter
-  OBBDicer
-  TableBasedClipDataSetWithPolyData
+  ExtractClusters
+  ExtractSurface
+  ExtractSurfaceDemo
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
-ADD_TEST(${KIT}-ClipDataSetWithPolyData ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-  TestClipDataSetWithPolyData -E 25)
-
-ADD_TEST(${KIT}-FillHoles ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-  TestFillHoles ${DATA}/Torso.vtp)
-
-ADD_TEST(${KIT}-OBBDicer ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-  TestOBBDicer ${DATA}/Bunny.vtp)
-
-ADD_TEST(${KIT}-MatrixMathFilter ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-  TestMatrixMathFilter ${DATA}/tensors.vtk)
-
-ADD_TEST(${KIT}-TableBasedClipDataSetWithPolyData ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-  TestTableBasedClipDataSetWithPolyData -E 25)
+if (vtkFiltersPoints_LOADED)
+   ADD_TEST(${KIT}-ExtractClusters ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestExtractClusters ${DATA}/Armadillo.ply)
+   ADD_TEST(${KIT}-ExtractSurface ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestExtractSurface ${DATA}/Armadillo.ply)
+   ADD_TEST(${KIT}-ExtractSurfaceDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestExtractSurfaceDemo ${DATA}/Armadillo.ply)
+endif()
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 endif()
