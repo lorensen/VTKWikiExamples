@@ -45,6 +45,7 @@ SET(NEEDS_ARGS
   ExtractClusters
   ExtractSurface
   ExtractSurfaceDemo
+  DensifyPoints
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
@@ -55,6 +56,8 @@ if (vtkFiltersPoints_LOADED)
      TestExtractSurface ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-ExtractSurfaceDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestExtractSurfaceDemo ${DATA}/Armadillo.ply)
+   ADD_TEST(${KIT}-DensifyPoints ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestDensifyPoints ${DATA}/Torso.vtp)
 endif()
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
