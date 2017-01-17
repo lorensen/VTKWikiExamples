@@ -18,6 +18,7 @@
 
 int main (int, char *[])
 {
+  vtkMath::RandomSeed(4355412); // for test result consistency
   double limits = 10;
   double radius = .5;
 

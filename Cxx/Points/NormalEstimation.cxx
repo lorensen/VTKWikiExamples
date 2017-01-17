@@ -5,6 +5,7 @@
 #include <vtkSphereSource.h>
 #include <vtkArrowSource.h>
 #include <vtkGlyph3D.h>
+#include <vtkMath.h>
 
 #include <vtkPolyDataMapper.h>
 #include <vtkProperty.h>
@@ -17,6 +18,8 @@ static void MakeGlyphs(vtkPolyData *src, double size, vtkGlyph3D *glyph);
 
 int main (int, char *[])
 {
+  vtkMath::RandomSeed(4355412); // for test result consistency
+
   double radius = 1.0;
   vtkSmartPointer<vtkPointSource> points =
     vtkSmartPointer<vtkPointSource>::New();
