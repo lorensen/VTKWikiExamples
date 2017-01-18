@@ -112,7 +112,6 @@ int main (int argc, char *argv[])
 
   // Generate an interesting view
   //
-  ren1->ResetCamera();
   ren1->GetActiveCamera()->SetPosition (1, 0, 0);
   ren1->GetActiveCamera()->SetFocalPoint (0, 1, 0);
   ren1->GetActiveCamera()->SetViewUp (0, 0, 1);
