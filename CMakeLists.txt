@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+cmake_policy(SET CMP0057 NEW)
 
 PROJECT(WikiExamples)
+
 if (Module_WikiExamples)
   message(STATUS "VTKWikiExamples: Building VTKWikiExamples as a Remote VTK Module")
   message(STATUS "VTKWikiExamples: All executables will have a \"wiki\" prefix")
