@@ -42,7 +42,6 @@ if (BUILD_TESTING)
 # Testing
 SET(KIT Points)
 SET(NEEDS_ARGS
-  ExtractClusters
   ExtractSurface
   ExtractSurfaceDemo
   DensifyPoints
@@ -50,8 +49,6 @@ SET(NEEDS_ARGS
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
 if (vtkFiltersPoints_LOADED)
-   ADD_TEST(${KIT}-ExtractClusters ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-     TestExtractClusters ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-ExtractSurface ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestExtractSurface ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-ExtractSurfaceDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
