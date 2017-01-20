@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
-cmake_policy(SET CMP0057 NEW)
+if (POLICY CMP0057)
+  cmake_policy(SET CMP0057 NEW)
+endif()
 
 PROJECT(WikiExamples)
 
