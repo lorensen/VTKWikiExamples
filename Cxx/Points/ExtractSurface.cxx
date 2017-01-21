@@ -67,7 +67,7 @@ int main (int argc, char *argv[])
   vtkSmartPointer<vtkExtractSurface> surface =
     vtkSmartPointer<vtkExtractSurface>::New();
   surface->SetInputConnection (distance->GetOutputPort());
-  surface->SetRadius(radius);
+  surface->SetRadius(radius * .99);
   surface->Update();
 
   vtkSmartPointer<vtkPolyDataMapper> surfaceMapper =
