@@ -29,6 +29,10 @@ SET(KIT Medical)
 SET(NEEDS_ARGS
   GenerateCubesFromLabels
   GenerateModelsFromLabels
+  MedicalDemo1
+  MedicalDemo2
+  MedicalDemo3
+  MedicalDemo4
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
@@ -37,6 +41,18 @@ ADD_TEST(${KIT}-GenerateCubesFromLabels ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}
 
 ADD_TEST(${KIT}-GenerateModelsFromLabels ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestGenerateModelsFromLabels ${DATA}/frogtissue.mhd 1 29)
+
+ADD_TEST(${KIT}-MedicalDemo1 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestMedicalDemo1 ${DATA}/FullHead.mhd)
+
+ADD_TEST(${KIT}-MedicalDemo2 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestMedicalDemo2 ${DATA}/FullHead.mhd)
+
+ADD_TEST(${KIT}-MedicalDemo3 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestMedicalDemo3 ${DATA}/FullHead.mhd)
+
+ADD_TEST(${KIT}-MedicalDemo4 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestMedicalDemo4 ${DATA}/FullHead.mhd)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
