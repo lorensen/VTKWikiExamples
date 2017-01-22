@@ -49,7 +49,7 @@ ADD_TEST(${KIT}-MedicalDemo2 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMedicalDemo2 ${DATA}/FullHead.mhd)
 
 ADD_TEST(${KIT}-MedicalDemo3 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
-  TestMedicalDemo3 -E 30 ${DATA}/FullHead.mhd)
+  TestMedicalDemo3 ${DATA}/FullHead.mhd -E 30)
 
 ADD_TEST(${KIT}-MedicalDemo4 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMedicalDemo4 ${DATA}/FullHead.mhd)
