@@ -9,7 +9,7 @@ INCLUDE(${VTK_USE_FILE})
 ENDIF(NOT WikiExamples_BINARY_DIR)
 
 if("${VTK_MAJOR_VERSION}.${VTK_MINOR_VERSION}" LESS 5.8)
-  SET(KIT_LIBS vtkFiltering vtkHybrid)
+  SET(KIT_LIBS vtkFiltering vtkHybrid vtkVolumeRendering)
 else()
   SET(KIT_LIBS ${VTK_LIBRARIES})
 endif()
