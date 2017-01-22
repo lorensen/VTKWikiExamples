@@ -33,6 +33,7 @@ SET(NEEDS_ARGS
   MedicalDemo2
   MedicalDemo3
   MedicalDemo4
+  TissueLens
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
@@ -53,6 +54,9 @@ ADD_TEST(${KIT}-MedicalDemo3 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
 
 ADD_TEST(${KIT}-MedicalDemo4 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMedicalDemo4 ${DATA}/FullHead.mhd)
+
+ADD_TEST(${KIT}-TissueLens ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestTissueLens ${DATA}/FullHead.mhd)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
