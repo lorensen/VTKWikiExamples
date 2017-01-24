@@ -166,9 +166,5 @@ int main (int argc, char *argv[])
   iren->Initialize();
   iren->Start();
 
-  std::cout << "Position: "
-            << lens->GetPosition()[0] << ", "
-            << lens->GetPosition()[1] << ", "
-            << lens->GetPosition()[2] << std::endl;
   return EXIT_SUCCESS;
 }
