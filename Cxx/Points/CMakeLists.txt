@@ -28,12 +28,8 @@ Requires_Version(ExtractSurface ${VERSION_MIN} ALL_FILES)
 Requires_Version(ExtractSurfaceDemo ${VERSION_MIN} ALL_FILES)
 Requires_Version(FitImplicitFunction ${VERSION_MIN} ALL_FILES)
 Requires_Version(NormalEstimation ${VERSION_MIN} ALL_FILES)
-Requires_Module(DensifyPointss vtkFiltersPoints)
-Requires_Module(ExtractClusters vtkFiltersPoints)
-Requires_Module(ExtractSurface vtkFiltersPoints)
-Requires_Module(ExtractSurfaceDemo vtkFiltersPoints)
-Requires_Module(FitImplicitFunction vtkFiltersPoints)
-Requires_Module(NormalEstimation vtkFiltersPoints)
+Requires_Version(SignedDistance ${VERSION_MIN} ALL_FILES)
+Requires_Version(UnsignedDistance ${VERSION_MIN} ALL_FILES)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   STRING(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
@@ -49,6 +45,8 @@ SET(NEEDS_ARGS
   ExtractSurface
   ExtractSurfaceDemo
   DensifyPoints
+  SignedDistance
+  UnsignedDistance
 )
 SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 
@@ -59,6 +57,10 @@ if (vtkFiltersPoints_LOADED)
      TestExtractSurfaceDemo ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-DensifyPoints ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestDensifyPoints ${DATA}/Torso.vtp)
+   ADD_TEST(${KIT}-SignedDistance ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestSignedDistance ${DATA}/Armadillo.ply)
+   ADD_TEST(${KIT}-UnsignedDistance ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestUnsignedDistance ${DATA}/Armadillo.ply)
 endif()
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
