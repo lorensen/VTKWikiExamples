@@ -3,6 +3,7 @@
 #include <vtkPCANormalEstimation.h>
 #include <vtkSignedDistance.h>
 #include <vtkExtractSurface.h>
+#include <vtkPointData.h>
 
 #include <vtkPolyDataMapper.h>
 #include <vtkProperty.h>
@@ -37,12 +38,25 @@ int main (int argc, char *argv[])
     sampleSize = 10;
     }
   std::cout << "Sample size is: " << sampleSize << std::endl;
-  vtkSmartPointer<vtkPCANormalEstimation> normals =
-    vtkSmartPointer<vtkPCANormalEstimation>::New();
-  normals->SetInputConnection (reader->GetOutputPort());
-  normals->SetSampleSize(sampleSize);
-  normals->SetNormalOrientationToGraphTraversal();
-  normals->FlipNormalsOn();
+  // Do we need to estimate normals?
+  vtkSmartPointer<vtkSignedDistance> distance =
+    vtkSmartPointer<vtkSignedDistance>::New();
+  if (reader->GetOutput()->GetPointData()->GetNormals())
+    {
+    std::cout << "Using normals from input file" << std::endl;
+    distance->SetInputConnection (reader->GetOutputPort());
+    }
+  else
+    {
+    std::cout << "Estimating normals using PCANormalEstimation" << std::endl;
+    vtkSmartPointer<vtkPCANormalEstimation> normals =
+      vtkSmartPointer<vtkPCANormalEstimation>::New();
+    normals->SetInputConnection (reader->GetOutputPort());
+    normals->SetSampleSize(sampleSize);
+    normals->SetNormalOrientationToGraphTraversal();
+    normals->FlipNormalsOn();
+    distance->SetInputConnection (normals->GetOutputPort());
+    }
   std::cout << "Range: "
             << range[0] << ", "
             << range[1] << ", "
@@ -51,9 +65,7 @@ int main (int argc, char *argv[])
   double radius = range[0] * .02;
   radius = range[0] / static_cast<double>(dimension) * 3; // ~3 voxels
   std::cout << "Radius: " << radius << std::endl;
-  vtkSmartPointer<vtkSignedDistance> distance =
-    vtkSmartPointer<vtkSignedDistance>::New();
-  distance->SetInputConnection (normals->GetOutputPort());
+
   distance->SetRadius(radius);
   distance->SetDimensions(dimension, dimension, dimension);
   distance->SetBounds(

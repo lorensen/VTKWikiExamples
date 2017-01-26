@@ -4,6 +4,7 @@
 #include <vtkPCANormalEstimation.h>
 #include <vtkSignedDistance.h>
 #include <vtkExtractSurface.h>
+#include <vtkPointData.h>
 
 #include <vtkArrowSource.h>
 #include <vtkMaskPoints.h>
@@ -41,12 +42,25 @@ int main (int argc, char *argv[])
   int sampleSize = 15;
 
   std::cout << "Sample size is: " << sampleSize << std::endl;
+  // Do we need to estimate normals?
+  vtkSmartPointer<vtkSignedDistance> distance =
+    vtkSmartPointer<vtkSignedDistance>::New();
   vtkSmartPointer<vtkPCANormalEstimation> normals =
     vtkSmartPointer<vtkPCANormalEstimation>::New();
-  normals->SetInputConnection (reader->GetOutputPort());
-  normals->SetSampleSize(sampleSize);
-  normals->SetNormalOrientationToGraphTraversal();
-  normals->FlipNormalsOn();
+  if (reader->GetOutput()->GetPointData()->GetNormals())
+    {
+    std::cout << "Using normals from input file" << std::endl;
+    distance->SetInputConnection (reader->GetOutputPort());
+    }
+  else
+    {
+    std::cout << "Estimating normals using PCANormalEstimation" << std::endl;
+    normals->SetInputConnection (reader->GetOutputPort());
+    normals->SetSampleSize(sampleSize);
+    normals->SetNormalOrientationToGraphTraversal();
+    normals->FlipNormalsOn();
+    distance->SetInputConnection (normals->GetOutputPort());
+    }
   std::cout << "Range: "
             << range[0] << ", "
             << range[1] << ", "
@@ -55,9 +69,7 @@ int main (int argc, char *argv[])
   double radius;
   radius = range[0] / static_cast<double>(dimension) * 3; // ~3 voxels
   std::cout << "Radius: " << radius << std::endl;
-  vtkSmartPointer<vtkSignedDistance> distance =
-    vtkSmartPointer<vtkSignedDistance>::New();
-  distance->SetInputConnection (normals->GetOutputPort());
+
   distance->SetRadius(radius);
   distance->SetDimensions(dimension, dimension, dimension);
   distance->SetBounds(
@@ -77,8 +89,14 @@ int main (int argc, char *argv[])
 
   vtkSmartPointer<vtkGlyph3D> glyph3D =
     vtkSmartPointer<vtkGlyph3D>::New();
-  MakeGlyphs(normals->GetOutput(), radius * 2.0, glyph3D.GetPointer());
-
+  if (reader->GetOutput()->GetPointData()->GetNormals())
+    {
+    MakeGlyphs(reader->GetOutput(), radius * 2.0, glyph3D.GetPointer());
+    }
+  else
+    {
+    MakeGlyphs(normals->GetOutput(), radius * 2.0, glyph3D.GetPointer());
+    }
   vtkSmartPointer<vtkPolyDataMapper> surfaceMapper =
     vtkSmartPointer<vtkPolyDataMapper>::New();
   surfaceMapper->SetInputConnection(surface->GetOutputPort());
