@@ -1,5 +1,9 @@
 #include <vtkSmartPointer.h>
 #include <vtkPLYReader.h>
+#include <vtkXMLPolyDataReader.h>
+#include <vtkOBJReader.h>
+#include <vtkSTLReader.h>
+#include <vtkPointSource.h>
 
 #include <vtkPCANormalEstimation.h>
 #include <vtkSignedDistance.h>
@@ -17,22 +21,17 @@
 #include <vtkRenderer.h>
 #include <vtkCamera.h>
 
+#include <vtksys/SystemTools.hxx>
+
 static void MakeGlyphs(vtkPolyData *src, double size, vtkGlyph3D *glyph);
+static vtkSmartPointer<vtkPolyData> ReadPolyData(const char *fileName);
 
 int main (int argc, char *argv[])
 {
-  if (argc < 2)
-  {
-    std::cout << "Usage: " << argv[0] << " file.ply" << std::endl;
-    return EXIT_FAILURE;
-  }
-  vtkSmartPointer<vtkPLYReader> reader =
-    vtkSmartPointer<vtkPLYReader>::New();
-  reader->SetFileName (argv[1]);
-  reader->Update();
+  vtkSmartPointer<vtkPolyData> polyData = ReadPolyData(argc > 1 ? argv[1] : "");;
 
   double bounds[6];
-  reader->GetOutput()->GetBounds(bounds);
+  polyData->GetBounds(bounds);
   double range[3];
   for (int i = 0; i < 3; ++i)
   {
@@ -47,15 +46,15 @@ int main (int argc, char *argv[])
     vtkSmartPointer<vtkSignedDistance>::New();
   vtkSmartPointer<vtkPCANormalEstimation> normals =
     vtkSmartPointer<vtkPCANormalEstimation>::New();
-  if (reader->GetOutput()->GetPointData()->GetNormals())
+  if (polyData->GetPointData()->GetNormals())
     {
     std::cout << "Using normals from input file" << std::endl;
-    distance->SetInputConnection (reader->GetOutputPort());
+    distance->SetInputData (polyData);
     }
   else
     {
     std::cout << "Estimating normals using PCANormalEstimation" << std::endl;
-    normals->SetInputConnection (reader->GetOutputPort());
+    normals->SetInputData (polyData);
     normals->SetSampleSize(sampleSize);
     normals->SetNormalOrientationToGraphTraversal();
     normals->FlipNormalsOn();
@@ -89,9 +88,9 @@ int main (int argc, char *argv[])
 
   vtkSmartPointer<vtkGlyph3D> glyph3D =
     vtkSmartPointer<vtkGlyph3D>::New();
-  if (reader->GetOutput()->GetPointData()->GetNormals())
+  if (polyData->GetPointData()->GetNormals())
     {
-    MakeGlyphs(reader->GetOutput(), radius * 2.0, glyph3D.GetPointer());
+    MakeGlyphs(polyData, radius * 2.0, glyph3D.GetPointer());
     }
   else
     {
@@ -178,4 +177,56 @@ void MakeGlyphs(vtkPolyData *src, double size, vtkGlyph3D *glyph)
   glyph->SetScaleFactor(size);
   glyph->OrientOn();
   glyph->Update();
+}
+
+static vtkSmartPointer<vtkPolyData> ReadPolyData(const char *fileName)
+{
+  vtkSmartPointer<vtkPolyData> polyData;
+  std::string extension = vtksys::SystemTools::GetFilenameExtension(std::string(fileName));
+  if (extension == ".ply")
+  {
+    vtkSmartPointer<vtkPLYReader> reader =
+      vtkSmartPointer<vtkPLYReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else if (extension == ".vtp")
+  {
+    vtkSmartPointer<vtkXMLPolyDataReader> reader =
+      vtkSmartPointer<vtkXMLPolyDataReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else if (extension == ".obj")
+  {
+    vtkSmartPointer<vtkOBJReader> reader =
+      vtkSmartPointer<vtkOBJReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else if (extension == ".stl")
+  {
+    vtkSmartPointer<vtkSTLReader> reader =
+      vtkSmartPointer<vtkSTLReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else
+  {
+    vtkSmartPointer<vtkPointSource> points =
+      vtkSmartPointer<vtkPointSource>::New();
+    points->SetNumberOfPoints(100000);
+    points->SetRadius(10.0);
+    points->SetCenter(vtkMath::Random(-100, 100),
+                      vtkMath::Random(-100, 100),
+                      vtkMath::Random(-100, 100));
+    points->SetDistributionToShell();
+    points->Update();
+    polyData = points->GetOutput();
+  }
+  return polyData;
 }

@@ -1,5 +1,10 @@
 #include <vtkSmartPointer.h>
 #include <vtkPLYReader.h>
+#include <vtkXMLPolyDataReader.h>
+#include <vtkOBJReader.h>
+#include <vtkSTLReader.h>
+#include <vtkPointSource.h>
+
 #include <vtkUnsignedDistance.h>
 #include <vtkImageMapToColors.h>
 #include <vtkLookupTable.h>
@@ -15,27 +20,23 @@
 #include <vtkRenderer.h>
 #include <vtkCamera.h>
 
+#include <vtksys/SystemTools.hxx>
+
+static vtkSmartPointer<vtkPolyData> ReadPolyData(const char *fileName);
+
 int main (int argc, char *argv[])
 {
-  if (argc < 2)
-  {
-    std::cout << "Usage: " << argv[0] << " file.ply" << std::endl;
-    return EXIT_FAILURE;
-  }
-  vtkSmartPointer<vtkPLYReader> reader =
-    vtkSmartPointer<vtkPLYReader>::New();
-  reader->SetFileName (argv[1]);
-  reader->Update();
+  vtkSmartPointer<vtkPolyData> polyData = ReadPolyData(argc > 1 ? argv[1] : "");;
 
   double bounds[6];
-  reader->GetOutput()->GetBounds(bounds);
+  polyData->GetBounds(bounds);
   double range[3];
   for (int i = 0; i < 3; ++i)
   {
     range[i] = bounds[2*i + 1] - bounds[2*i];
   }
 
-  int sampleSize = reader->GetOutput()->GetNumberOfPoints() * .00005;
+  int sampleSize = polyData->GetNumberOfPoints() * .00005;
   if (sampleSize < 10)
     {
     sampleSize = 10;
@@ -52,7 +53,7 @@ int main (int argc, char *argv[])
   std::cout << "Radius: " << radius << std::endl;
   vtkSmartPointer<vtkUnsignedDistance> distance =
     vtkSmartPointer<vtkUnsignedDistance>::New();
-  distance->SetInputConnection (reader->GetOutputPort());
+  distance->SetInputData (polyData);
   distance->SetRadius(radius);
   distance->SetDimensions(dimension, dimension, dimension);
   distance->SetBounds(
@@ -153,4 +154,56 @@ int main (int argc, char *argv[])
   std::cout << distance->GetOutput()->GetScalarRange()[0] << ", "
             << distance->GetOutput()->GetScalarRange()[1] << std::endl;
   return EXIT_SUCCESS;
+}
+
+static vtkSmartPointer<vtkPolyData> ReadPolyData(const char *fileName)
+{
+  vtkSmartPointer<vtkPolyData> polyData;
+  std::string extension = vtksys::SystemTools::GetFilenameExtension(std::string(fileName));
+  if (extension == ".ply")
+  {
+    vtkSmartPointer<vtkPLYReader> reader =
+      vtkSmartPointer<vtkPLYReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else if (extension == ".vtp")
+  {
+    vtkSmartPointer<vtkXMLPolyDataReader> reader =
+      vtkSmartPointer<vtkXMLPolyDataReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else if (extension == ".obj")
+  {
+    vtkSmartPointer<vtkOBJReader> reader =
+      vtkSmartPointer<vtkOBJReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else if (extension == ".stl")
+  {
+    vtkSmartPointer<vtkSTLReader> reader =
+      vtkSmartPointer<vtkSTLReader>::New();
+    reader->SetFileName (fileName);
+    reader->Update();
+    polyData = reader->GetOutput();
+  }
+  else
+  {
+    vtkSmartPointer<vtkPointSource> points =
+      vtkSmartPointer<vtkPointSource>::New();
+    points->SetNumberOfPoints(100000);
+    points->SetRadius(10.0);
+    points->SetCenter(vtkMath::Random(-100, 100),
+                      vtkMath::Random(-100, 100),
+                      vtkMath::Random(-100, 100));
+    points->SetDistributionToShell();
+    points->Update();
+    polyData = points->GetOutput();
+  }
+  return polyData;
 }
