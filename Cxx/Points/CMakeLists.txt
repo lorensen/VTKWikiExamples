@@ -28,6 +28,7 @@ Requires_Version(ExtractSurface ${VERSION_MIN} ALL_FILES)
 Requires_Version(ExtractSurfaceDemo ${VERSION_MIN} ALL_FILES)
 Requires_Version(FitImplicitFunction ${VERSION_MIN} ALL_FILES)
 Requires_Version(NormalEstimation ${VERSION_MIN} ALL_FILES)
+Requires_Version(PointOccupancy ${VERSION_MIN} ALL_FILES)
 Requires_Version(SignedDistance ${VERSION_MIN} ALL_FILES)
 Requires_Version(UnsignedDistance ${VERSION_MIN} ALL_FILES)
 
@@ -45,6 +46,7 @@ SET(NEEDS_ARGS
   ExtractSurface
   ExtractSurfaceDemo
   DensifyPoints
+  PointOccupancy
   SignedDistance
   UnsignedDistance
 )
@@ -57,6 +59,8 @@ if (vtkFiltersPoints_LOADED)
      TestExtractSurfaceDemo ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-DensifyPoints ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestDensifyPoints ${DATA}/Torso.vtp)
+   ADD_TEST(${KIT}-PointOccupancy ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestPointOccupancy ${DATA}/cowHead.vtp)
    ADD_TEST(${KIT}-SignedDistance ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestSignedDistance ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-UnsignedDistance ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
