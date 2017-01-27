@@ -41,7 +41,7 @@ int main (int argc, char *argv[])
     vtkSmartPointer<vtkRadiusOutlierRemoval>::New();
   removal->SetInputData(polyData);
   removal->SetRadius(range[0] / 50.0);
-  removal->SetNumberOfNeighbors(4);
+  removal->SetNumberOfNeighbors(6);
   removal->GenerateOutliersOn();
   removal->Update();
   std::cout << "# of removed points: " << removal->GetNumberOfPointsRemoved() << std::endl;
