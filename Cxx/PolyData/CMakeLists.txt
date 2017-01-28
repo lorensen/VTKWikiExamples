@@ -53,7 +53,7 @@ SET(NEEDS_ARGS
   MiscPointData
   PointLocatorVisualization
   PolyDataIsoLines
-  PolyDataPointSample
+  PolyDataPointSampler
   RemoveVertices
   ThinPlateSplineTransform
   TriangleColoredPoints
@@ -119,6 +119,9 @@ ADD_TEST(${KIT}-PointLocatorVisualization ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KI
 
 ADD_TEST(${KIT}-PolyDataIsoLines ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestPolyDataIsoLines ${DATA}/cowHead.vtp)
+
+ADD_TEST(${KIT}-PolyDataPointSampler ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestPolyDataPointSampler ${DATA}/Torso.vtp)
 
 ADD_TEST(${KIT}-RemoveVertices ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestRemoveVertices ${DATA}/Bunny.vtp)
