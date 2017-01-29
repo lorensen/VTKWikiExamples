@@ -21,6 +21,8 @@ include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 
 set(VERSION_MIN "7.0")
 Requires_Version(BoxChart ${VERSION_MIN} ALL_FILES)
+Requires_Version(StackedPlot ${VERSION_MIN} ALL_FILES)
+Requires_Version(StackedBar ${VERSION_MIN} ALL_FILES)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   STRING(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
