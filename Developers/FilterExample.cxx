@@ -1,63 +1,33 @@
 #include <vtkSmartPointer.h>
-#include <vtkGraph.h>
-#include <vtkMutableUndirectedGraph.h>
-#include <vtkMutableDirectedGraph.h>
 
 #include "vtkTestFilter.h"
 
-void TestDirected();
-void TestUndirected();
-
 int main(int, char *[])
 {
-  TestDirected();
-  TestUndirected();
+  vtkSmartPointer<vtkPoints> points = 
+    vtkSmartPointer<vtkPoints>::New();
+  points->InsertNextPoint(0.0, 0.0, 0.0);
   
-  return EXIT_SUCCESS;
-}
-
-void TestDirected()
-{
+  vtkSmartPointer<vtkPolyData> inputPolydata =   
+    vtkSmartPointer<vtkPolyData>::New();
+  inputPolydata->SetPoints(points);
   
-  vtkSmartPointer<vtkMutableDirectedGraph> g =
-    vtkSmartPointer<vtkMutableDirectedGraph>::New();
-  vtkIdType v1 = g->AddVertex();
-  vtkIdType v2 = g->AddVertex();
-
-  g->AddEdge(v1, v2);
-  std::cout << "Input type: " << g->GetClassName() << std::endl;
-
-  vtkSmartPointer<vtkTestFilter> filter =
+  std::cout << "Input points: " << inputPolydata->GetNumberOfPoints() 
+            << std::endl;
+  
+  vtkSmartPointer<vtkTestFilter> filter = 
     vtkSmartPointer<vtkTestFilter>::New();
 #if VTK_MAJOR_VERSION <= 5
-  filter->SetInput(g);
+  filter->SetInput(inputPolydata);
 #else
-  filter->SetInputData(g);
+  filter->SetInputData(inputPolydata);
 #endif
   filter->Update();
-
-  std::cout << "Output type: " << filter->GetOutput()->GetClassName() << std::endl;
-  std::cout << "Output has " << filter->GetOutput()->GetNumberOfVertices() << " vertices." << std::endl;
-  std::cout << std::endl;
-}
-
-void TestUndirected()
-{
-  std::cout << "TestUndirected" << std::endl;
-  vtkSmartPointer<vtkMutableUndirectedGraph> g =
-    vtkSmartPointer<vtkMutableUndirectedGraph>::New();
-  vtkIdType v1 = g->AddVertex();
-  vtkIdType v2 = g->AddVertex();
-
-  g->AddEdge(v1, v2);
-  std::cout << "Input type: " << g->GetClassName() << std::endl;
-
-  vtkSmartPointer<vtkTestFilter> filter =
-    vtkSmartPointer<vtkTestFilter>::New();
-  filter->SetInput(g);
-  filter->Update();
-
-  std::cout << "Output type: " << filter->GetOutput()->GetClassName() << std::endl;
-  std::cout << "Output has " << filter->GetOutput()->GetNumberOfVertices() << " vertices." << std::endl;
-  std::cout << std::endl;
+  
+  vtkPolyData* outputPolydata = filter->GetOutput();
+  
+  std::cout << "Output points: " << outputPolydata->GetNumberOfPoints() 
+            << std::endl;
+  
+  return EXIT_SUCCESS;
 }

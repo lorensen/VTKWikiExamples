@@ -93,9 +93,16 @@ int main(int, char*[])
     }
 
   // Set the Month Labels
-  chart->GetAxis(1)->SetTickLabels(arrMonthLabel);
-  chart->GetAxis(1)->SetTickPositions(arrXTickPositions);
+  chart->GetAxis(1)->SetCustomTickPositions(arrXTickPositions, arrMonthLabel);
   chart->GetAxis(1)->SetMaximum(11);
+
+  chart->GetAxis(1)->SetRange(0, 11);
+  chart->GetAxis(1)->SetBehavior(vtkAxis::FIXED);
+  chart->GetAxis(1)->SetTitle("Month");
+
+  chart->SetShowLegend(true);
+
+  chart->GetAxis(0)->SetTitle("Checkouts");
 
   // Add multiple line plots, setting the colors etc
   vtkPlotStacked *stack = 0;
@@ -103,7 +110,7 @@ int main(int, char*[])
   // Books
   stack = vtkPlotStacked::SafeDownCast(chart->AddPlot(vtkChart::STACKED));
   stack->SetUseIndexForXSeries(true);
-  stack->SetInput(table);
+  stack->SetInputData(table);
   stack->SetInputArray(1,"Books");
   stack->SetInputArray(2,"New / Popular");
   stack->SetInputArray(3,"Periodical");
@@ -112,10 +119,10 @@ int main(int, char*[])
 
   vtkSmartPointer<vtkColorSeries> colorSeries =
     vtkSmartPointer<vtkColorSeries>::New();
-  colorSeries->SetColorScheme(vtkColorSeries::COOL);
+  colorSeries->SetColorScheme(vtkColorSeries::WILD_FLOWER);
   stack->SetColorSeries(colorSeries);
  
-  //Finally render the scene and compare the image to a reference image
+  // Finally render the scene and compare the image to a reference image
   view->GetRenderWindow()->SetMultiSamples(0);
 
   view->GetInteractor()->Initialize();
