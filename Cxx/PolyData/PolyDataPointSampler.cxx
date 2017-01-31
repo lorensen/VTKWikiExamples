@@ -1,3 +1,5 @@
+#include <vtkVersion.h>
+
 #include <vtkSmartPointer.h>
 #include <vtkPolyDataPointSampler.h>
 #include <vtkPLYReader.h>
@@ -38,7 +40,11 @@ int main (int argc, char *argv[])
   std::cout << "# of original points: " << polyData->GetNumberOfPoints() << std::endl;
   vtkSmartPointer<vtkPolyDataPointSampler> sample =
     vtkSmartPointer<vtkPolyDataPointSampler>::New();
+#if VTK_MAJOR_VERSION <= 5
+  sample->SetInput(polyData);
+#else
   sample->SetInputData(polyData);
+#endif
   sample->SetDistance(range[0] / 50);
   sample->Update();
   std::cout << "# of points after sampling: " << sample->GetOutput()->GetNumberOfPoints() << std::endl;
@@ -51,7 +57,11 @@ int main (int argc, char *argv[])
 
   vtkSmartPointer<vtkGlyph3D> originalGlyph3D =
     vtkSmartPointer<vtkGlyph3D>::New();
+#if VTK_MAJOR_VERSION <= 5
+  originalGlyph3D->SetInput(polyData);
+#else
   originalGlyph3D->SetInputData(polyData);
+#endif
   originalGlyph3D->SetSourceConnection(originalSource->GetOutputPort());
   originalGlyph3D->ScalingOff();
   originalGlyph3D->Update();
