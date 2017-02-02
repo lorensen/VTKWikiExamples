@@ -51,7 +51,7 @@ public:
   vtkTypeMacro(vtkTestingObjectFactory,vtkObjectFactory);
   virtual const char* GetVTKSourceVersion();
   const char* GetDescription() { return "Factory for overrides during testing"; }
-  void PrintSelf(ostream& os, vtkIndent indent);
+  void PrintSelf(ostream& os, vtkIndent indent) VTK_OVERRIDE;
 
 protected:
   // Description:
