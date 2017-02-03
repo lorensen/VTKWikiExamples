@@ -145,6 +145,8 @@ for page in site.pages:
                     os.makedirs(PathName)
             # Write the source code file
             OutputFile = "./" + PathName + "/" + FileName
+            if os.path.exists(OutputFile):
+                sys.exit("ERROR: " + OutputFile + " already exists. Check for duplicate file in examples.")
             print "Creating " + OutputFile
             MyFile = open(OutputFile, 'w')
             MyFile.write(FileContent)

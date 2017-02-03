@@ -5,7 +5,7 @@
 #include <vtkCallbackCommand.h>
 #include <vtkCommand.h>
 
-#include "vtkTestFilter.h"
+#include "vtkTestFilterSelfProgressFilter.h"
 
 void ProgressFunction(vtkObject* caller, long unsigned int eventId, void* clientData, void* callData);
 
@@ -15,8 +15,8 @@ int main(int argc, char **argv)
       vtkSmartPointer<vtkSphereSource>::New();
   sphereSource->Update();
   
-  vtkSmartPointer<vtkTestFilter> testFilter = 
-      vtkSmartPointer<vtkTestFilter>::New();
+  vtkSmartPointer<vtkTestFilterSelfProgressFilter> testFilter = 
+      vtkSmartPointer<vtkTestFilterSelfProgressFilter>::New();
   testFilter->SetInputConnection(sphereSource->GetOutputPort());
   testFilter->Update();
   

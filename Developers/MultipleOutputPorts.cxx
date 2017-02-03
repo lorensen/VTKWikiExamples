@@ -1,7 +1,7 @@
 #include <vtkSmartPointer.h>
 #include <vtkSphereSource.h>
 
-#include "vtkTestFilter.h"
+#include "vtkTestMultipleOutputPortsFilter.h"
 
 int main (int, char *[])
 {
@@ -9,8 +9,8 @@ int main (int, char *[])
       vtkSmartPointer<vtkSphereSource>::New();
   sphereSource->Update();
 
-  vtkSmartPointer<vtkTestFilter> filter =
-      vtkSmartPointer<vtkTestFilter>::New();
+  vtkSmartPointer<vtkTestMultipleOutputPortsFilter> filter =
+      vtkSmartPointer<vtkTestMultipleOutputPortsFilter>::New();
   filter->SetInputConnection(sphereSource->GetOutputPort());
   filter->Update();
 

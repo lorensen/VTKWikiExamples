@@ -1,7 +1,7 @@
 #include <vtkSmartPointer.h>
 #include <vtkSphereSource.h>
 
-#include "vtkTestFilter.h"
+#include "vtkTestMultipleInputPortsFilter.h"
 
 int main (int argc, char *argv[])
 {
@@ -15,8 +15,8 @@ int main (int argc, char *argv[])
   sphereSource2->SetThetaResolution(10);
   sphereSource2->Update();
 
-  vtkSmartPointer<vtkTestFilter> filter =
-      vtkSmartPointer<vtkTestFilter>::New();
+  vtkSmartPointer<vtkTestMultipleInputPortsFilter> filter =
+      vtkSmartPointer<vtkTestMultipleInputPortsFilter>::New();
   filter->SetInputConnection(0, sphereSource1->GetOutputPort());
   filter->SetInputConnection(1, sphereSource2->GetOutputPort());
   filter->Update();

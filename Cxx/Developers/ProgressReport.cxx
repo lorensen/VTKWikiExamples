@@ -5,7 +5,7 @@
 #include <vtkCallbackCommand.h>
 #include <vtkCommand.h>
 
-#include "vtkTestFilter.h"
+#include "vtkTestProgressReportFilter.h"
 
 void ProgressFunction(vtkObject* caller, long unsigned int eventId, void* clientData, void* callData);
 
@@ -19,8 +19,8 @@ int main(int, char *[])
     vtkSmartPointer<vtkCallbackCommand>::New();
   progressCallback->SetCallback(ProgressFunction);
     
-  vtkSmartPointer<vtkTestFilter> testFilter = 
-    vtkSmartPointer<vtkTestFilter>::New();
+  vtkSmartPointer<vtkTestProgressReportFilter> testFilter = 
+    vtkSmartPointer<vtkTestProgressReportFilter>::New();
   testFilter->SetInputConnection(sphereSource->GetOutputPort());
   testFilter->AddObserver(vtkCommand::ProgressEvent, progressCallback);
   testFilter->Update();
@@ -33,6 +33,6 @@ void ProgressFunction ( vtkObject* caller,
                         void* vtkNotUsed(clientData),
                         void* vtkNotUsed(callData) )
 {
-  vtkTestFilter* testFilter = static_cast<vtkTestFilter*>(caller);
+  vtkTestProgressReportFilter* testFilter = static_cast<vtkTestProgressReportFilter*>(caller);
   std::cout << "Progress: " << testFilter->GetProgress() << std::endl;
 }

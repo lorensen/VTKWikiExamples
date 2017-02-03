@@ -1,5 +1,5 @@
 #include <vtkSmartPointer.h>
-#include "vtkTestFilter.h"
+#include "vtkTestMultipleOutputConnectionsFilter.h"
 
 int main(int, char*[])
 {
@@ -11,8 +11,8 @@ int main(int, char*[])
     vtkSmartPointer<vtkPolyData>::New();
   polydata->SetPoints(points);
 
-  vtkSmartPointer<vtkTestFilter> filter =
-    vtkSmartPointer<vtkTestFilter>::New();
+  vtkSmartPointer<vtkTestMultipleOutputConnectionsFilter> filter =
+    vtkSmartPointer<vtkTestMultipleOutputConnectionsFilter>::New();
   filter->SetInputConnection(polydata->GetProducerPort());
   filter->Update();
 
