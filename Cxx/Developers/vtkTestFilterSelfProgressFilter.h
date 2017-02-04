@@ -6,7 +6,7 @@
 class vtkTestFilterSelfProgressFilter : public vtkPolyDataAlgorithm 
 {
 public:
-  vtkTypeRevisionMacro(vtkTestFilterSelfProgressFilter,vtkAlgorithm);
+  vtkTypeMacro(vtkTestFilterSelfProgressFilter,vtkAlgorithm);
   
   static vtkTestFilterSelfProgressFilter *New();
  
@@ -14,7 +14,7 @@ protected:
   vtkTestFilterSelfProgressFilter();
   ~vtkTestFilterSelfProgressFilter(){}
  
-  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *);
+  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *) VTK_OVERRIDE; 
  
   static void ProgressFunction(vtkObject* caller, long unsigned int eventId, void* clientData, void* callData);
   

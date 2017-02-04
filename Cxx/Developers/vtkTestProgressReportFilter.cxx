@@ -7,7 +7,6 @@
 #include "vtkDataObject.h"
 #include "vtkSmartPointer.h"
  
-vtkCxxRevisionMacro(vtkTestProgressReportFilter, "$Revision: 1.70 $");
 vtkStandardNewMacro(vtkTestProgressReportFilter);
 
 int vtkTestProgressReportFilter::RequestData(vtkInformation *vtkNotUsed(request),

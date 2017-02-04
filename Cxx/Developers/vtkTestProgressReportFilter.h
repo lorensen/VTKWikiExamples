@@ -3,10 +3,10 @@
  
 #include "vtkPolyDataAlgorithm.h"
  
-class vtkTestProgressReportFilter : public vtkPolyDataAlgorithm 
+class vtkTestProgressReportFilter : public vtkPolyDataAlgorithm
 {
 public:
-  vtkTypeRevisionMacro(vtkTestProgressReportFilter,vtkAlgorithm);
+  vtkTypeMacro(vtkTestProgressReportFilter,vtkAlgorithm);
  
   static vtkTestProgressReportFilter *New();
  
@@ -14,7 +14,7 @@ protected:
   vtkTestProgressReportFilter(){}
   ~vtkTestProgressReportFilter(){}
  
-  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *);
+  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *) VTK_OVERRIDE;
  
 private:
   vtkTestProgressReportFilter(const vtkTestProgressReportFilter&);  // Not implemented.

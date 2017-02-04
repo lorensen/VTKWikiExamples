@@ -9,7 +9,6 @@
 
 #include "vtkTestFilterSelfProgressFilter.h"
  
-vtkCxxRevisionMacro(vtkTestFilterSelfProgressFilter, "$Revision: 1.70 $");
 vtkStandardNewMacro(vtkTestFilterSelfProgressFilter);
 
 vtkTestFilterSelfProgressFilter::vtkTestFilterSelfProgressFilter()
