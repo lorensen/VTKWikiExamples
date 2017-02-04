@@ -52,4 +52,3 @@ int vtkTestFilterSelfProgressFilter::RequestData(vtkInformation *vtkNotUsed(requ
  
   return 1;
 }
- 

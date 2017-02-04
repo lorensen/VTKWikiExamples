@@ -1,6 +1,6 @@
 #include <vtkSmartPointer.h>
 
-#include "vtkTestClass.h"
+#include "vtkTestClass3.h"
 
 int main(int, char*[])
 {
