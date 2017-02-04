@@ -20,3 +20,6 @@ TARGET_LINK_LIBRARIES(ProgressReport ${VTK_LIBRARIES})
 
 ADD_EXECUTABLE(FilterSelfProgress FilterSelfProgress.cxx vtkTestFilterSelfProgressFilter.cxx)
 TARGET_LINK_LIBRARIES(FilterSelfProgress ${VTK_LIBRARIES})
+
+ADD_EXECUTABLE(MultipleInputPorts MultipleInputPorts TestMultipleInputPortsFilter)
+TARGET_LINK_LIBRARIES(MultipleInputPorts ${VTK_LIBRARIES})
