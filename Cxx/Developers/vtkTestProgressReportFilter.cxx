@@ -9,9 +9,10 @@
  
 vtkStandardNewMacro(vtkTestProgressReportFilter);
 
-int vtkTestProgressReportFilter::RequestData(vtkInformation *vtkNotUsed(request),
-                                             vtkInformationVector **inputVector,
-                                             vtkInformationVector *outputVector)
+int vtkTestProgressReportFilter::RequestData(
+  vtkInformation *vtkNotUsed(request),
+  vtkInformationVector **inputVector,
+  vtkInformationVector *outputVector)
 {
  
   // Get the info objects
@@ -21,15 +22,15 @@ int vtkTestProgressReportFilter::RequestData(vtkInformation *vtkNotUsed(request)
  
   // Get the input and ouptut
   vtkPolyData *input = vtkPolyData::SafeDownCast(
-      inInfo->Get(vtkDataObject::DATA_OBJECT()));
+    inInfo->Get(vtkDataObject::DATA_OBJECT()));
  
   vtkPolyData *output = vtkPolyData::SafeDownCast(
-      outInfo->Get(vtkDataObject::DATA_OBJECT()));
+    outInfo->Get(vtkDataObject::DATA_OBJECT()));
  
   for(vtkIdType i = 0; i < input->GetNumberOfPoints(); i++)
-    {
+  {
     this->UpdateProgress(static_cast<double>(i)/input->GetNumberOfPoints());
-    }
+  }
      
   output->ShallowCopy(input);
  
