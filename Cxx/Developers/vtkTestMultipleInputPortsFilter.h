@@ -10,19 +10,19 @@
 class vtkTestMultipleInputPortsFilter : public vtkPolyDataAlgorithm
 {
 public:
-  vtkTypeMacro(vtkTestMultipleInputPortsFilter,vtkPolyDataAlgorithm);
   static vtkTestMultipleInputPortsFilter *New();
+  vtkTypeMacro(vtkTestMultipleInputPortsFilter,vtkPolyDataAlgorithm);
 
 protected:
   vtkTestMultipleInputPortsFilter();
-  ~vtkTestMultipleInputPortsFilter(){}
+  ~vtkTestMultipleInputPortsFilter() VTK_OVERRIDE {}
 
-  int FillInputPortInformation( int port, vtkInformation* info );
-  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *);
+  int FillInputPortInformation( int port, vtkInformation* info ) VTK_OVERRIDE;
+  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *) VTK_OVERRIDE;
 
 private:
-  vtkTestMultipleInputPortsFilter(const vtkTestMultipleInputPortsFilter&);  // Not implemented.
-  void operator=(const vtkTestMultipleInputPortsFilter&);  // Not implemented.
+  vtkTestMultipleInputPortsFilter(const vtkTestMultipleInputPortsFilter&) VTK_DELETE_FUNCTION;
+  void operator=(const vtkTestMultipleInputPortsFilter&) VTK_DELETE_FUNCTION;
 
 };
 
