@@ -6,10 +6,9 @@
 class vtkTestGraphAlgorithmSource : public vtkGraphAlgorithm 
 {
 public:
-  vtkTypeRevisionMacro(vtkTestGraphAlgorithmSource,vtkGraphAlgorithm);
-  void PrintSelf(ostream& os, vtkIndent indent);
-
   static vtkTestGraphAlgorithmSource *New();
+  vtkTypeMacro(vtkTestGraphAlgorithmSource,vtkGraphAlgorithm);
+  void PrintSelf(ostream& os, vtkIndent indent);
 	
 protected:
   vtkTestGraphAlgorithmSource();

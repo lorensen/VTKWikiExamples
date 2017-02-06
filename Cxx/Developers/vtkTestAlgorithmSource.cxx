@@ -7,8 +7,7 @@
 #include "vtkObjectFactory.h"
 #include "vtkStreamingDemandDrivenPipeline.h"
 
-vtkCxxRevisionMacro(vtkTestSource, "$Revision: 1.1 $");
-vtkStandardNewMacro(vtkTestSource);
+vtkStandardNewMacro(vtkTestAlgorithmSource);
 
 //----------------------------------------------------------------------------
 vtkTestAlgorithmSource::vtkTestAlgorithmSource()
@@ -37,7 +36,7 @@ vtkTest1* vtkTestAlgorithmSource::GetOutput()
 //----------------------------------------------------------------------------
 vtkTest1* vtkTestAlgorithmSource::GetOutput(int port)
 {
-  return vtkTest::SafeDownCast(this->GetOutputDataObject(port));
+  return vtkTest1::SafeDownCast(this->GetOutputDataObject(port));
 }
 
 //----------------------------------------------------------------------------
@@ -103,7 +102,6 @@ int vtkTestAlgorithmSource::RequestDataObject(
       output = vtkTest1::New();
       outInfo->Set( vtkDataObject::DATA_OBJECT(), output );
       output->FastDelete();
-      output->SetPipelineInformation( outInfo );
       this->GetOutputPortInformation( i )->Set(
                                       vtkDataObject::DATA_EXTENT_TYPE(), output->GetExtentType() );
     }

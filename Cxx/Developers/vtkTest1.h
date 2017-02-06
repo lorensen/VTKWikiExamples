@@ -7,7 +7,7 @@ class vtkTest1 : public vtkDataObject
 {
   public:
     static vtkTest1* New();
-    vtkTypeRevisionMacro(vtkTest1,vtkDataObject);
+    vtkTypeMacro(vtkTest1,vtkDataObject);
     void PrintSelf( ostream& os, vtkIndent indent );
 
     vtkGetMacro(Value, double);

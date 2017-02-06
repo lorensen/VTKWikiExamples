@@ -2,12 +2,12 @@
 #include <vtkGraph.h>
 #include <vtkMutableUndirectedGraph.h>
 
-#include "vtkTest GraphAlgorithmSource.h"
+#include "vtkTestGraphAlgorithmSource.h"
 
 int main (int, char *[])
 {
-  vtkSmartPointer<vtkTest GraphAlgorithmSource> source =
-    vtkSmartPointer<vtkTest GraphAlgorithmSource>::New();
+  vtkSmartPointer<vtkTestGraphAlgorithmSource> source =
+    vtkSmartPointer<vtkTestGraphAlgorithmSource>::New();
   source->Update();
   
   vtkGraph* outputGraph = source->GetOutput();

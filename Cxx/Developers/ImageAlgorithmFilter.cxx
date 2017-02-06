@@ -11,7 +11,7 @@ int main (int argc, char *argv[])
     vtkSmartPointer<vtkImageData>::New();
   // Setup the image
   input->SetDimensions(2,2,1);
-  input->SetNumberOfScalarComponents(1);
+  input->AllocateScalars(VTK_DOUBLE,1);
   
   // Fill every entry of the image data with "2.0"
   int* dims = input->GetDimensions();
@@ -29,7 +29,7 @@ int main (int argc, char *argv[])
   
   vtkSmartPointer<vtkImageAlgorithmFilter> filter =
     vtkSmartPointer<vtkImageAlgorithmFilter>::New();
-  filter->SetInput(input);
+  filter->SetInputData(input);
   filter->Update();
   
   vtkImageData* output = filter->GetOutput();

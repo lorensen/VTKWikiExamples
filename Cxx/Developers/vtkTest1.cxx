@@ -3,9 +3,8 @@
 #include "vtkObjectFactory.h"
 
 vtkStandardNewMacro(vtkTest1);
-vtkCxxRevisionMacro(vtkTest,"$Revision: 1.46 $");
 
-vtkTest1::vtkTest(1)
+vtkTest1::vtkTest1()
 {
   this->Value = 4.5;
 }

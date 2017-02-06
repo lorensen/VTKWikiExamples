@@ -15,11 +15,26 @@ else()
 endif()
 #
 
+ADD_EXECUTABLE(AlgorithmFilter AlgorithmFilter vtkTestAlgorithmFilter vtkTest)
+TARGET_LINK_LIBRARIES(AlgorithmFilter ${VTK_LIBRARIES})
+
+ADD_EXECUTABLE(AlgorithmSource AlgorithmSource vtkTestAlgorithmSource vtkTest1)
+TARGET_LINK_LIBRARIES(AlgorithmSource ${VTK_LIBRARIES})
+
 ADD_EXECUTABLE(ProgressReport ProgressReport.cxx vtkTestProgressReportFilter.cxx)
 TARGET_LINK_LIBRARIES(ProgressReport ${VTK_LIBRARIES})
 
 ADD_EXECUTABLE(FilterSelfProgress FilterSelfProgress.cxx vtkTestFilterSelfProgressFilter.cxx)
 TARGET_LINK_LIBRARIES(FilterSelfProgress ${VTK_LIBRARIES})
+
+ADD_EXECUTABLE(GraphAlgorithmFilter GraphAlgorithmFilter vtkTestGraphAlgorithmFilter.cxx)
+TARGET_LINK_LIBRARIES(GraphAlgorithmFilter ${VTK_LIBRARIES})
+
+ADD_EXECUTABLE(GraphAlgorithmSource GraphAlgorithmSource vtkTestGraphAlgorithmSource.cxx)
+TARGET_LINK_LIBRARIES(GraphAlgorithmSource ${VTK_LIBRARIES})
+
+ADD_EXECUTABLE(ImageAlgorithmFilter ImageAlgorithmFilter vtkImageAlgorithmFilter.cxx)
+TARGET_LINK_LIBRARIES(ImageAlgorithmFilter ${VTK_LIBRARIES})
 
 ADD_EXECUTABLE(MultipleInputPorts MultipleInputPorts vtkTestMultipleInputPortsFilter)
 TARGET_LINK_LIBRARIES(MultipleInputPorts ${VTK_LIBRARIES})

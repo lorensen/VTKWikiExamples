@@ -10,7 +10,6 @@
 #include "vtkUndirectedGraph.h"
 #include "vtkGraph.h"
 
-vtkCxxRevisionMacro(vtkTestGraphAlgorithmSource, "$Revision: 1.70 $");
 vtkStandardNewMacro(vtkTestGraphAlgorithmSource);
 
 vtkTestGraphAlgorithmSource::vtkTestGraphAlgorithmSource()
