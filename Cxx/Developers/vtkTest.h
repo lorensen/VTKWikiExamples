@@ -7,7 +7,7 @@ class vtkTest : public vtkDataObject
 {
   public:
     static vtkTest* New();
-    vtkTypeRevisionMacro(vtkTest,vtkDataObject);
+    vtkTypeMacro(vtkTest,vtkDataObject);
     void PrintSelf( ostream& os, vtkIndent indent );
     void ShallowCopy(vtkTest* t);
     

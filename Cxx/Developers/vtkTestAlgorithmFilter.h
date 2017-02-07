@@ -10,7 +10,7 @@ class vtkTestAlgorithmFilter : public vtkAlgorithm
 {
   public:
     static vtkTestAlgorithmFilter *New();
-    vtkTypeRevisionMacro(vtkTestAlgorithmFilter,vtkAlgorithm);
+    vtkTypeMacro(vtkTestAlgorithmFilter,vtkAlgorithm);
     void PrintSelf(ostream& os, vtkIndent indent);
 
   // Description:

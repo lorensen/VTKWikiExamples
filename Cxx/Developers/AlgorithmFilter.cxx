@@ -8,10 +8,10 @@ int main(int, char *[])
   vtkSmartPointer<vtkTest> inputTest = 
     vtkSmartPointer<vtkTest>::New();
   inputTest->SetValue(5.6);
-  std::cout << "Input value: " << InputTest->GetValue() << std::endl;
+  std::cout << "Input value: " << inputTest->GetValue() << std::endl;
   
   vtkSmartPointer<vtkTestAlgorithmFilter> filter = vtkTestAlgorithmFilter::New();
-  filter->SetInput(InputTest);
+  filter->SetInput(inputTest);
   filter->Update();
   
   vtkTest* outputTest = filter->GetOutput();

@@ -7,7 +7,6 @@
 #include "vtkObjectFactory.h"
 #include "vtkStreamingDemandDrivenPipeline.h"
 
-vtkCxxRevisionMacro(vtkTestAlgorithmFilter, "$Revision: 1.1 $");
 vtkStandardNewMacro(vtkTestAlgorithmFilter);
 
 //----------------------------------------------------------------------------
@@ -121,18 +120,16 @@ int vtkTestAlgorithmFilter::FillInputPortInformation(
 
   vtkInformation* outInfo = outputVector->GetInformationObject(0);
   vtkTest* output = vtkTest::SafeDownCast(
-                                            outInfo->Get( vtkDataObject::DATA_OBJECT() ) );
+    outInfo->Get( vtkDataObject::DATA_OBJECT() ) );
     
-  
   if ( ! output )
     {
     output = vtkTest::New();
     outInfo->Set( vtkDataObject::DATA_OBJECT(), output );
     output->FastDelete();
-    output->SetPipelineInformation( outInfo );
     
     this->GetOutputPortInformation(0)->Set(
-                                    vtkDataObject::DATA_EXTENT_TYPE(), output->GetExtentType() );
+      vtkDataObject::DATA_EXTENT_TYPE(), output->GetExtentType() );
     }
 
   return 1;
@@ -203,12 +200,12 @@ void vtkTestAlgorithmFilter::SetInput(int index, vtkDataObject* input)
 {
   if(input)
   {
-    this->SetInputConnection(index, input->GetProducerPort());
+    this->SetInputDataObject(index, input);
   }
   else
   {
     // Setting a NULL input removes the connection.
-    this->SetInputConnection(index, 0);
+    this->SetInputDataObject(index, 0);
   }
 }
 
@@ -223,6 +220,6 @@ void vtkTestAlgorithmFilter::AddInput(int index, vtkDataObject* input)
 {
   if(input)
   {
-    this->AddInputConnection(index, input->GetProducerPort());
+    this->AddInputDataObject(index, input);
   }
 }
