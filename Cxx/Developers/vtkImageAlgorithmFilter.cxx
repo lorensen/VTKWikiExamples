@@ -34,9 +34,14 @@ int vtkImageAlgorithmFilter::RequestData(vtkInformation *vtkNotUsed(request),
   output->ShallowCopy(image);
 
   // Without these lines, the output will appear real but will not work as the input to any other filters
-  output->SetExtent(input->GetExtent());
-  output->SetUpdateExtent(output->GetExtent());
-  output->SetWholeExtent(output->GetExtent());
-  
+  int extent[6];
+  input->GetExtent(extent);
+  output->SetExtent(extent);
+  outInfo->Set(vtkStreamingDemandDrivenPipeline::UPDATE_EXTENT(),
+               extent,
+               6);
+  outInfo->Set(vtkStreamingDemandDrivenPipeline::WHOLE_EXTENT(),
+               extent,
+               6);
   return 1;
 }
