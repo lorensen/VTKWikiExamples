@@ -27,6 +27,7 @@ Requires_Version(ExtractClusters ${VERSION_MIN} ALL_FILES)
 Requires_Version(ExtractSurface ${VERSION_MIN} ALL_FILES)
 Requires_Version(ExtractSurfaceDemo ${VERSION_MIN} ALL_FILES)
 Requires_Version(FitImplicitFunction ${VERSION_MIN} ALL_FILES)
+Requires_Version(MaskPointsFilter ${VERSION_MIN} ALL_FILES)
 Requires_Version(NormalEstimation ${VERSION_MIN} ALL_FILES)
 Requires_Version(PointOccupancy ${VERSION_MIN} ALL_FILES)
 Requires_Version(RadiusOutlierRemoval ${VERSION_MIN} ALL_FILES)
@@ -47,6 +48,7 @@ SET(NEEDS_ARGS
   ExtractSurface
   ExtractSurfaceDemo
   DensifyPoints
+  MaskPointsFilter
   PointOccupancy
   RadiusOutlierRemoval
   SignedDistance
@@ -61,6 +63,8 @@ if (vtkFiltersPoints_LOADED)
      TestExtractSurfaceDemo ${DATA}/Armadillo.ply)
    ADD_TEST(${KIT}-DensifyPoints ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestDensifyPoints ${DATA}/Torso.vtp)
+   ADD_TEST(${KIT}-MaskPointsFilter ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+     TestMaskPointsFilter ${DATA}/FullHead.mhd)
    ADD_TEST(${KIT}-PointOccupancy ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
      TestPointOccupancy ${DATA}/cowHead.vtp)
    ADD_TEST(${KIT}-RadiusOutlierRemoval ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
