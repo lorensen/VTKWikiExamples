@@ -24,9 +24,12 @@ baselines = []
 baselineRoot = "Testing/Baseline"
 for root, dirs, files in os.walk(baselineRoot):
   for f in files:
-    baselineFile = root + "/" + f
-    baselines.append(baselineFile)
-  
+    extension = os.path.splitext(f)[1][1:]
+    if extension == "png" :
+      baselineFile = root + "/" + f
+      baselines.append(baselineFile)
+    else :
+      print "Skipping " + root + "/" + f
 # For each baseline see if there exists a wiki image
 for baseline in baselines:
   # The wiki name is derived from the baseline name
