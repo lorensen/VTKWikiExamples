@@ -34,6 +34,9 @@ void ActorCallback( vtkObject* caller,
 
 int main(int, char *[])
 {
+  // For testing
+  vtkMath::RandomSeed(8775070);
+
   // Create a sphere
   vtkSmartPointer<vtkSphereSource> sphereSource = 
     vtkSmartPointer<vtkSphereSource>::New();
