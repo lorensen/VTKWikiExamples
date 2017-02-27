@@ -26,11 +26,11 @@ echo "3) Scrape the wiki"
 ./Admin/ScrapeWiki
 
 echo "3.1) Check for a successful scrape"
-count=`find . -name \*.cxx | wc -l`
-expected=850
+count=$((`find . -name \*.cxx | wc -l` + `find . -name \*.cxx | wc -l`))
+expected=1750
 if test $count -lt $expected; then
    echo VTKWikiExamples/Admin/ScrapeWiki failed
-   echo VTKWikiExamples: Expected at least $expected cxx files but only found $count cxx files | mail -s "SyncRepoWithWiki failed" bill.lorensen@gmail.com
+   echo VTKWikiExamples: Expected at least $expected cxx and py files but only found $count cxx and py files | mail -s "SyncRepoWithWiki failed" bill.lorensen@gmail.com
    git checkout .
    exit 1
 fi
