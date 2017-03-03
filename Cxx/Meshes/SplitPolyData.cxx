@@ -9,6 +9,7 @@
 #include <vtkGeometryFilter.h>
 
 #include <vtksys/SystemTools.hxx>
+#include <sstream>
 
 int main(int argc, char *argv[])
 {
@@ -40,8 +41,12 @@ int main(int argc, char *argv[])
 
   // Create pipeline
   vtkSmartPointer<vtkOBBDicer> dicer =
-    vtkSmartPointer<vtkOBBDicer>::New();
+  vtkSmartPointer<vtkOBBDicer>::New();
+#if VTK_MAJOR_VERSION <= 5
+  dicer->SetInput(inputPolyData);
+#else
   dicer->SetInputData(inputPolyData);
+#endif
   dicer->SetNumberOfPieces(4);
   dicer->SetDiceModeToSpecifiedNumberOfPieces();
   dicer->Update();
