@@ -29,6 +29,7 @@ Requires_Version(Legend ${VERSION_MIN} ALL_FILES)
 Requires_Version(ElevationBandsWithGlyphs ${VERSION_MIN} ALL_FILES)
 Requires_Version(CurvatureBandsWithGlyphs ${VERSION_MIN} ALL_FILES)
 Requires_Version(ProjectSphere ${VERSION_MIN} ALL_FILES)
+Requires_Version(BillboardTextActor3D "7.1.0" ALL_FILES)
 Requires_Module(Shadows vtkRenderingOpenGL)
 Requires_Setting_Off(StreamLines VTK_LEGACY_REMOVE)
 
