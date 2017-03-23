@@ -45,9 +45,12 @@ if (BUILD_TESTING)
 SET(KIT Visualization)
 SET(NEEDS_ARGS
   BackgroundTexture
+  BoxClipStructuredPoints
+  BoxClipUnstructuredGrid
   ClipArt
   CorrectlyRenderTranslucentGeometry
   CurvedReformation
+  DataSetGradient
   DepthSortPolyData
   Glyph3DMapper
   HedgeHog
@@ -66,6 +69,12 @@ SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 ADD_TEST(${KIT}-BackgroundTexture ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestBackgroundTexture -E 30)
 
+ADD_TEST(${KIT}-BoxClipStructuredPoints ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestBoxClipStructuredPoints ${DATA}/HeadMRVolume.mhd)
+
+ADD_TEST(${KIT}-BoxClipUnstructuredGrid ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestBoxClipUnstructuredGrid ${DATA}/hexa.vtk)
+
 ADD_TEST(${KIT}-ClipArt ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestClipArt ${DATA}/stormy.jpg)
 
@@ -74,6 +83,9 @@ ADD_TEST(${KIT}-CorrectlyRenderTranslucentGeometry ${CMAKE_RUNTIME_OUTPUT_DIRECT
 
 ADD_TEST(${KIT}-CurvedReformation ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestCurvedReformation ${DATA}/HeadMRVolume.mhd ${DATA}/polyline.vtk 200)
+
+ADD_TEST(${KIT}-DataSetGradient ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestDataSetGradient ${DATA}/hexa.vtk)
 
 ADD_TEST(${KIT}-DepthSortPolyData ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestDepthSortPolyData 1 100 100 0)
