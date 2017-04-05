@@ -64,21 +64,18 @@ int main(int, char *[])
   double radius = .05;
   frame->GetOutput()->GetPointData()->SetActiveVectors("FSNormals");
   MakeGlyphs(frame->GetOutput(), radius, glyph3DNormals.GetPointer());
-  glyph3DNormals->Update();
   vtkSmartPointer<vtkPolyData> normalsPolyData =
     vtkSmartPointer<vtkPolyData>::New();
   normalsPolyData->DeepCopy(glyph3DNormals->GetOutput());
 
   frame->GetOutput()->GetPointData()->SetActiveVectors("FSTangents");
   MakeGlyphs(frame->GetOutput(), radius, glyph3DTangents.GetPointer());
-  glyph3DTangents->Update();
   vtkSmartPointer<vtkPolyData> tangentsPolyData =
     vtkSmartPointer<vtkPolyData>::New();
   tangentsPolyData->DeepCopy(glyph3DTangents->GetOutput());
 
   frame->GetOutput()->GetPointData()->SetActiveVectors("FSBinormals");
   MakeGlyphs(frame->GetOutput(), radius, glyph3DBinormals.GetPointer());
-  glyph3DBinormals->Update();
   vtkSmartPointer<vtkPolyData> binormalsPolyData =
     vtkSmartPointer<vtkPolyData>::New();
   binormalsPolyData->DeepCopy(glyph3DBinormals->GetOutput());
