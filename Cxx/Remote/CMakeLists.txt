@@ -11,11 +11,10 @@ SET(KIT_LIBS ${VTK_LIBRARIES})
 # Build all .cxx files in the directory
 FILE(GLOB ALL_FILES *.cxx)
 
-include(${WikiExamples_SOURCE_DIR}/CMake/RequiresVersion.cmake)
 include(${WikiExamples_SOURCE_DIR}/CMake/RequiresModule.cmake)
 
-set(VERSION_MIN "7.1")
 Requires_Module(FrenetSerretFrame SplineDrivenImageSlicer)
+Requires_Module(FrenetSerretFrameDemo SplineDrivenImageSlicer)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   STRING(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
@@ -23,7 +22,6 @@ foreach(SOURCE_FILE ${ALL_FILES})
   ADD_EXECUTABLE(${WIKI}${EXAMPLE} ${EXECUTABLE_FLAG} ${EXAMPLE}.cxx)
   TARGET_LINK_LIBRARIES(${WIKI}${EXAMPLE} ${KIT_LIBS})
 endforeach(SOURCE_FILE)
-message(STATUS "ALL_FILES: ${ALL_FILES}")
 
 if (BUILD_TESTING)
 # Testing
