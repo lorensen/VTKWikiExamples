@@ -1,16 +1,14 @@
-#include "vtkTesting.h"
-#include "vtkActor.h"
-#include "vtkCellData.h"
 #include "vtkMarchingSquares.h"
+#include "vtkSmartPointer.h"
+
+#include "vtkActor.h"
 #include "vtkRenderer.h"
 #include "vtkRenderWindow.h"
 #include "vtkRenderWindowInteractor.h"
-#include "vtkContourTriangulator.h"
 #include "vtkPNGReader.h"
 #include "vtkDataSetMapper.h"
 #include "vtkCamera.h"
 #include "vtkProperty.h"
-#include "vtkSmartPointer.h"
 
 int main(int argc, char* argv[])
 {
@@ -50,20 +48,6 @@ int main(int argc, char* argv[])
   isoActor->SetMapper(isoMapper);
   isoActor->GetProperty()->SetColor(0.8900, 0.8100, 0.3400);
 
-  vtkSmartPointer<vtkContourTriangulator> poly =
-    vtkSmartPointer<vtkContourTriangulator>::New();
-  poly->SetInputConnection(iso->GetOutputPort());
-
-  vtkSmartPointer<vtkDataSetMapper> polyMapper =
-    vtkSmartPointer<vtkDataSetMapper>::New();
-  polyMapper->SetInputConnection(poly->GetOutputPort());
-  polyMapper->ScalarVisibilityOff();
-
-  vtkSmartPointer<vtkActor> polyActor =
-    vtkSmartPointer<vtkActor>::New();
-  polyActor->SetMapper(polyMapper);
-  polyActor->GetProperty()->SetColor(1.0000, 0.3882, 0.2784);
-
   // Standard rendering classes
   vtkSmartPointer<vtkRenderer> renderer =
     vtkSmartPointer<vtkRenderer>::New();
@@ -75,7 +59,6 @@ int main(int argc, char* argv[])
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
   iren->SetRenderWindow(renWin);
 
-  renderer->AddActor(polyActor);
   renderer->AddActor(isoActor);
 
   // Standard testing code.
