@@ -70,6 +70,7 @@ endif()
 message(STATUS "VTKWikiExamples: Example executables are stored in ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 ADD_SUBDIRECTORY(Cxx/Animation)
+ADD_SUBDIRECTORY(Cxx/CompositeData)
 IF(VTK_USE_MYSQL)
   ADD_SUBDIRECTORY(Cxx/Databases)
 ENDIF(VTK_USE_MYSQL)
