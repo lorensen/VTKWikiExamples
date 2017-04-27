@@ -1,4 +1,4 @@
-//Demonstrates how to create and populate a VTK's Overlapping AMR Grid type Data
+//Demonstrates how to make VTK's Overlapping AMR Grid type Data
 
 #include <vtkAMRBox.h>
 #include <vtkAMRUtilities.h>
