@@ -27,7 +27,7 @@ if (BUILD_TESTING)
 # Testing
 SET(KIT CompositeData)
 SET(NEEDS_ARGS
- # none yet
+  OverlappingAMR
 )
 
 ADD_TEST(${KIT}-OverlappingAMR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
