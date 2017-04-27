@@ -36,10 +36,12 @@ if (BUILD_TESTING)
 SET(KIT VolumeRendering)
 if (VTK_RENDERING_BACKEND STREQUAL "OpenGL2")
   SET(NEEDS_ARGS
+    GPURenderDemo
     MinIntensityRendering
   )
 else()
   SET(NEEDS_ARGS
+    GPURenderDemo
     HAVSVolumeMapper
     MinIntensityRendering
   )
@@ -49,9 +51,15 @@ SET(DATA ${WikiExamples_SOURCE_DIR}/Testing/Data)
 SET(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
 if (VTK_RENDERING_BACKEND STREQUAL "OpenGL2")
+ADD_TEST(${KIT}-GPURenderDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  GPURenderDemo -VTI ${DATA}/hncma-atlas.vti -RGB_Composite)
+
 ADD_TEST(${KIT}-MinIntensityRendering ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMinIntensityRendering ${DATA}/ironProt.vtk)
 else()
+ADD_TEST(${KIT}-GPURenderDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  GPURenderDemo -VTI ${DATA}/hncma-atlas.vti -RGB_Composite)
+
 ADD_TEST(${KIT}-HAVSVolumeMapper ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestHAVSVolumeMapper ${DATA}/ironProt.vtk ${DATA}/neghip.slc)
 
