@@ -8,7 +8,7 @@ PROJECT({{{1}}})
 find_package(VTK REQUIRED)
 include(${VTK_USE_FILE})
 
-add_executable({{{1}}} MACOSX_BUNDLE {{{1}}})
+add_executable({{{1}}} MACOSX_BUNDLE {{{1}}}.cxx)
 
 if(VTK_LIBRARIES)
   target_link_libraries({{{1}}} ${VTK_LIBRARIES})
