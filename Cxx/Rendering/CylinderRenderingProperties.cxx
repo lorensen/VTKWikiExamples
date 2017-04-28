@@ -8,7 +8,7 @@
 #include "vtkCamera.h"
 #include "vtkSmartPointer.h"
 
-int main()
+int main(int, char *[])
 {
   // This creates a polygonal cylinder model with eight circumferential facets
   // (i.e, in practice an octagonal prism).
@@ -60,5 +60,5 @@ int main()
   // This starts the event loop and as a side effect causes an initial render.
   renderWindowInteractor->Start();
 
-  return 0;
+  return EXIT_SUCCESS;
 }

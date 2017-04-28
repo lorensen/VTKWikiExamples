@@ -9,7 +9,7 @@
 #include "vtkCamera.h"
 #include "vtkLight.h"
 
-int main()
+int main(int, char *[])
 {
   // The following lines create a sphere represented by polygons.
   //
@@ -117,7 +117,7 @@ int main()
   ren1->AddActor(sphere7);
   ren1->AddActor(sphere8);
   ren1->SetBackground(0.1, 0.2, 0.4);
-  renWin->SetSize(400, 200);
+  renWin->SetSize(600, 400);
 
   // Set up the lighting.
   //
@@ -144,7 +144,3 @@ int main()
 
   return EXIT_SUCCESS;
 }
-
-
-
-

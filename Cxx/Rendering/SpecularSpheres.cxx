@@ -136,7 +136,7 @@ int main(int, char *[])
   ren1->AddActor(sphere7);
   ren1->AddActor(sphere8);
   ren1->SetBackground(0.1, 0.2, 0.4);
-  renWin->SetSize(400, 200);
+  renWin->SetSize(640, 480);
 
   // Set up the lighting.
   //
@@ -164,7 +164,3 @@ int main(int, char *[])
 
   return EXIT_SUCCESS;
 }
-
-
-
-
