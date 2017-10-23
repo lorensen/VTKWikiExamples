@@ -1,2 +1,2 @@
 # VTKWikiExamples
-For more information go to the [description on the wiki](http://www.vtk.org/Wiki/VTK/Examples).
+This repository is DISCONTINUED. See https://github.com/lorensen/VTKExamples for the new examples.
