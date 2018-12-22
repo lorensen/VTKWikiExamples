@@ -36,6 +36,8 @@ ADD_TEST(${KIT}-CompositePolyDataMapper ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}
   TestCompositePolyDataMapper)
 ADD_TEST(${KIT}-MultiBlockDataSet ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
   TestMultiBlockDataSet)
+ADD_TEST(${KIT}-MultiBlockDataGroupFilter ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+  TestMultiBlockDataGroupFilter)
 
 INCLUDE(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 
